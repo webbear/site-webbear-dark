@@ -1,0 +1,73 @@
+table.InputfieldTable {
+	width: 100%; 
+}
+
+table.InputfieldTable th {
+	vertical-align: bottom;
+	text-align: left; 
+}
+
+table.InputfieldTable tbody tr td {
+	text-align: left;
+}
+table.InputfieldTable tbody tr td:first-child, 
+table.InputfieldTable tbody tr td:last-child,
+table.InputfieldTable thead tr th:last-child {
+	/* drag and delete icons */
+	max-width: 20px; 
+	/*vertical-align: middle;*/
+	border-left: none; 
+	border-right: none; 
+}
+table.InputfieldTable thead tr th:nth-child(2),
+table.InputfieldTable tbody tr td:nth-child(2) {
+	border-left: none; 
+}
+
+table.InputfieldTable td,
+table.InputfieldTable th {
+	padding: 0.35em; 
+}
+
+table.InputfieldTable tbody tr td:first-child {
+	padding-left: 0;
+}
+table.InputfieldTable tbody tr td:last-child {
+	padding-right: 0; 
+	text-align: right;
+}
+
+
+table.InputfieldTable td + td,
+table.InputfieldTable th + th {
+}
+
+table.InputfieldTable td input,
+table.InputfieldTable td textarea,
+table.InputfieldTable td select {
+	min-width: 0;
+	width: 100%; 
+}
+
+table.InputfieldTable td label.checkbox input {
+	display: inline;
+	width: auto;
+}
+
+table.InputfieldTable tr.InputfieldTableRowTemplate {
+	display: none; 
+}
+
+table.InputfieldTable td .InputfieldTableRowSortHandle {
+	cursor: move; 
+}
+
+table.InputfieldTable tr.InputfieldTableRowDeleted input, 
+table.InputfieldTable tr.InputfieldTableRowDeleted select, 
+table.InputfieldTable tr.InputfieldTableRowDeleted label {
+	text-decoration: line-through; 
+}
+table.InputfieldTable .InputfieldTableRowDeleteLink {
+	cursor: pointer; 
+}
+

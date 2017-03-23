@@ -1,0 +1,345 @@
+<?php
+
+/**
+ * ProcessWire Table Inputfield
+ *
+ * Field that lets you define a database table of custom inputs. 
+ *
+ * Part of the ProFields package
+ * Please do not distribute. 
+ * 
+ * Copyright 2014 by Ryan Cramer
+ *
+ * http://processwire.com
+ *
+ */
+
+class InputfieldTable extends Inputfield {
+
+	public static function getModuleInfo() {
+		return array(
+			'title' => __('ProFields: Table', __FILE__), // Module Title
+			'summary' => __('Field that lets you define a database table of custom inputs.', __FILE__), // Module Summary
+			'version' => 5,
+			);
+	}
+
+	/**
+	 * Debug mode for development only
+	 *
+	 */
+	const debug = false; 
+
+	/**
+	 * Associated Field object currently in use by this Inputfield
+	 *
+	 */
+	protected $field; 
+
+	/**
+	 * Set the current Field
+	 *
+	 * @param Field $field
+	 *
+	 */
+	public function setField(Field $field) {
+		$this->field = $field; 
+	}
+
+	/**
+	 * Output a message only when debug mode is on (for this field)
+	 *
+	 * @param string $msg
+	 *
+	 */
+	protected function debugMessage($msg) {
+		if(!self::debug) return;
+		$this->message($msg, Notice::debug); 
+	}
+
+	/**
+	 * Is the value of this field empty?
+	 *
+	 * @return bool
+	 *
+	 */
+	public function isEmpty() {
+		return (!$this->value || !count($this->value)); 
+	}
+
+	/**
+	 * Render markup for a table column
+	 *
+	 * @param array $col Column definition array
+	 * @param int $rowNum Row Number
+	 * @param mixed $value Column value
+	 * @return string
+	 *
+	 */
+	protected function renderCol(array $col, $rowNum, Field $field, $value) {
+
+		$n = $col['n'];
+		$name = $col['name'];
+		$type = $col['type']; 
+		$nameAttr = $this->name . "_{$rowNum}_{$name}";
+		$out = '';
+		$options = array();
+		$labels = array();
+		$sanitizer = $this->wire('sanitizer');
+		$settings = $col['settings'];
+		$placeholder = '';
+	
+		if(!empty($settings['default']) && empty($value)) $value = $settings['default'];
+		if(!empty($settings['placeholder'])) $placeholder = " placeholder='" . $sanitizer->entities($settings['placeholder']) . "'";
+
+		if(in_array($type, array('checkboxes', 'select', 'radios'))) {
+			if(!is_array($value)) $value = explode(',', $value); 
+			foreach($value as $k => $v) $value[$k] = trim($v); 
+		}
+
+		if(!empty($col['options'])) foreach($col['options'] as $k => $option) { 
+			$label = $option; 
+			if(strpos($option, '=') !== false) list($option, $label) = explode('=', $option); 
+			if(strpos($option, '+') === 0 && !count($value)) $value = array($option); 
+			$option = ltrim($option, '+'); 
+			$options[$k] = $option; 
+			if(empty($label)) $label = $option; 
+			$labels[$k] = $sanitizer->entities($label);
+		}
+
+		$_value = $value; // unencoded value	
+		if(!is_array($value)) $value = $this->wire('sanitizer')->entities($value); 
+
+		switch($type) {
+
+			case 'checkbox':
+				$checked = $value ? " checked='checked'" : '';
+				$out .= "<input type='checkbox' name='$nameAttr' value='1'$checked />";
+				break;
+
+			case 'checkboxes':
+				$out = '';
+				foreach($options as $k => $option) {
+					$checked = in_array($option, $_value) ? " checked='checked'" : '';
+					$option = $sanitizer->entities($option);
+					$out .= "<label class='checkbox'><input type='checkbox' name='{$nameAttr}[]' value='$option'$checked /> $labels[$k]</label>";
+				}
+				break;
+
+			case 'radios': 
+				$out = '';
+				foreach($options as $k => $option) {
+					$checked = in_array($option, $_value) ? " checked='checked'" : '';
+					$option = $sanitizer->entities($option);
+					$out .= "<label class='checkbox'><input type='radio' name='$nameAttr' value='$option'$checked /> $labels[$k]</label>";
+				}
+				break;
+
+			case 'select':
+				if(!is_array($value)) $value = explode(',', $value); 
+				$out = "<select name='$nameAttr'><option></option>";
+				foreach($options as $k => $option) {
+					$selected = in_array($option, $_value) ? " selected='selected'" : '';
+					$option = $sanitizer->entities(trim($option));
+					$out .= "<option value='$option'$selected>$labels[$k]</option>";
+				}
+				$out .= "</select>";
+				break;
+
+			case 'date':
+			case 'datetime':
+				$inputfield = $this->wire('modules')->get('InputfieldDatetime'); 
+				$inputfield->attr('name', $nameAttr);
+				$inputfield->attr('value', $value); 
+				foreach($settings as $key => $setting) $inputfield->$key = $setting; 
+				$out .= $inputfield->render();
+				break;
+
+			case 'textarea':
+				$rows = isset($settings['rows']) ? (int) $settings['rows'] : 4; 
+				$out .= "<textarea rows='$rows' name='$nameAttr'$placeholder>$value</textarea>";
+				break;
+
+			default: 
+				$colType = $field->type->colTypes[$type];
+				$inputType = isset($colType['input']) ? $colType['input'] : 'text';
+				$out .= "<input type='$inputType' name='$nameAttr' value='$value'$placeholder />";
+		}
+
+		return $out; 
+	}
+
+	/**
+	 * Render markup for a table row
+	 *
+	 * @param int $rowNum Row Number
+	 * @param array $cols Column definitions 
+	 * @param Field $field
+	 * @param TableRow $row
+	 * @param string $class
+	 * @return string
+	 *
+	 */
+	protected function renderRow($rowNum, array $cols, Field $field, TableRow $row = null, $class = '') {
+
+		if($class) $class = " class='$class'";
+		$out = "<tr$class>";
+		$out .= "<td style='width: 17px;'><i class='fa fa-arrows InputfieldTableRowSortHandle'></i></td>";
+
+		foreach($cols as $name => $col) { 
+			$value = $row ? $row->$name : ''; 
+			$width = (int) $col['width'];
+			$style = $width ? " style='width:$width%;'" : '';
+			$out .= "<td$style>" . $this->renderCol($col, $rowNum, $field, $value) . "</td>";
+		}	
+
+		$id = $row ? (int) $row->id : 0; 
+
+		$out .= "<td>" . 
+			"<i class='fa fa-trash-o InputfieldTableRowDeleteLink'></i>" . 
+			"<input class='InputfieldTableRowDelete' type='hidden' name='{$this->name}_{$rowNum}__delete' value='' />" . 
+			"<input class='InputfieldTableRowID' type='hidden' name='{$this->name}_{$rowNum}__id' value='$id' />" . 
+			"<input class='InputfieldTableRowSort' type='hidden' name='{$this->name}_{$rowNum}__sort' value='$rowNum' />" . 
+			"</td>";
+
+		$out .= "</tr>";
+
+		return $out; 
+	}
+
+	/**
+	 * Render table header row
+	 *
+	 * @param array $cols Column definitions 
+	 * @param Field $field
+	 * @return string
+	 *
+	 */
+	protected function renderHeaderRow(array $cols, Field $field) {
+		$out = "<thead><tr>";
+		$out .= "<th>&nbsp;</th>"; // sort handle
+		foreach($cols as $name => $col) { 
+			$label = $col['label'];
+			$width = (int) $col['width'];
+			$style = $width ? " style='width:$width%;'" : '';
+			if(empty($label)) $label = $name; 
+			$label = $this->sanitizer->entities($label); 
+			$out .= "<th$style>$label</th>";
+		}
+		$out .= "<th>&nbsp;</th>";
+		$out .= "</tr></thead>";
+		return $out; 
+	}
+
+	/**
+	 * Render markup for table Inputfield 
+	 *
+	 * @return string
+	 *
+	 */
+	public function ___render() {
+		// inherit styles from MarkupAdminDataTable core module
+		$this->wire('modules')->get('MarkupAdminDataTable'); 
+
+		$cols = $this->field->type->getColumnsByName($this->field); 
+
+		$thead = $this->renderHeaderRow($cols, $this->field);
+		$tbody = "<tbody>";
+
+		$total = count($this->value); 
+		$tbody .= $this->renderRow(0, $cols, $this->field, null, 'InputfieldTableRowTemplate'); 
+
+		$n = 1; 
+		foreach($this->value as $row) {
+			$tbody .= $this->renderRow($n, $cols, $this->field, $row); 
+			$n++;
+		}
+
+		$tbody .= "</tbody>";
+		$out = "<table class='InputfieldTable AdminDataList AdminDataTable'>$thead$tbody</table>";
+		$out .= "<p><a class='InputfieldTableAddRow' href='#'><i class='fa fa-plus-circle'></i> " . $this->_('Add Row') . "</a></p>";
+
+		return $out; 
+	}
+
+	/**
+	 * Render value mode 
+	 *
+	 * @return string
+	 *
+	 */
+	public function ___renderValue() {
+		return $this->value->render(array(
+			'tableClass' => 'AdminDataList AdminDataTable'
+			)); 
+	}
+
+	/**
+	 * Process input for the submitted table
+	 *
+	 * @param WireInputData $input
+	 * @return this
+	 *
+	 */
+	public function ___processInput(WireInputData $input) {
+
+		$rowNum = 0; 
+		$rows = $this->attr('value');
+		$rowsArray = array();
+		$rowsDelete = array();
+		$maxCols = $this->field->maxCols; 
+		$cols = $this->field->type->getColumnsByName($this->field); 
+
+		do {
+			$rowNum++;
+			$idName = $this->name . "_{$rowNum}__id";
+			$id = $input->$idName; 
+			if(is_null($id)) break;
+			$id = (int) $id; 
+
+			$deleteName = $this->name . "_{$rowNum}__delete";
+			$delete = (int) $input->$deleteName; 
+
+			$sortName = $this->name . "_{$rowNum}__sort";
+			$sort = (int) $input->$sortName; 
+
+			$row = $this->value->eq($rowNum-1); 
+
+			if($row && $delete) $rowsDelete[] = $row; 
+	
+			if(is_null($row) && $delete) continue; 
+			if(is_null($row)) $row = $rows->makeBlankItem();
+			$row->id = $id; 
+
+			foreach($cols as $name => $col) {
+				$type = $col['type'];
+				if(!$name || !$type) continue; 
+				$nameAttr = $this->attr('name') . "_{$rowNum}_{$name}";
+				$value = $input->$nameAttr; 
+				if($type == 'date') $value = FieldtypeDatetime::stringToTimestamp($value, $col['settings']['dateInputFormat']); 
+				if($type == 'datetime') $value = FieldtypeDatetime::stringToTimestamp($value, $col['settings']['dateInputFormat'] . ' ' . $col['settings']['timeInputFormat']); 
+				$row->set($name, $value); 
+				if(self::debug) {
+					if(is_array($value)) $value = print_r($value, true); 
+					$this->debugMessage("SET ROW $rowNum: $name=$value"); 
+				}
+			}
+
+			while(isset($rowsArray[$sort])) $sort++;
+			$rowsArray[$sort] = $row;
+
+			
+		} while(1); 
+
+		ksort($rowsArray);
+		foreach($rowsArray as $row) $rows->add($row); 
+		$this->debugMessage("Setting n rows: " . count($rows)); 
+		foreach($rowsDelete as $row) $rows->remove($row); 
+
+		$this->debugMessage("Setting n rows: " . count($rows)); 
+		$this->debugMessage('value', $rows); 
+
+		return $this; 
+	}
+
+}

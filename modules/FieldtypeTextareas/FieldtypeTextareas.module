@@ -1,0 +1,288 @@
+<?php
+
+/**
+ * ProcessWire Textareas Fieldtype
+ *
+ * Stores multiple text/textarea fields. 
+ *
+ * Part of the ProFields package.
+ * Please do not distribute. 
+ * 
+ * Copyright (C) 2014 by Ryan Cramer 
+ *
+ * http://processwire.com
+ *
+ */
+
+class FieldtypeTextareas extends FieldtypeTextarea {
+
+	public static function getModuleInfo() {
+		return array(
+			'title' => __('ProFields: Textareas', __FILE__),
+			'version' => 3,
+			'summary' => __('Multiple text/textarea fields combined into one field.', __FILE__),
+			'installs' => 'InputfieldTextareas',
+			);
+	}
+
+	/**
+	 * Definitions for Textareas fields cached so we don't have to parse them multiple times
+	 *
+	 */ 
+	protected $definitionCache = array();
+
+	public function __construct() {
+		$dir = dirname(__FILE__); 
+		require_once($dir . "/TextareasData.php"); 
+	}
+
+	/**
+	 * Get a blank Textareas value
+	 *
+	 * @param Page $page
+	 * @param Field $field
+	 * @return TextareasData
+	 *
+	 */
+	public function getBlankValue(Page $page, Field $field) {
+		$value = new TextareasData();
+		$value->setField($field); 
+		$definitions = $this->getTextareaDefinitions($field); 
+		foreach($definitions as $name => $definition) {
+			// establish blank values
+			$value->set($name, ''); 
+		}
+		return $value; 
+	}
+
+	/**
+	 * Sanitize a Textareas value for placement in a Page
+	 *
+	 * @param Page $page
+	 * @param Field $field
+	 * @param TextareasData $value
+	 * @return TextareasData
+	 *
+	 */
+	public function sanitizeValue(Page $page, Field $field, $value) {
+		if(!$value instanceof TextareasData) $value = $this->getBlankValue($page, $field); 	
+		foreach($value as $k => $v) {
+			$value->set($k, parent::sanitizeValue($page, $field, $v)); 
+		}
+		return $value; 
+	}
+	
+	/**
+	 * Format a Textareas value for output
+	 *
+	 * @param Page $page
+	 * @param Field $field
+	 * @param TextareasData $value
+	 * @return TextareasData
+	 *
+	 */
+	public function ___formatValue(Page $page, Field $field, $value) {
+
+		if(!$value instanceof TextareasData) throw new WireException("formatValue requires TextareasData value"); 
+
+		$formattedValue = new TextareasData();
+		$formattedValue->setField($field); 
+
+		foreach($value as $k => $v) {
+			$formattedValue->set($k, parent::___formatValue($page, $field, $v)); 
+		}
+
+		return $formattedValue; 
+	}
+
+	/**
+	 * Prepare a Textareas value for saving (converts to CR delimited string)
+	 *
+	 * @param Page $page
+	 * @param Field $field
+	 * @param TextareasData $value
+	 * @return string
+	 *
+	 */
+	public function ___sleepValue(Page $page, Field $field, $value) {
+
+		$sleepValue = '';
+
+		foreach($value as $name => $v) {
+			// remove carriage return charcters, leaving only \n linefeed characters
+			$v = parent::___sleepValue($page, $field, $v); 
+			$v = trim($v); 
+			if(!strlen($v)) continue; 
+			$v = str_replace(array("\r\n", "\r"), array("\n", ""), $v); 
+			$sleepValue .= "\r$name:$v";
+		}
+
+		return ltrim($sleepValue);
+	}
+
+	/**
+	 * Convert a textareas value from string to TextareasData
+	 *
+	 * @param Page $page
+	 * @param Field $field
+	 * @param string $value
+	 * @return TextareasData
+	 *
+	 */
+	public function ___wakeupValue(Page $page, Field $field, $value) {
+
+		$wakeupValue = $this->getBlankValue($page, $field); 
+
+		// split fields by CR
+		foreach(explode("\r", $value) as $v) {
+			// isolate name from rest by colon
+			if(empty($v) || !strpos($v, ':')) continue; 
+			list($name, $v) = explode(":", $v, 2); 
+			$wakeupValue->set($name, parent::___wakeupValue($page, $field, $v)); 
+		}
+
+		$wakeupValue->resetTrackChanges(true); 
+
+		return $wakeupValue; 
+	}
+	
+	/**
+	 * Prepare a Textareas value for export
+	 *
+	 * @param Page $page
+	 * @param Field $field
+	 * @param TextareasData $value
+	 * @return array
+	 *
+	 */
+	public function ___exportValue(Page $page, Field $field, $value, array $options = array()) {
+		$a = array();
+		foreach($value as $name => $v) {
+			if(empty($v) && !empty($options['human'])) continue; // exclude blank values
+			$a[$name] = $v; 
+		}
+		return $a; 
+	}
+
+	/**
+	 * Get the Inputfield needed to populate a Textareas value
+	 *
+	 * @param Page $page
+	 * @param Field $field
+	 * @return InputfieldTextareas
+	 *
+	 */
+	public function getInputfield(Page $page, Field $field) {
+		$inputfield = $this->modules->get('InputfieldTextareas'); 
+		$inputfield->setField($field); 
+		$inputfield->setPage($page); 
+		return $inputfield; 
+	}
+
+	/**
+	 * Get the DB schema necessary to store a Textareas value
+	 *
+	 * @param Field $field
+	 * @return array
+	 *
+	 */
+	public function getDatabaseSchema(Field $field) {
+		$schema = parent::getDatabaseSchema($field); 
+		return $schema;
+	}
+
+	/**
+	 * Get the label (text) for a Textareas property
+	 *
+	 * @param Field|string|int $field
+	 * @param string $name Property
+	 * @return string Returns label or blank string if not found
+	 *
+	 */
+	public function getLabel($field, $name) {
+		if(!is_object($field)) $field = $this->wire('fields')->get($field); 
+		if(!$field) return '';
+		$schema = $this->getTextareaDefinitions($field); 
+		if(!isset($schema[$name])) return '';
+		return $schema[$name][0]; 
+	}
+
+	/**
+	 * Get the definitions (array) for a particular Textareas field
+	 *
+	 * @param Field $field
+	 * @param bool $cache Whether or not to allow use of the definition cache
+	 * @return array
+	 *
+	 */
+	public function getTextareaDefinitions(Field $field, $cache = true) {
+
+		if($cache && isset($this->definitionCache[$field->name])) return $this->definitionCache[$field->name]; 
+
+		$schema = array();
+		$lines = explode("\n", $field->definitions); 
+
+		foreach($lines as $line) {
+			$line = trim($line); 
+			if(empty($line)) continue; 
+			$pos = strpos($line, '='); 
+			$name = $pos === false ? $line : trim(substr($line, 0, $pos)); 
+			$name = $this->wire('sanitizer')->fieldName($name); 
+			if(empty($name)) continue; 
+			$label = $pos === false ? $name : trim(substr($line, $pos+1)); 
+			$description = '';
+			if(strpos($label, '=') !== false) {
+				list($label, $description) = explode('=', $label, 2); 
+				$label = trim($label);
+				$description = trim($description); 
+			}
+
+			$schema[$name] = array($label, $description); 
+		}
+
+		if($cache && count($schema)) $this->definitionCache[$field->name] = $schema; 
+
+		return $schema; 
+		
+	}
+
+	/**
+	 * Get the Inputfields needed to configure this Field in the field settings "details" tab
+	 *
+	 * @param Field $field
+	 * @return InputfieldWrapper
+	 *
+	 */
+	public function ___getConfigInputfields(Field $field) {
+
+		$inputfields = parent::___getConfigInputfields($field);
+
+		$f = $inputfields->getChildByName('inputfieldClass'); 
+		$baseClass = 'InputfieldText';
+		foreach($this->wire('modules')->find("className^=Inputfield") as $fm) {
+			if("$fm" == $baseClass || is_subclass_of("$fm", $baseClass)) {
+				if(is_subclass_of("$fm", "InputfieldTextarea")) continue; // already have these	
+				if(in_array("$fm", array('InputfieldPassword', 'InputfieldPageName', 'InputfieldPageTitle'))) continue; 
+				$f->addOption("$fm", str_replace("Inputfield", '', "$fm"));
+			}
+		}
+		$f->attr('value', $field->inputfieldClass); 
+
+		$f = $this->modules->get('InputfieldTextarea'); 
+		$f->attr('name', 'definitions'); 
+		$f->label = $this->_('Textarea Definitions'); 
+		$f->description = $this->_('Define one textarea per line in the format: "name", or "name=label", or "name=label=description". The "name" follows the same rules as any other ProcessWire field name (meaning only alphanumeric characters and underscores). The "label" may be any text. The "description" is optional and typically represents a longer version of the label, when useful.'); // Textareas description
+		$f->notes = $this->_('Examples:') . "\n" . 
+			$this->_('address=Mailing Address') . "\n" . 
+			$this->_('publications = Publications List = Enter the publication titles, one per line.'); 
+		$f->attr('value', $field->definitions); 
+		$rows = substr_count($field->definitions, "\n") + 2; 
+		if($rows < 5) $rows = 5; 
+		$f->attr('rows', $rows); 
+		$inputfields->add($f); 
+		
+		return $inputfields; 
+	}
+
+}
+

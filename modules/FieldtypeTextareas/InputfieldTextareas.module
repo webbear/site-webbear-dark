@@ -1,0 +1,247 @@
+<?php
+
+/**
+ * ProcessWire Textareas Inputfield
+ *
+ * Stores multiple text/textarea fields. 
+ *
+ * Part of the ProFields package.
+ * Please do not distribute. 
+ * 
+ * Copyright (C) 2014 by Ryan Cramer 
+ *
+ * http://processwire.com
+ *
+ */
+
+class InputfieldTextareas extends Inputfield {
+
+	public static function getModuleInfo() {
+		return array(
+			'title' => __('ProFields: Textareas', __FILE__), 
+			'summary' => __('Multiple text/textarea fields combined into one field.', __FILE__), 
+			'version' => 3,
+			'requires' => 'FieldtypeTextareas'
+			);
+	}
+
+	/**
+	 * Current page being edited
+	 *
+	 */
+	protected $page = null;
+
+	/**
+	 * Current field for this Textareas
+	 *
+	 */
+	protected $field = null;
+
+	/**
+	 * Cached result from getInputfields()
+	 *
+	 */
+	protected $inputfields = null;
+
+	/**
+	 * Construct the Inputfield and establish default config values
+	 *
+	 */
+	public function __construct() {
+		$this->set('inputWidth', 0); 
+		$this->set('collapsed2', 0); 
+		parent::__construct();
+	}
+
+	/**
+	 * Capture setting of the inputWidth property to validate it within a range
+	 *
+	 */
+	public function set($key, $value) {
+		if($key == 'inputWidth') {		
+			$value = (int) $value;
+			if($value > 100) $value = 100; 
+			if($value < 10) $value = 0;
+		}
+		return parent::set($key, $value); 
+	}
+
+	/**
+	 * Set the current Field object
+	 *
+	 */
+	public function setField(Field $field) {
+		$this->field = $field; 
+	}
+
+	/**
+	 * Set the current Page (being edited) object
+	 *
+	 */
+	public function setPage(Page $page) {
+		$this->page = $page; 
+	}
+
+	/**
+	 * Get the Textareas Inputfields
+	 *
+	 * @return InputfieldFieldset
+	 *
+	 */
+	protected function getInputfields() {
+
+		if(!is_null($this->inputfields)) return $this->inputfields; 
+		$inputWidth = $this->inputWidth; 
+
+		$fieldset = $this->wire('modules')->get('InputfieldFieldset'); 
+		$fieldset->attr('name', $this->name); 
+		$fieldset->label = $this->label;
+		$fieldset->collapsed = $this->collapsed; 
+		$attrs = $this->getAttributes();
+
+		foreach($attrs as $k => $v) {
+			if($k == 'value') continue; 
+			$fieldset->attr($k, $v); 
+		}
+
+		unset($attrs['type'], $attrs['name'], $attrs['id'], $attrs['value']); 
+
+		foreach($this->field->type->getTextareaDefinitions($this->field) as $name => $definition) {
+
+			list($label, $description) = $definition;
+			$inputfield = $this->modules->get($this->field->inputfieldClass); 
+
+			foreach($this->field->getArray() as $key => $value) {
+				if($inputfield->has($key)) $inputfield->set($key, $value); 
+			}
+
+			$inputfield->attr('name', $this->attr('name') . "__" . $name); 	
+			$inputfield->attr('data-name', $name); 
+			$inputfield->attr('value', $this->attr('value')->$name); 
+			$inputfield->label = $label;
+			$inputfield->description = $description; 
+			$inputfield->collapsed = $this->collapsed2; 
+			if($inputWidth) $inputfield->columnWidth = $inputWidth; 
+
+			foreach($attrs as $key => $value) {
+				$inputfield->attr($key, $value); 
+			}
+			$inputfield->resetTrackChanges(true); 
+			$fieldset->add($inputfield); 
+			
+		}
+
+		$this->inputfields = $fieldset; 
+
+		return $fieldset; 
+	}
+
+	/**
+	 * Is this Textareas Inputfield empty?
+	 *
+	 * @return bool
+	 *
+	 */
+	public function isEmpty() {
+		$value = $this->attr('value'); 
+		if(empty($value)) return true; 
+		$length = 0; 
+		foreach($value as $k => $v) {
+			$length += strlen($v);
+		}
+		return $length === 0; 
+	}
+
+	/**
+	 * Render the Inputfield markup
+	 *
+	 * @return string
+	 *
+	 */
+	public function ___render() {
+
+		if(!$this->field || !$this->field->type instanceof FieldtypeTextareas) {
+			$error = "Field '{$this->field->name}' - Fieldtype {$this->field->type} is not compatible with Textareas.";
+			$this->error($error);
+			return $error; 
+		}
+
+		$inputfields = $this->getInputfields();
+
+		return $inputfields->render();
+	}
+
+	/**
+	 * Render just the value (not input) in text/markup for presentation purposes
+	 *
+	 * @return string of text or markup where applicable
+	 *
+	 */
+	public function ___renderValue() {
+		$inputfields = $this->getInputfields();
+		return $inputfields->renderValue();
+	}
+
+	/**
+	 * Process the Textareas input
+	 *
+	 */
+	public function ___processInput(WireInputData $input) {
+		$inputfields = $this->getInputfields();
+		foreach($inputfields as $f) {
+			$f->processInput($input); 
+			if($f->isChanged()) {
+				$name = $f->attr('data-name'); 
+				$value = $f->attr('value'); 
+				$this->value->set($name, $value); 
+				$this->trackChange('value');
+			}
+		}	
+		return $this;
+	}
+
+	/**
+	 * Get the Inputfields necessary to configure this field (for the Input tab) 
+	 *
+	 * @return InputfieldWrapper
+	 *
+	 */
+	public function ___getConfigInputfields() {
+
+		$inputfieldClass = $this->field->inputfieldClass; 
+		if(!$inputfieldClass) $inputfieldClass = 'InputfieldTextarea';
+		$inputfield = $this->modules->get($inputfieldClass); 
+		$inputfield->hasFieldtype = false;
+
+		foreach($this->field->getArray() as $key => $value) {
+			if($inputfield->has($key)) $inputfield->set($key, $value); 
+		}
+
+		$inputfields = $inputfield->getConfigInputfields();
+
+		$fieldset = $this->wire('modules')->get('InputfieldFieldset'); 
+		$fieldset->label = $this->_('Textareas Input Settings'); 
+
+		$f = $this->wire('modules')->get('InputfieldInteger'); 
+		$f->attr('name', 'inputWidth'); 
+		$f->label = $this->_('Column Width %'); 
+		$f->description = $this->_('Enter the default width for each Textareas item as a percentage between 10 and 100. Values less than 10 are assumed to be 100% (default).'); 
+		$f->min = 0;
+		$f->max = 100; 
+		$f->attr('value', (int) $this->inputWidth); 
+		$f->columnWidth = 50; 
+		$fieldset->add($f); 
+
+		$f = $inputfields->getChildByName('collapsed'); 
+		$f = clone $f; 
+		$f->attr('name', 'collapsed2'); 
+		$f->attr('value', (int) $this->collapsed2); 
+		$f->columnWidth = 50; 
+		$f->description = $this->_('How should the individual fields within the Textareas be displayed in the page editor?'); 
+		$fieldset->add($f); 
+
+		$inputfields->add($fieldset);
+
+		return $inputfields; 
+	}
+}

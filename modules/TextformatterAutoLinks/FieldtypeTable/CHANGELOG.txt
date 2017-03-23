@@ -1,0 +1,7 @@
+Table 0.0.5
+-----------
+Fix issue when cloning a Table field. 
+
+Table 0.0.4
+-----------
+First public release (beta).

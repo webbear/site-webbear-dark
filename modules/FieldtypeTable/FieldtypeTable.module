@@ -1,0 +1,1274 @@
+<?php
+
+/**
+ * ProcessWire Table Fieldtype
+ *
+ * Field that lets you define a database table of custom fields.
+ *
+ * Part of the ProFields package
+ * Please do not distribute. 
+ * 
+ * Copyright 2014 by Ryan Cramer
+ *
+ * http://processwire.com
+ *
+ */
+
+class FieldtypeTable extends FieldtypeMulti {
+
+	public static function getModuleInfo() {
+		return array(
+			'title' => __('ProFields: Table', __FILE__),
+			'summary' => __('Field that lets you define a database table of custom fields.', __FILE__),
+			'version' => 5,
+			'installs' => 'InputfieldTable',
+			);
+	}
+
+	/**
+	 * Debug mode for development (of this module)
+	 *
+	 */
+	const debug = false; 
+
+	/**
+	 * Default number of columns present for a newly created field
+	 *
+	 */
+	const defaultCols = 3; 
+
+	/**
+	 * Value used for replacement of commas in enum fields
+	 *
+	 */
+	const enumCommaReplacement = ';;';
+
+	/**
+	 * Column type definitions as populated in the constructor
+	 *
+	 */
+	protected $colTypes = array(); 
+
+	/**
+	 * Construct the Fieldtype and populate default settings and column types
+	 *
+	 */
+	public function __construct() {
+		parent::__construct();
+
+		require_once(dirname(__FILE__) . '/TableRow.php'); 
+		require_once(dirname(__FILE__) . '/TableRows.php'); 
+
+		$settings = array(
+			'text' => array(
+				"textformatters" => "TextformatterEntities", 
+				"placeholder" => "", 
+				"default" => ""
+				),
+			'textarea' => array(
+				"rows" => 4,
+				"textformatters" => "TextformatterEntities", 
+				"placeholder" => "", 
+				"default" => "", 
+				),
+			'select' => array(
+				"textformatters" => "TextformatterEntities",
+				),
+			'date' => array(
+				"dateInputFormat" => "Y-m-d", 
+				"dateOutputFormat" => "Y-m-d", 
+				"datepicker" => 3, 
+				"defaultToday" => 0,
+				"yearRange" => "-10:+10",
+				),
+			'datetime' => array(
+				"dateInputFormat" => "Y-m-d", 
+				"timeInputFormat" => "h:i a", 
+				"dateOutputFormat" => "Y-m-d", 
+				"timeOutputFormat" => "h:i a", 
+				"datepicker" => 3, 
+				"defaultToday" => 0,
+				"yearRange" => "-10:+10",
+				"placeholder" => ""
+				),
+			'float' => array(
+				"precision" => "", 
+				),
+			); 
+
+
+		$this->colTypes = array(
+
+			'tinytext' => array(
+				'type' => 'tinytext', 
+				'label' => 'Tiny Text (up to 255 chars)',
+				'index' => 'FULLTEXT', 
+				'input' => 'text',
+				'valid' => 'text',
+				'settings' => $settings['text'], 
+				), 
+			'text' => array(
+				'type' => 'text', 
+				'label' => 'Text',
+				'index' => 'FULLTEXT', 
+				'input' => 'text',
+				'valid' => 'text',
+				'settings' => $settings['text'], 
+				), 
+			'textarea' => array(
+				'type' => 'text', 
+				'label' => 'Textarea',
+				'index' => 'FULLTEXT', 
+				'input' => 'textarea',
+				'valid' => 'textarea',
+				'settings' => $settings['textarea'], 
+				),
+			'email' => array(
+				'type' => 'tinytext', 
+				'label' => 'Email',
+				'index' => 'FULLTEXT', 
+				'input' => 'email',
+				'valid' => 'email',
+				'settings' => $settings['text'], 
+				), 
+			'url' => array(
+				'type' => 'text', 
+				'label' => 'URL',
+				'index' => 'FULLTEXT', 
+				'input' => 'url',
+				'valid' => 'url',
+				'settings' => $settings['text'], 
+				), 
+			'tinyint1' => array(
+				'type' => 'tinyint', 
+				'label' => 'Tiny Integer Signed (-128 to 128)',
+				'input' => 'number', 
+				'valid' => 'int', 
+				), 
+			'tinyint2' => array(
+				'type' => 'tinyint unsigned', 
+				'label' => 'Tiny Integer Unsigned (0 to 255)',
+				'input' => 'number', 
+				'valid' => 'int',
+				), 
+			'int1' => array(
+				'type' => 'int', 
+				'label' => 'Integer Signed',
+				'input' => 'number', 
+				'valid' => 'int',
+				), 
+			'int2' => array(
+				'type' => 'int unsigned', 
+				'label' => 'Integer Unsigned',
+				'input' => 'number', 
+				'valid' => 'int',
+				), 
+			'float' => array(
+				'type' => 'float', 
+				'label' => 'Float', 
+				'input' => 'text', 
+				'valid' => 'float',
+				'settings' => $settings['float'],
+				),
+			'double' => array(
+				'type' => 'double', 
+				'label' => 'Double', 
+				'input' => 'text', 
+				'valid' => 'double',
+				'settings' => $settings['float'],
+				),
+			'date' => array(
+				'type' => 'date', 
+				'label' => 'Date', 
+				'input' => 'text', 
+				'valid' => 'date',
+				'settings' => $settings['date'], 
+				),
+			'datetime' => array(
+				'type' => 'datetime', 
+				'label' => 'DateTime', 
+				'input' => 'text', 
+				'valid' => 'datetime',
+				'settings' => $settings['datetime'], 
+				),
+			'checkbox' => array(
+				'type' => "enum('0','1')", 
+				'label' => 'Checkbox', 
+				'input' => 'checkbox', 
+				'valid' => 'int',
+				'settings' => $settings['select'], 
+				),
+			'select' => array(
+				'type' => "enum([options])", 
+				'label' => 'Select', 
+				'input' => 'select',
+				'valid' => 'text',
+				'settings' => $settings['select'], 
+				),
+			'radios' => array(
+				'type' => "enum([options])", 
+				'label' => 'Radios', 
+				'input' => 'radios',
+				'valid' => 'text',
+				'settings' => $settings['select'], 
+				),
+			'checkboxes' => array(
+				'type' => "set([options])", 
+				'label' => 'Checkboxes', 
+				'input' => 'checkboxes',
+				'valid' => 'array',
+				'settings' => $settings['select'], 
+				)
+			);
+
+		ksort($this->colTypes); 
+	}
+
+	/**
+	 * Output a debugging message, for development use
+	 *
+	 */
+	protected function debugMessage($msg, $flags = 0) {
+		if(!self::debug) return;
+		$flags = $flags | Notice::debug; 
+		$this->message($msg, $flags); 
+	}
+
+	/**
+	 * Override of default __get() to capture the 'colTypes' key. 
+	 *
+	 */
+	public function __get($key) {
+		if($key == 'colTypes') return $this->colTypes;
+		return parent::__get($key); 
+	}
+
+	/**
+	 * Return a blank TableRows value
+	 *
+	 * @param Page $page
+	 * @param Field $field
+	 * @return TableRows
+	 *
+	 */
+	public function getBlankValue(Page $page, Field $field) {
+		return new TableRows($page, $field);
+	}
+
+	/**
+	 * Get an individual column by number (1 or higher) or name
+	 *
+	 * @param Field $field
+	 * @param int|string $n
+	 * @return array
+	 *
+	 */
+	public function getColumn(Field $field, $n) {
+
+		if(is_string($n) && !ctype_digit("$n")) return $this->getColumnByName($n); 
+
+		$col = array(
+			'name' => strtolower($field->{"col{$n}name"}), 
+			'type' => $field->{"col{$n}type"}, 
+			'label' => $field->{"col{$n}label"}, 
+			'width' => $field->{"col{$n}width"}, 
+			'sort' => $field->{"col{$n}sort"}, 
+			'options' => $field->{"col{$n}options"}, 
+			'settings' => $field->{"col{$n}settings"}, 
+			'schema' => '', 
+			'valid' => '', 
+			'input' => '', 
+			'index' => '', 
+			);
+
+		$type = $col['type'];
+		$colType = array();
+
+		if(isset($this->colTypes[$type])) {
+			$colType = $this->colTypes[$type]; 
+			$col['schema'] = $colType['type']; 
+			$col['valid'] = $colType['valid'];
+			$col['input'] = $colType['input'];
+			$col['index'] = isset($colType['index']) ? $colType['index'] : '';
+		}
+
+		if(empty($col['options'])) {
+			$col['options'] = array();
+		} else {
+			$col['options'] = explode("\n", $col['options']); 
+			foreach($col['options'] as $key => $value) {
+				$col['options'][$key] = trim($value); 
+			}
+		}
+
+		if(!$type) { 
+			$col['settings'] = array();
+
+		} else if(empty($col['settings'])) {
+			$col['settings'] = isset($colType['settings']) ? $colType['settings'] : array();
+
+		} else {
+			$settings = isset($colType['settings']) ? $colType['settings'] : array();
+			foreach(explode("\n", $col['settings']) as $line) {
+				if(!strpos($line, '=')) continue; 
+				list($property, $setting) = explode('=', $line); 
+				$settings[trim($property)] = trim($setting); 
+			}
+			$col['settings'] = $settings; 
+		}
+
+		return $col;
+	}
+
+	/**
+	 * Get an individual column by name (only)
+	 *
+	 * @param Field $field
+	 * @param string $name
+	 * @return array
+	 *
+	 */
+	public function getColumnByName(Field $field, $name) {
+		if(!$field->maxCols) $field->maxCols = self::defaultCols; 
+		$col = array();
+		for($n = 1; $n <= $field->maxCols; $n++) {	
+			if(strtolower($field->{"col{$n}name"}) == $name) {
+				$col = $this->getColumn($field, $n); 
+				break;
+			}
+		}
+		return $col;
+	}
+
+	/**
+	 * Get an array of all columns indexed by colum number
+	 *
+	 * @param Field $field
+	 * @return array
+	 *
+	 */
+	public function getColumns(Field $field) {
+		$cols = array();
+		for($n = 1; $n <= $field->maxCols; $n++) {
+			$cols[$n] = $this->getColumn($field, $n); 
+		}
+		return $cols; 
+	}
+		
+	/**
+	 * Get an array of all columns indexed by name
+	 *
+	 * @param Field $field
+	 * @return array
+	 *
+	 */
+	public function getColumnsByName(Field $field) {
+		$colsByNum = $this->getColumns($field); 
+		$cols = array();
+		foreach($colsByNum as $n => $col) {
+			$name = $col['name']; 
+			if(empty($name)) continue; 
+			$col['n'] = $n; 
+			$cols[$name] = $col; 
+		}
+		return $cols; 
+	}
+
+	/**
+	 * Update a DatabaseSelectQuery object to match a Page
+	 *
+	 * @param DatabaseSelectQuery $query
+	 * @param string $table
+	 * @param string $subfield
+	 * @param string $operator
+	 * @param string $value
+	 * @return DatabaseSelectQuery
+	 * @throws WireException
+	 *
+	 */
+	public function getMatchQuery($query, $table, $subfield, $operator, $value) {
+
+		if(in_array($subfield, array('', 'count', 'data'))) return parent::getMatchQuery($query, $table, $subfield, $operator, $value);
+
+		$field = $query->field; 
+		$column = $this->getColumnByName($field, $subfield); 
+		if(empty($column['name'])) throw new WireException("Unknown column specified as subfield"); 
+		$database = $this->wire('database'); 
+
+		if(stripos($column['index'], 'fulltext') !== false) {
+			$ft = new DatabaseQuerySelectFulltext($query);
+			$ft->match($table, $subfield, $operator, $value);
+			return $query;
+		}
+
+		$subfield = $database->escapeCol($subfield); 
+		$value = $database->escapeStr($value); 
+
+		if(stripos($column['schema'], 'set(') === 0) {
+			if(!in_array($operator, array('=', '!='))) throw new WireException("Operator '$operator' not supported for this query"); 
+			if($operator == '=') { 
+				$query->where("(FIND_IN_SET('$value', $table.$subfield)>0)");
+			} else {
+				$pageFinder = new PageFinder();
+				$selector = "$field->name.$subfield=$value, include=all";
+				$matches = $pageFinder->find(new Selectors($selector), array('getTotal' => false)); 	
+				if(count($matches)) {
+					$ids = array();
+					foreach($matches as $match) $ids[$match['id']] = (int) $match['id'];
+					$query->where("$table.pages_id NOT IN(" . implode(',', $ids) . ")"); 
+				} else {
+					return parent::getMatchQuery($query, $table, $subfield, $operator, $value);
+					
+				}
+			}
+
+		} else {
+			return parent::getMatchQuery($query, $table, $subfield, $operator, $value);
+		}
+		
+		return $query; 	
+	}
+	
+
+	/**
+	 * Sanitize and validate value any time it is set to a Page
+	 *
+	 * @param Page $page
+	 * @param Field $field
+	 * @param TableRows $value
+	 * @return TableRows
+	 *
+	 */
+	public function sanitizeValue(Page $page, Field $field, $value) {
+
+		if(!$value instanceof TableRows) $value = $this->getBlankValue($page, $field); 
+		$sanitizer = $this->wire('sanitizer'); 
+		$columns = $this->getColumns($field); 
+
+		foreach($value as $row) { 
+			foreach($columns as $col) {
+				if(!$col['name'] || !$col['type']) continue; 
+				$v = $row->get($col['name']); 
+
+				switch($col['valid']) {
+					case 'text':
+						$v = $sanitizer->text($v); 
+						break;
+					case 'textarea':
+						$v = $sanitizer->textarea($v); 
+						break;
+					case 'array':
+						if(!is_array($v)) $v = array();
+						foreach($v as $kk => $vv) {
+							$v[$kk] = $sanitizer->text($vv); 
+						}
+						break;
+					case 'int':
+						if(strlen("$v")) $v = intVal($v); 
+						break;
+					case 'double':
+					case 'float':
+						if(strlen("$v")) $v = floatVal($v); 
+						break;
+					case 'email':
+						$v = $sanitizer->email($v); 
+						break;
+					case 'date':
+					case 'datetime':
+						if(empty($v) || strpos($v, '0000') === 0) $v = '';
+							else if(ctype_digit($v)) $v = (int) $v; 
+							else $v = strtotime($v); 
+						break;
+					case 'url':
+						$v = $sanitizer->url($v); 
+						break;
+					default:
+						$v = $sanitizer->text($v); 
+
+				}
+
+				$row->set($col['name'], $v); 
+			}
+		}
+
+		return $value; 
+	}
+
+	/**
+	 * Given a value from the DB, wake it up to a TableRows object
+	 *
+	 * @param Page $page
+	 * @param Field $field
+	 * @param array $value
+	 * @return TableRows
+	 *
+	 */
+	public function ___wakeupValue(Page $page, Field $field, $value) {
+
+		$items  = $this->getBlankValue($page, $field);
+		if(!$field->maxCols) $field->maxCols = self::defaultCols;
+
+		if(empty($value)) return $items; 
+		$this->debugMessage('wakeup 1: ' . print_r($value, true), Notice::allowMarkup); 
+
+		$types = array();
+
+		for($n = 1; $n <= $field->maxCols; $n++) {
+			$name = $field->{"col{$n}name"}; 
+			$type = $field->{"col{$n}type"}; 
+			$types[$name] = $type; 
+		}
+
+		foreach($value as $key => $row) {
+			if(!WireArray::iterable($row)) continue; 
+
+			// identify and convert arrays
+			foreach($row as $name => $v) {
+				if(!isset($types[$name])) continue; 
+				$type = $this->colTypes[$types[$name]];
+				if(!empty($type['valid']) && $type['valid'] == 'array') {
+					$v = explode(',', $v); 	
+					foreach($v as $kk => $vv) {
+						if(strpos($vv, self::enumCommaReplacement) !== false) {
+							$v[$kk] = str_replace(self::enumCommaReplacement, ',', $vv); 
+						}
+					}
+					$row[$name] = $v; 
+				}
+			}
+
+			$item = new TableRow($field, $row);
+			$item->resetTrackChanges(true);
+			$items->add($item); 
+		}	
+		$this->debugMessage('wakeup 2: ' . print_r($value, true), Notice::allowMarkup); 
+
+		$items->resetTrackChanges(true);
+		return $items; 
+	}
+
+	/**
+	 * Given a TableRows object, convert it to an array for storage
+	 *
+	 * @param Page $page
+	 * @param Field $field
+	 * @param TableRows $value
+	 * @return array
+	 *
+	 */
+	public function ___sleepValue(Page $page, Field $field, $value) {
+
+		if($value->data('preventSaving')) throw new WireException("Formatted value may not be used for saving");  
+		$itemsArray = array();
+		$sort = 0; 
+		if(!$field->maxCols) $field->maxCols = self::defaultCols; 
+		$value = $this->sanitizeValue($page, $field, $value); // to cover all object properties
+
+		foreach($value as $key => $item) {
+			$itemArray = array();
+
+			foreach($this->getColumns($field) as $n => $col) { 
+				$name = $col['name']; 
+				$type = $col['type'];
+				if(!$name || !$type) continue; 
+				$itemValue = $item->$name; 
+
+				if(is_array($itemValue)) {
+					// account for enum/set values with commas
+					$str = '';
+					foreach($itemValue as $k => $v) {
+						if(strpos($v, ',') !== false) $v = str_replace(',', self::enumCommaReplacement, $v); 
+						$str .= trim($v) . ",";
+					}
+					$itemValue = trim($str, ','); 
+
+				} else if($type == 'date' || $type == 'datetime') {
+					// dates stored at runtime as timestamps, so we convert to ISO-8601 for DB					
+					if(empty($itemValue)) $itemValue = null;
+						else if($type == 'date') $itemValue = date('Y-m-d', $itemValue); 
+						else $itemValue = date('Y-m-d H:i:s', $itemValue); 
+				}
+
+				$itemArray[$name] = $itemValue; 
+			}
+
+			if($item->id) $itemArray['data'] = (int) $item->id; 
+			$itemsArray[] = $itemArray; 
+		}
+
+		$this->debugMessage('sleepValue2: <pre>' . print_r($itemsArray, true) . '</pre>', Notice::allowMarkup); 
+
+		return $itemsArray; 
+	}
+
+	/**
+	 * Run the given text formatters on the provided $value and return the formatted value
+	 *
+	 * @param Page $page
+	 * @param Field $field
+	 * @param TableRows $value
+	 * @param array $textformatters
+	 * @return TableRows
+	 *
+	 */
+	protected function textformatters(Page $page, Field $field, $value, array $textformatters) {
+
+		foreach($textformatters as $module) {
+			if(is_array($value)) {
+				foreach($value as $k => $v) {
+					if(!is_string($v)) continue; 
+					$module->formatValue($page, $field, $v); 
+					$value[$k] = $v; 
+				}
+
+			} else if(is_string($value)) {
+				$module->formatValue($page, $field, $value); 
+			}
+		}
+		return $value; 
+	}
+
+	/**
+	 * Format Table value for front-end output
+	 *
+	 * This primarily entity encodes all strings.
+	 *
+	 * This method is only used when $page->outputFormatting is true. 
+	 *
+	 * @param Page $page
+	 * @param Field $field
+	 * @param TableRows $value
+	 * @return TableRows
+	 *
+	 */
+	public function ___formatValue(Page $page, Field $field, $value) {
+
+		if(!$value instanceof TableRows) return $this->getBlankValue($page, $field); 
+		$formattedValue = $value->makeNew();
+		$formattedValue->data('preventSaving', true); 
+		$cols = $this->getColumnsByName($field); 
+
+		foreach($value as $n => $item) {
+
+			$formattedItem = $formattedValue->makeBlankItem();
+
+			foreach($cols as $name => $col) {
+
+				$itemValue = $item->get($name); 
+				$settings = empty($col['settings']) ? array() : $col['settings'];
+				$textformatters = array();
+
+				// find all textformatters defined for this field
+				if(!empty($settings['textformatters'])) {
+					foreach(explode(',', $settings['textformatters']) as $moduleName) {
+						$module = $this->wire('modules')->get($moduleName); 
+						if(!$module || !$module instanceof Textformatter) continue; 
+						$textformatters[] = $module; 
+					}
+				}
+
+				// format dates/times
+				if($itemValue && ($col['type'] == 'date' || $col['type'] == 'datetime')) {
+					$dateFormat = isset($settings['dateOutputFormat']) ? $settings['dateOutputFormat'] : '';
+					$dateFormat = "$dateFormat " . (isset($settings['timeOutputFormat']) ? $settings['timeOutputFormat'] : '');
+					$dateFormat = trim($dateFormat); 
+					if(!empty($dateFormat)) $itemValue = FieldtypeDatetime::formatDate($itemValue, $dateFormat); 
+				}
+
+				// run textformatters
+				if(count($textformatters)) $itemValue = $this->textformatters($page, $field, $itemValue, $textformatters); 
+
+				$formattedItem->set($name, $itemValue); 
+			}
+
+			$formattedValue->add($formattedItem); 
+		}
+
+		$formattedValue->resetTrackChanges(true); 
+		
+		return $formattedValue; 
+	}
+
+	/**
+	 * Return the Inputfield used for inputting Table data
+	 * 
+	 * @param Page $page
+	 * @param Field $field
+	 * @return Inputfield
+	 *
+	 */
+	public function getInputfield(Page $page, Field $field) {
+		$inputfield = $this->modules->get('InputfieldTable'); 
+		$inputfield->setField($field); 
+		return $inputfield;
+	}
+
+	/**
+	 * Return the DB schema used by Table
+	 *
+	 * @param Field $field
+	 * @return array
+	 *
+	 */
+	public function getDatabaseSchema(Field $field) {
+
+		if(!$field->maxCols) $field->maxCols = self::defaultCols; 
+		$schema = parent::getDatabaseSchema($field); 
+		$schema['data'] = 'INT UNSIGNED NOT NULL AUTO_INCREMENT';
+		$schema['keys']['primary'] = 'PRIMARY KEY (data)'; 
+		$schema['keys']['pages_id'] = 'UNIQUE (pages_id, sort)';
+		unset($schema['keys']['data']); 
+
+		for($n = 1; $n <= $field->maxCols; $n++) {
+			$name = $this->sanitizeFieldName($field->{"col{$n}name"});
+			$type = $field->{"col{$n}type"};
+			$options = $field->{"col{$n}options"};
+			if(empty($name) || empty($type)) continue; 
+			$typeSQL = $this->colTypes[$type]['type'];
+			if(strlen($options)) $typeSQL = $this->populateOptionsSchema($typeSQL, $options); 
+			$schema[$name] = $typeSQL;
+			$index = "INDEX";
+			if(isset($this->colTypes[$type]['index'])) $index = $this->colTypes[$type]['index'];
+			$schema['keys'][$name] = "$index $name (`$name`)";
+		}
+
+		return $schema;
+	}
+
+	/**
+	 * Convert "[options]" in an SQL schema to the actual list of options (for ENUM or SET)
+	 *
+	 * @param string $typeSQL
+	 * @param array $options
+	 * @return string Converted SQL string
+	 *
+	 */
+	protected function populateOptionsSchema($typeSQL, $options) { 
+		if(!is_array($options)) $options = explode("\n", $options); 
+		$optionsString = '';	
+		foreach($options as $option) {
+			// check for commas which aren't allowed in enum/set
+			$option = ltrim($option, '+ '); 
+			if(strpos($option, '=') !== false) list($option, $label) = explode('=', $option); 
+			if(strpos($option, ',') !== false) $option = str_replace(',', self::enumCommaReplacement, $option); 
+			$option = $this->database->quote(trim($option)); 
+			$optionsString .= "$option,";
+		}
+		$optionsString = rtrim($optionsString, ',');
+		$typeSQL = str_replace('[options]', $optionsString, $typeSQL); 
+		return $typeSQL;
+	}
+
+	/**
+	 * Check whether schema needs change and commit changes if $commit is true
+	 *
+	 * If $commit is not true, needed changes that don't erase data will still be committed. 
+	 *
+	 * Returns array if confirmation queries indicating what will be changed next time $commit is true. 
+	 *
+	 * @param Field $field
+	 * @param bool $commit
+	 * @return array
+	 *
+	 */
+	public function _checkSchema(Field $field, $commit = false) {
+
+		// retrieve current field definitions
+		if(!$field->maxCols) $field->maxCols = self::defaultCols; 
+		$cols = array();
+		$colNumbers = array();
+		$confirmQueries = array();
+		$oldName = '';
+		$newName = '';
+		$hasSelectOptions = false; 
+
+		if($field->renameColumn && strpos($field->renameColumn, '=')) {
+			// note $field->renameColumn is a temporary field with old=new value
+			list($oldName, $newName) = explode('=', $field->renameColumn); 
+			$oldName = $this->sanitizeFieldName($oldName); 
+			$newName = $this->sanitizeFieldName($newName); 
+			if(in_array($newName, array('pages_id', 'data', 'sort'))) $newName = '';
+		}
+		
+		for($n = 1; $n <= $field->maxCols; $n++) {
+
+			$name = $this->sanitizeFieldName($field->{"col{$n}name"});
+			if(empty($name)) continue; 
+			$typeName = $field->{"col{$n}type"};
+			if(empty($typeName)) continue; 
+			$typeSQL = $this->colTypes[$typeName]['type']; 
+			$options = $field->{"col{$n}options"};
+
+			if(strpos($typeSQL, '[options]')) {
+				// convert enum or set values to MySQL CSV
+				$typeSQL = $this->populateOptionsSchema($typeSQL, explode("\n", $options)); 
+				$hasSelectOptions = true; 
+			} 
+
+			$cols[$name] = array(
+				'name' => $name,
+				'newName' => $oldName === $name && strlen($newName) ? $newName : '', 
+				'typeName' => $typeName, 
+				'typeSQL' => $typeSQL, 
+				);
+
+			$colNumbers[$name] = $n;
+		}
+
+		// retrieve current schema as it is in the DB table
+		$schema = array();
+		$table = $this->database->escapeTable($field->getTable()); 
+		$query = $this->database->prepare("SHOW COLUMNS FROM `$table`"); 
+		$query->execute();
+
+		while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+
+			$name = $this->sanitizeFieldName($row['Field']);	
+			if(in_array($name, array('data', 'sort', 'pages_id'))) continue; 
+
+			$typeSQL = $row['Type']; 
+			$pos = strpos($typeSQL, '('); 
+			$t = $pos ? substr($typeSQL, 0, $pos) : null;
+
+			if(in_array($t, array('enum', 'set', 'varchar'))) { 
+				// fine then, we'll take that
+			} else {
+				if(preg_match('/\(\d+\)/', $typeSQL)) {
+					$typeSQL = preg_replace('/\(\d+\)/', '', $typeSQL); 
+				} else if(!is_null($t)) {
+					$typeSQL = $t;
+				}
+			}
+
+			$schema[$name] = array(
+				'name' => $name, 
+				'typeSQL' => $typeSQL, 
+				);
+		}
+
+		// figure out if any fields need to be deleted from the schema
+		foreach($schema as $name => $dbcol) {
+			if(isset($cols[$name])) continue; 
+			try {
+				if($commit) {
+					$sql = "ALTER TABLE `$table` DROP `$name`";
+					$this->debugMessage($sql); 
+					$query = $this->database->prepare($sql);
+					$query->execute();
+				} else {
+					$confirmQueries[] = "Field: '$name' - Delete";
+				}
+			} catch(Exception $e) {
+				$this->error($e->getMessage()); 
+			}
+		}
+		 
+		// compare definitions to DB table, adding or modifying fields where appropriate
+		// if $commit is true, we make the changes now. If not, we just document the changes in $confirmQueries array
+		foreach($cols as $name => $col) {
+
+			$typeName = $col['typeName'];
+			if(!$name || empty($this->colTypes[$typeName])) continue; 
+			$colType = $this->colTypes[$typeName]; 
+			if(!isset($colType['index'])) $colType['index'] = 'INDEX'; 
+			$typeSQL = $col['typeSQL'];
+			if(empty($typeSQL)) continue; 
+			$hasNameChange = $col['newName'] && !isset($cols[$col['newName']]); 
+			$hasTypeChange = isset($schema[$name]) && $schema[$name]['typeSQL'] != $typeSQL && $schema[$name]['typeSQL'] != str_replace('\\', '', $typeSQL); 
+			$sql = '';
+
+			if(!isset($schema[$name])) {
+				// add new col to DB schema
+				$sql = "ALTER TABLE `$table` ADD `$name` $typeSQL";
+				$index = "$colType[index] `$name` (`$name`)"; 
+				$commit = true; // we always automatically commit new field additions
+
+			} else if($hasTypeChange || $hasNameChange) { 
+				// name or type has changed
+				if($hasTypeChange) $this->debugMessage($schema[$name]['typeSQL'] . " != $typeSQL"); 
+				if($hasNameChange) $this->debugMessage("$name != $col[newName]"); 
+				$newName = $hasNameChange ? $col['newName'] : $name; 
+				if($commit) try {
+					$sql = "ALTER TABLE `$table` DROP INDEX `$name`";
+					$this->debugMessage($sql, Notice::debug); 
+					$this->database->exec($sql); 
+				} catch(Exception $e) { 
+					$this->error($e->getMessage());
+				}
+				if($commit) {
+					$sql = "ALTER TABLE `$table` CHANGE `$name` `$newName` $typeSQL";
+					if($hasNameChange) {
+						$name = $newName; // so index updated as well
+						$n = $colNumbers[$oldName]; 
+						$field->set("col{$n}name", $newName); 
+					}
+				} else {
+					if($hasTypeChange) {
+						if($hasSelectOptions) {
+							$confirmQueries[] = "Field '$name' - Update selectable options and/or change type to '$typeName'";
+						} else {
+							$confirmQueries[] = "Field '$name' - Change type to '$typeName'";
+						}
+					}
+					if($hasNameChange) $confirmQueries[] = "Field '$name' - Change name to '$newName'";
+				}
+			} else {
+				$index = '';
+			}
+
+			if($sql && $commit && !count($confirmQueries)) try {
+				$this->debugMessage($sql); 
+				$query = $this->database->prepare($sql); 
+				$query->execute();
+
+				$index = "$colType[index] `$name` (`$name`)"; 
+				$sql = "ALTER TABLE `$table` ADD $index";
+				$this->debugMessage($sql); 
+				$query = $this->database->prepare($sql); 
+				$query->execute();
+
+			} catch(Exception $e) {
+				$this->error($e->getMessage()); 
+			}
+		}
+
+		return $confirmQueries; 
+	}
+
+	/**
+	 * Reorder our field definitions to be consistent with their sort orders
+	 *
+	 * @param Field $field
+	 *
+	 */
+	protected function reorder(Field $field) {
+
+		$defs = array();
+
+		for($n = 1; $n <= $field->maxCols; $n++) {
+			$sort = $field->{"col{$n}sort"}; 
+			$def = array(
+				'name' => $this->sanitizeFieldName($field->{"col{$n}name"}),
+				'label' => $field->{"col{$n}label"},
+				'type' => $field->{"col{$n}type"},
+				'width' => $field->{"col{$n}width"},
+				'options' => $field->{"col{$n}options"},
+				'sort' => $field->{"col{$n}sort"}
+				);
+			if($def['type'] == 'delete') {
+				continue; 
+			}
+			if(!$def['name']) $sort = $field->maxCols; // move to end of list
+			while(isset($defs[$sort])) $sort++;
+			$defs[$sort] = $def; 
+		}
+
+		// sort by the 'sort' value
+		ksort($defs);
+		// convert to predictable 0-based array
+		$tmp = array();
+		foreach($defs as $def) $tmp[] = $def;
+		$defs = $tmp;
+
+		for($n = 1; $n <= $field->maxCols; $n++) {
+			$i = $n-1; 
+			if(isset($defs[$i])) {
+				$def = $defs[$i];
+				$field->set("col{$n}name", $def['name']); 
+				$field->set("col{$n}label", $def['label']); 
+				$field->set("col{$n}type", $def['type']); 
+				$field->set("col{$n}width", $def['width']); 
+				$field->set("col{$n}options", $def['options']); 
+				$field->set("col{$n}sort", $n); 
+			} else {	
+				unset($field->{"col{$n}name"}); 
+				unset($field->{"col{$n}label"}); 
+				unset($field->{"col{$n}type"}); 
+				unset($field->{"col{$n}width"}); 
+				unset($field->{"col{$n}options"}); 
+				unset($field->{"col{$n}sort"}); 
+			}
+		}
+	}
+
+	/**
+	 * There are no other fieldtypes compatible with this one
+	 *
+	 * @param Field $field
+	 * @return Fieldtypes
+	 *
+	 */
+	public function ___getCompatibleFieldtypes(Field $field) {
+		$fieldtypes = new Fieldtypes();
+		return $fieldtypes;
+	}
+
+	/**
+	 * Get information for use in selectors
+	 *
+	 * @param Field $field
+	 * @array $data
+	 * @return array
+	 *
+	 */
+	public function ___getSelectorInfo(Field $field, array $data = array()) {
+
+		$info = parent::___getSelectorInfo($field, $data); 
+		$info['input'] = 'none'; 
+		unset($info['subfields']['data']); 
+
+		/*
+		foreach($this->getColumns($field) as $col) {
+
+			$name = $col['name'];
+			$type = $col['type'];
+			$options = array();
+			$operators = $info['operators'];
+			$input = 'text';
+			$_type = 'text';
+
+			if(!empty($col['options'])) {
+				foreach($col['options'] as $option) {
+					$options[$option] = $option; 
+				}
+				$input = 'select';
+
+			} else if(in_array($type, array('date', 'datetime'))) {
+				$input = 'datetime';
+
+			} else if(in_array($type, array('tinyint1', 'tinyint2', 'int1', 'int2'))) {
+				$input = 'number';
+				$_type = 'integer';
+
+			} else if(in_array($type, array('float', 'double'))) {
+				$_type = 'float';
+
+			} else if($type == 'email') {
+				$input = 'email';
+
+			} else if(in_array($type, array('tinytext', 'text', 'textarea'))) {
+				$operators = array('=', '!=', '%=', '*=', '~=', '^=', '$='); 
+			}
+
+			$info['subfields'][$name] = array(
+				'type' => $_type, 
+				'input' => $input,
+				'label' => $col['label'], 
+				'operators' => $operators,
+				'options' => $options, 
+				);
+		}
+		*/
+
+
+		return $info; 
+	}
+
+	/**
+	 * Sanitize a field name
+	 *
+	 * Same as Sanitizer::fieldName, but enforces lowercase
+	 *
+	 * @param string $fieldName
+	 * @return string
+	 *
+	 */
+	public function sanitizeFieldName($fieldName) {
+		$fieldName = $this->wire('sanitizer')->fieldName($fieldName); 
+		$fieldName = strtolower($fieldName); 
+		return $fieldName; 
+	}
+
+
+	/**
+	 * Configure the FieldtypeTable for details tab
+	 *
+	 * @param Field $field
+	 * @return InputfieldWrapper
+	 *
+	 */
+	public function ___getConfigInputfields(Field $field) {
+
+		$numActiveColumns = 0; 
+
+		if(!$field->maxCols) $field->maxCols = self::defaultCols; 
+		$inputfields = parent::___getConfigInputfields($field); 
+		$this->reorder($field); 
+
+		$f = $this->modules->get('InputfieldInteger'); 
+		$f->attr('name', 'maxCols'); 
+		$f->label = $this->_('Number of Columns'); 
+		$f->attr('value', (int) $field->maxCols); 
+		$f->required = true; 
+		$f->icon = 'tachometer';
+		$f->description = $this->_('More than 10 columns may not fit in a table, so the recommendation is to stay under that, but you may specify any number.'); 
+		$f->collapsed = Inputfield::collapsedYes;
+		$f->notes = $this->_('If you change this value, hit save to see additional column inputs.'); 
+		$inputfields->add($f); 
+
+		$wrap = $this->modules->get('InputfieldFieldset'); 
+		$wrap->attr('id', 'table_column_definitions'); 
+		$wrap->label = $this->_('Column Definitions'); 
+		$wrap->icon = 'table';
+		$totalWidth = 0;
+
+		for($n = 1; $n <= $field->maxCols; $n++) {
+
+			$fieldset = $this->modules->get('InputfieldFieldset'); 
+			$fieldset->label = sprintf($this->_('Column %d'), $n); 
+			$fieldset->addClass('table_column_definition'); 
+			$fieldset->icon = 'arrows';
+			$col = $this->getColumn($field, $n); 
+
+			$name = "col{$n}name";
+			$v = $field->$name; 
+			if(empty($v)) { 
+				$columnWidth = 25; 
+				$f = $this->modules->get('InputfieldName'); 
+				$f->attr('name', $name); 
+				$f->label = $this->_('Name'); 
+				$f->notes = $this->_('Use only lowercase: _a-z0-9'); 
+				$f->attr('value', $v); 
+				$f->required = false; 
+				$f->columnWidth = $columnWidth; 
+				$f->description = '';
+				$fieldset->add($f); 
+				$fieldset->collapsed = Inputfield::collapsedYes; 
+				$isNew = true; 
+			} else {
+				$f = $this->modules->get('InputfieldHidden');
+				$f->attr('name', $name); 
+				$f->attr('value', $v); 
+				$fieldset->add($f); 
+				$fieldset->label = $v; 
+				$columnWidth = 33; 	
+				$numActiveColumns++;
+				$isNew = false;
+			}
+
+			$f = $this->modules->get('InputfieldText'); 
+			$name = "col{$n}label";
+			$f->attr('name', $name); 
+			$f->label = $this->_('Label'); 
+			if($isNew) $f->notes = $this->_('Any string value'); 
+			$f->attr('value', $field->$name); 
+			$f->required = false; 
+			$f->columnWidth = $columnWidth; 
+			$f->description = '';
+			$fieldset->add($f); 
+
+			$f = $this->modules->get('InputfieldSelect'); 
+			$name = "col{$n}type";
+			$f->attr('name', $name); 
+			$f->label = $this->_('Type'); 
+			if($isNew) $f->notes = $this->_('Please select'); 
+			foreach($this->colTypes as $key => $type) {
+				$schema = $type['type']; 
+				$label = $type['label'];
+				if(strpos($schema, '[options]')) $label .= ' *';
+				$f->addOption($key, $label);
+			}
+
+			$f->addOption('delete', $this->_('DELETE THIS COLUMN')); 
+			$f->attr('value', $field->$name); 
+			$f->required = $field->$name ? true : false; 
+			$f->columnWidth = $columnWidth; 
+			$fieldset->add($f); 
+
+			$f = $this->modules->get('InputfieldInteger');
+			$name = "col{$n}width";
+			$f->attr('name', $name); 
+			$f->label = $this->_('% Width'); 
+			if($isNew) $f->notes = '10-100 (blank=auto)';
+			$f->attr('value', $field->$name > 0 ? $field->$name : ''); 
+			$f->columnWidth = $columnWidth; 
+			$fieldset->add($f); 
+			$totalWidth += (int) $field->$name; 
+
+			$f = $this->modules->get('InputfieldHidden');
+			$name = "col{$n}sort";
+			$f->attr('name', $name); 
+			$f->label = $this->_('Sort'); 
+			$f->attr('value', $n); 
+			$f->addClass('table_column_sort_value'); 
+			$fieldset->add($f); 
+
+			$f = $this->modules->get('InputfieldTextarea'); 
+			$name = "col{$n}options";
+			$f->attr('name', $name); 
+			$f->attr('value', trim($field->$name)); 
+			$f->label = $this->_('Options (1 per line)'); 	
+			$f->addClass('table_column_options'); 
+			$f->addClass(strpos($schema, '[options]') ? 'has_options' : 'no_options'); 
+			$f->notes = $this->_('Optional: To specify separate values and labels, specify **value=label** on the line.'); 
+			$fieldset->add($f); 
+
+			$name = "col{$n}settings";
+			$value = $col['settings']; 
+			if(!$isNew && count($value)) {
+				$f = $this->modules->get('InputfieldTextarea'); 
+				$f->attr('rows', count($value) > 2 ? count($value) : 2); 
+				$v = '';
+				foreach($value as $setting => $settingValue) $v .= "$setting=$settingValue\n";	
+				$f->attr('name', $name); 
+				$f->attr('value', trim($v)); 
+				$f->label = $this->_('Settings'); 	
+				$f->addClass('table_column_settings'); 
+				$f->collapsed = Inputfield::collapsedYes; 
+				$fieldset->add($f); 
+			}
+
+			$wrap->add($fieldset); 
+		}
+
+		$inputfields->add($wrap); 
+
+		$markup = $this->modules->get('InputfieldMarkup'); 
+		$markup->attr('id', 'table_definition_js');
+		$markup->value = "<script>" . file_get_contents(__DIR__ . "/config.js") . "</script>";
+		$inputfields->add($markup);
+
+		$changes = $this->_checkSchema($field, false); 
+		$f = $this->modules->get('InputfieldRadios');
+		$f->attr('name', 'commit');
+		$f->label = $this->_('Confirm Changes?');
+		if(count($changes)) { 
+			$commitKey = microtime();
+			$f->addOption(1, $this->_('Yes')); 
+			$f->addOption(0, $this->_('No')); 
+			$f->description = $this->_('Database schema changes that can modify or delete data have been requested. Please confirm these changes by Selecting "Yes" below and saving the field. If you do not want these changes, select "No" and return your field(s) to their previous state.'); 
+			$f->notes = implode("\n", $changes); 
+			$f->icon = 'exclamation-triangle';
+			$f->optionColumns = 1; 
+			$f->attr('value', $field->commit); 
+			$inputfields->prepend($f); 
+			$wrap->collapsed = Inputfield::collapsedYes; 
+		}
+
+		if($numActiveColumns) {
+			$f = $this->modules->get('InputfieldText'); 
+			$f->attr('name', 'renameColumn'); 
+			$f->attr('value', $field->renameColumn);
+			$f->label = $this->_('Rename Column'); 
+			$f->placeholder = 'old=new';
+			$f->collapsed = Inputfield::collapsedBlank; 
+			$f->description = $this->_('If you want to rename a column, enter **old=new** below, replacing **old** with the current name, and **new** with the new name you want to use.'); 
+			$inputfields->add($f); 
+		}
+
+		$this->addHookAfter('ProcessField::fieldSaved', function($event) {
+			$field = $event->arguments(0); 
+			if($field->commit) { 
+				$field->type->_checkSchema($field, true); 
+				$field->message(__('Database schema changes have been committed.', __FILE__)); 
+				$field->commit = null;
+				$field->renameColumn = null;
+				$field->save();
+			}
+		}); 
+		
+		return $inputfields; 			
+	}
+
+}
+

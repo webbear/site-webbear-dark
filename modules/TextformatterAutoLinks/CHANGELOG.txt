@@ -1,0 +1,30 @@
+ProcessWire ProFields ChangeLog
+===============================
+
+VERSION 3 (BETA) - MAY 29 2014
+------------------------------------------------
+Fixes an exception that occurred when attempting
+to clone a Page using the Table Fieldtype. 
+
+- Table 	0.0.5
+
+
+VERSION 2 (BETA) - MAY 23 2014
+------------------------------------------------
+This version updates AutoLinks for multi-language
+support, allowed tags whitelist, and a new max
+links option. 
+
+- AutoLinks	0.0.2
+
+
+VERSION 1 (BETA) - MAY 19 2014
+------------------------------------------------
+This first official release includes:
+
+- Textareas 	0.0.3
+- Multiplier 	0.0.3 
+- Table 	0.0.4 
+- AutoLinks	0.0.1	
+
+

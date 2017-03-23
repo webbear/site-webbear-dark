@@ -1,0 +1,252 @@
+<?php
+
+/**
+ * ProcessWire Multiplier Inputfield
+ *
+ * Takes any single-value Fieldtype and turns it into a multiple-value fieldtype. 
+ *
+ * Part of the ProFields package.
+ * Please do not distribute.
+ *
+ * Copyright 2014 by Ryan Cramer
+ *
+ * http://processwire.com
+ *
+ */
+
+require_once(__DIR__ . '/InputfieldMultiplierBase.php'); 
+
+class InputfieldMultiplier extends InputfieldMultiplierBase implements InputfieldHasArrayValue {
+
+	public static function getModuleInfo() {
+		return array(
+			'title' => __('ProFields: Multiplier', __FILE__), // Module Title
+			'summary' => __('Multiplies single inputs with a fixed quantity.', __FILE__), // Module Summary
+			'version' => 3,
+			'requires' => 'FieldtypeMultiplier', 
+			);
+	}
+
+	/**
+	 * Get the default settings for InputfieldMultiplier
+	 *
+	 * @return array
+	 *
+	 */
+	protected function getDefaultSettings() {
+		$settings = parent::getDefaultSettings();
+		$settings['qtyMin'] = 3;
+		$settings['qtyMax'] = 3;
+		$settings['sortable'] = 0; 
+		$settings['trashable'] = 0; 
+		return $settings; 
+	}
+
+	/**
+	 * Set an attribute: capture the 'value' attribute to convert to internal format
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 * @return array
+	 *
+	 */
+	public function setAttribute($key, $value) {
+		if($key == 'value') {
+			// we always work with multipliers as a plain PHP array in here
+			if(is_object($value) && $value instanceof MultiplierArray) $value = $value->getArray();
+		}
+		return parent::setAttribute($key, $value); 
+	}
+
+	/**
+	 * Render the markup for the Inputfield
+	 *
+	 * @return string
+	 *
+	 */
+	public function ___render() {
+
+		$this->wire('modules')->get('MarkupAdminDataTable');
+
+		$qtyMin = $this->qtyMin; 
+		if($qtyMin < 1) $qtyMin = 1; 
+		$qtyMax = $this->qtyMax; 
+		if($qtyMax < $qtyMin) $qtyMax = $qtyMin;
+		$qtyInactive = 0; 
+		$out = ''; 
+		$name = $this->attr('name'); 
+		$id = $this->attr('id'); 
+		$track = $this->trackChanges(); 
+		$this->setTrackChanges(false);
+		$value = $this->attr('value');
+		if(!is_array($value)) $value = array($value); 
+		$value = array_values($value); 
+
+		for($n = 0; $n < $qtyMax; $n++) {
+			$v = isset($value[$n]) ? $value[$n] : '';
+			$inactive = $n >= $qtyMin && empty($v); 
+			if($inactive) $qtyInactive++;
+			$out .= $this->renderItem($n, $v, $inactive); 
+		}
+
+		$class = 'AdminDataList AdminDataTable ';
+		if($this->sortable) $class .= 'InputfieldMultiplierSortable '; 
+		if($this->trashable) $class .= 'InputfieldMultiplierTrashable ';
+		$class = trim($class); 
+		if($class) $out = "<table class='$class'><tbody>$out</tbody></table>"; 
+
+		if($this->sortable) {
+			$out .= "<input class='InputfieldMultiplierSort' name='{$name}__sort' type='hidden' value='' />";
+		}
+
+		if($this->trashable) {
+			$out .= "<input class='InputfieldMultiplierTrashed' name='{$name}__trash' type='hidden' value='' />";
+		}
+
+		if($qtyInactive) {
+			$out .= "<p><a href='#' class='InputfieldMultiplierAdd'><i class='fa fa-plus-circle'></i> " . $this->_('Add') . "</a></p>";
+		}
+
+
+		return $out; 
+	}
+
+	/**
+	 * Render the markup for an individual Multiplier item
+	 *
+	 */
+	protected function renderItem($n, $value, $inactive = false) {
+		$in = $this->getInputfield($n, $value); 
+		$class = 'InputfieldMultiplierItem ' . $in->className(); 
+		if($inactive) $class .= ' InputfieldMultiplierInactive';
+		$out = 	"<tr data-n='$n' class='$class'>";
+		if($this->sortable) $out .= "<td class='InputfieldMultiplierSortHandle'><i class='fa fa-arrows'></i></td>";
+		$out .= "<td class='InputfieldMultiplierInput'>" . $in->render() . "</td>";
+		if($this->trashable) $out .= "<td class='InputfieldMultiplierTrash'><i class='fa fa-trash-o'></i></td>";
+		$out .= "</tr>";
+		return $out; 
+	}
+
+	/**
+	 * Process input for the Multiplier
+	 *
+	 */
+	public function ___processInput(WireInputData $input) {
+
+		$qty = $this->qtyMax; 
+		if($qty < $this->qtyMin) $qty = $this->qtyMin; 
+		$name = $this->attr('name'); 
+		$id = $this->attr('id'); 
+		$value = $this->attr('value');
+		if(!is_array($value)) $value = array($value); 
+		$value = array_values($value); 
+		$numChanges = 0;
+
+		for($n = 0; $n < $qty; $n++) {
+			$oldValue = array_key_exists($n, $value) ? $value[$n] : '';
+			$in = $this->getInputfield($n, $oldValue); 
+			$in->processInput($input); 
+			$newValue = $in->attr('value'); 
+			if($oldValue !== $newValue) {
+				$numChanges++;
+				$value[$n] = $newValue; 
+			}
+		}
+
+		$sort = $input->{$name . '__sort'}; 
+		if($this->sortable && strlen($sort)) {
+			$sorted = array();
+			foreach(explode(',', $sort) as $n) {
+				if(!strlen(trim($n))) continue; 
+				$sorted[(int)$n] = $value[(int)$n];
+			}
+			if(implode(',', $value) != implode(',', $sorted)) {
+				$numChanges++;
+				$value = $sorted; 
+			}
+		}
+
+		$trash = $input->{$name . '__trash'}; 
+		if($this->trashable && strlen($trash)) {
+			foreach(explode(',', $trash) as $n) {
+				if(!strlen(trim($n))) continue; 
+				unset($value[(int)$n]); 
+				$numChanges++;
+			}
+		}
+
+		$value = array_slice($value, 0, $this->qtyMax); 
+
+		$this->attr('value', $value); 
+		
+		if($numChanges) $this->trackChange('value'); 
+		
+		return $this; 
+	}
+
+	/**
+	 * Get the Inputfield being multiplied
+	 *
+	 */
+	public function getInputfield($n = 0, $value = null) {
+		$inputfield = parent::getInputfield($n, $value); 
+		$inputfield->attr('name', $this->attr('name') . "_$n"); 
+		return $inputfield; 
+	}
+
+	/**
+	 * Get the Inputfields needed to configure this Inputfield (for input tab)
+	 *
+	 */
+	public function ___getConfigInputfields() {
+
+		if($this->qtyMin < 1) $this->qtyMin = 3; 
+		if($this->qtyMax < $this->qtyMin) $this->qtyMax = $this->qtyMin;
+
+		$inputfields = parent::___getConfigInputfields();
+
+		$fieldset = $this->modules->get('InputfieldFieldset'); 
+		$fieldset->label = 'Multiplier';
+
+		$f = $this->modules->get('InputfieldInteger'); 
+		$f->attr('name', 'qtyMin'); 
+		$f->attr('value', (int) $this->qtyMin); 
+		$f->label = $this->_('Minimum/default number of inputs'); 
+		$f->required = true; 
+		$f->columnWidth = 50;
+		$f->notes = $this->_('This amount of inputs will always be visible.'); 
+		$fieldset->add($f); 
+
+		$f = $this->modules->get('InputfieldInteger'); 
+		$f->attr('name', 'qtyMax'); 
+		$f->attr('value', (int) $this->qtyMax);
+		$f->label = $this->_('Maximum number of inputs'); 
+		$f->required = true; 
+		$f->columnWidth = 50;
+		$f->notes = $this->_('These are pre-rendered so do not specify any more than you need.'); 
+		$fieldset->add($f); 
+
+		$f = $this->modules->get('InputfieldCheckbox'); 
+		$f->attr('name', 'sortable'); 
+		$f->attr('value', 1); 
+		if($this->sortable) $f->attr('checked', 'checked'); 
+		$f->label = $this->_('Use Sort?'); 
+		$f->description = $this->_('When checked, items may be sorted by drag-and-drop.');
+		$f->columnWidth = 50; 
+		$f->notes = $this->_('Note that not all input types can be sorted this way (rich text editors, for example, do not work with sorting).');
+		$fieldset->add($f); 
+
+		$f = $this->modules->get('InputfieldCheckbox'); 
+		$f->attr('name', 'trashable'); 
+		$f->attr('value', 1); 
+		if($this->trashable) $f->attr('checked', 'checked'); 
+		$f->label = $this->_('Use Trash?'); 
+		$f->description = $this->_('When checked, items may be deleted by clicking a trash icon.');
+		$f->columnWidth = 50; 
+		$fieldset->add($f); 
+
+		$inputfields->prepend($fieldset);
+
+		return $inputfields; 
+	}
+}
