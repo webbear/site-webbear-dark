@@ -3,7 +3,8 @@
 
 $homepage = pages('/');
 $settings = pages('/settings/');
-
+$navExcludedPages = $settings->browser_title ? settings->browser_title : "site-map";
+$navExcludedTemplates = $settings->custom_text_input ? $settings->custom_text_input : "sitemap|news|events";
 $browserTitle = page('browser_title|headline|title') . ' - ' . $settings->headline;
 $title = page('headline|title'); // headline if available, otherwise title
 $content = page()->render->body;

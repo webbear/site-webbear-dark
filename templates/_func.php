@@ -68,8 +68,8 @@ class Utilities {
 		$numChildren = $item->numChildren(true);
 		if($level+1 > $options['tree'] || $item->id == 1 ) $numChildren = 0;
 
-		if(in_array($item->name, explode("|",$options['excluded_pages']))) continue;
-		if(in_array($item->template, explode("|", $options['excluded_templates']))) continue;
+		if(in_array($item->name, array_map('trim', explode("|",$options['excluded_pages'])))) continue;
+		if(in_array($item->template, array_map('trim', explode("|", $options['excluded_templates'])))) continue;
 		$total = count($items) - count(explode("|",$options['excluded_pages'])) - count(explode('|',$options['excluded_templates']));
 		$class = '';
 		if($numChildren) $class .= $options['has_sublevel_class']." ";
@@ -240,8 +240,9 @@ class Utilities {
 		return $first . $second;
 	}
 
-	public function image($img) {
-	return "<img src='{$img->url}' alt='{$img->description}' width='{$img->width}' height='{$img->height}' />";
+	public function image($img, $alt = null) {
+		$alt = ($alt == null) ? $img->description : $alt;
+		return "<img src='{$img->url}' alt='{$alt}' width='{$img->width}' height='{$img->height}' />";
 	}
 
 	public function randomImage($images, $options = array()) {

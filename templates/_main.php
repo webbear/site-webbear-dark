@@ -32,7 +32,7 @@
 		<div class="top-bar">
 			<nav class="top-nav">
 				<ul class='topnav'>
-					<?=$wb->renderNavigation($homepage->children->prepend($homepage), $options = array('tree' => 2))?>
+					<?=$wb->renderNavigation($homepage->children->prepend($homepage), $options = array('tree' => 2, 'excluded_pages' => $navExcludedPages, 'excluded_templates' => $navExcludedTemplates))?>
 				</ul>
 			</nav>
 		</div>
