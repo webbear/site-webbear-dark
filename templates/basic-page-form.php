@@ -1,10 +1,11 @@
 <?php
-
-
 if ($page->form_name) {
-	$content .= "<div class='form'>" . $forms->load($page->form_name)->render(). "</div>";
+	$form = $forms->render($page->form_name);
+	$headScript .= $form->styles;
+	$headScript .= $form->scripts;
+	
+	$content .= "<div class='form'>" . $form . "</div>";
 }
-
 //if($page->hasChildren) $content .= renderNav($page->children, 0, 'summary');
 
 // // sidebar
