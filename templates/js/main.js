@@ -1,8 +1,10 @@
-//@codekit-prepend "./vendors/jquery.mobilemenu.js"
+//@codekit-prepend "./vendors/mobileMenu.js"
 
+
+mobileMenu('.top-nav', 'body');
 
 $(document).ready(function() {
-	$('<div class="mobile-header"><span class="menu-toggle" >&#9776;</span></div><div class="mm-container"></div>').prependTo('body');
+	/*$('<div class="mobile-header"><span class="menu-toggle" >&#9776;</span></div><div class="mm-container"></div>').prependTo('body');
 
 	$('.mm-container').mobileMenu({mobileElements: '.top-nav'});
 
@@ -18,7 +20,7 @@ $(document).ready(function() {
 			$(this).html('&#9776;').addClass('closed');
 		}
 
-	});
+	});*/
 
   $('a[data-rel^=lightcase]').lightcase( {
     swipe: true

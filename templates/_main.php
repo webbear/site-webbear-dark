@@ -22,7 +22,7 @@
 	<?=$headScript?>
 	<link rel="icon" type="image/x-icon" href="<?=$wb->makeAssetLink(urls('templates') .'images/favicon.ico')?>" />
 </head>
-<body id="top" class="<?php if($sidebar) echo "has-sidebar"; ?>">
+<body id="top" class="<?php if($sidebar) {echo "has-sidebar";} else {echo "full-width";}?>">
 
 
 <div class="container">
@@ -32,7 +32,7 @@
 		<div class="top-bar">
 			<nav class="top-nav">
 				<ul class='topnav'>
-					<?=$wb->renderNavigation($homepage->children->prepend($homepage), $options = array('tree' => 2, 'excluded_pages' => $navExcludedPages, 'excluded_templates' => $navExcludedTemplates))?>
+					<?=$wb->renderNavigation($homepage->children->prepend($homepage), array('tree' => 2, 'excluded_pages' => $navExcludedPages, 'excluded_templates' => $navExcludedTemplates))?>
 				</ul>
 			</nav>
 		</div>

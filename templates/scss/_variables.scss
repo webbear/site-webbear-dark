@@ -1,0 +1,44 @@
+$susy:(
+columns:12,
+global-box-sizing: border-box,
+gutters: 1/3,
+container: 1200px,
+debug: (image: hide)
+);
+
+
+$portrait: 376px;
+$tablet: 768px;
+$desktop: 1040px;
+
+
+$small: $portrait;
+$medium: $tablet;
+$large: $desktop;
+$x-large: 1200px;
+
+$grey: #aaa;
+$light-grey: #ccc;
+$black: #000;
+$white: #fff;
+
+
+$primary-color: #666;
+$secondary-color: #158E50;
+
+
+$brand-color: $secondary-color;
+
+$base-color: $primary-color;
+$body-bg-color: #fff;
+$nav-color: $secondary-color;
+$nav-color-current: darken($secondary-color, 5%);
+$site-title-color: #ccc;
+$crumbs-border-color: $secondary-color;
+$link-color: $secondary-color;
+
+
+$mobile-bg-color: $brand-color;
+$mobile-link-color: #fff;
+$mobile-link-current-color: #fff;
+$header-color: darken($secondary-color, 10%);

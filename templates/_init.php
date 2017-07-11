@@ -1,10 +1,11 @@
 <?php
-
+include_once("./_func.php");
 
 $homepage = pages('/');
 $settings = pages('/settings/');
-$navExcludedPages = $settings->browser_title ? settings->browser_title : "site-map";
-$navExcludedTemplates = $settings->custom_text_input ? $settings->custom_text_input : "sitemap|news|events";
+$navExcludedPages = ($settings->browser_title) ? $settings->browser_title : "site-map";
+$navExcludedTemplates = ($settings->custom_text_input) ? $settings->custom_text_input : "settings|news|events";
+
 $browserTitle = page('browser_title|headline|title') . ' - ' . $settings->headline;
 $title = page('headline|title'); // headline if available, otherwise title
 $content = page()->render->body;
@@ -25,4 +26,4 @@ $footScript ='';
 //     $footScript .= "<script src='{$config->urls->templates}bower_components/swipebox/src/js/jquery.swipebox.js'></script>\n"."<script>\n;( function( $ ) {\n $( document ).swipebox({selector: '.swipebox'});\n } )( jQuery );\n</script>";
 // }
 
-include_once("./_func.php");
+

@@ -10,14 +10,14 @@ class Utilities {
 	/////////////////////////////////////////////
 	//  navigation
 	/////////////////////////////////////////////
-	public function renderNav($items, $maxDepth = 0, $fieldNames = '', $class = 'nav', $excludeTemplates = array('events', 'news')) {
+	public function renderNav($items, $maxDepth = 0, $fieldNames = '', $class = 'nav', $excludeTemplates = array('product', 'checkout', 'cart', 'news')) {
 
 		if($items instanceof Page) $items = array($items);
 
 		$out = '';
 
 		foreach($items as $item) {
-			if ( in_array($item->template, $excludeTemplates)) continue;
+			if (in_array($item->template, $excludeTemplates)) continue;
 
 			$out .= $item->id == wire('page')->id ? "<li class='current'>" : "<li>";
 
@@ -161,9 +161,17 @@ class Utilities {
 	public function cssClasses() {
 		$out='';
 		$page = wire('page');
-		$language = wire('user')->language->name;
+		$user = wire('user');
+		$language = $user->language->name;
+		$roles = '';
+		foreach ($user->roles as $role) {
+			$roles .= ' role-'.$role->name;
+		}
+		
+		
 		$classes = array();
-
+		
+		
 		//get the segments
 		if ($page->id == 1) {
 			if ($page->path != "/") {
@@ -183,8 +191,10 @@ class Utilities {
 		$classes[] = "page-$page->id";
 		$classes[] = ($page->id != 1) ? "page-$page->name" : "page-home";
 		$classes[] = ($page->rootParent->id != 1) ? "section-{$page->rootParent->name}" : "";
+		$classes[] = ($page->id == $page->rootParent->id) ? "section-startpage root-level-page" : '';
 		$classes[] = "template-" . $page->template->name;
 		$classes[] = "language-" . $language;
+		$classes[] =  $roles;
 
 		$out = implode(' ', $classes);
 		return $out;
@@ -215,7 +225,7 @@ class Utilities {
     	$config = wire('config');
 
     	if ($user->isLoggedin()) {
-    		$out .= "<div class='logout-link'><a href='/logout/?redirect=".wire('page')->id."'>({$user->name}) - Abmelden</a></div>";
+    		$out .= "<div class='logout-link'><a href='{$config->urls->admin}login/logout/'>({$user->name}) - Abmelden</a></div>";
     	}
     	return $out;
     }
@@ -240,9 +250,9 @@ class Utilities {
 		return $first . $second;
 	}
 
-	public function image($img, $alt = null) {
-		$alt = ($alt == null) ? $img->description : $alt;
-		return "<img src='{$img->url}' alt='{$alt}' width='{$img->width}' height='{$img->height}' />";
+	public function image($img,$description = null) {
+		$descr = $description ? $description : $img->description;
+	return "<img src='{$img->url}' alt='{$descr}' width='{$img->width}' height='{$img->height}' />";
 	}
 
 	public function randomImage($images, $options = array()) {
@@ -339,6 +349,24 @@ class Utilities {
 		$out .= $endstr;
 		return $out;
 	}
+	// language specific date rendering
+	public function dateFormatter($timestamp, $formats = array()) {
+		$defaults = array(
+			 "de" => '%e. %B %G', 
+			 "fr" => '%e %B %G'
+		);	
+		$formats = array_merge($defaults, $formats);
+		if (user()->language == languages("fr")) {
+			setlocale(LC_TIME, 'fr_FR.utf-8');
+			$format = $formats['fr'];		
+		} else {
+			setlocale(LC_TIME, 'de_DE.utf-8');
+			$format = $formats["de"];	
+		}
+		return strftime($format ,$timestamp);;
+		
+	}
 }
+
 
 $wb = new Utilities();

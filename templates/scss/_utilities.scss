@@ -1,0 +1,17 @@
+/////////////////////////////////////////////
+//  utilities
+/////////////////////////////////////////////
+
+.edit {
+	position: fixed;
+	top: 5px;
+	right:0;
+	a {
+		text-decoration: none;
+		font-size: px2rem(12);
+		display: block;
+		background: darken(red, 20%);
+		color: white;
+		padding: .5rem .75rem;
+	}
+}

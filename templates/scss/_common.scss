@@ -1,0 +1,167 @@
+* {
+	@include box-sizing;
+}
+html {
+  font-size: 100%;
+}
+
+
+body {
+	font-family: 'Raleway', sans-serif;
+	font-size: 100%;
+	line-height:1.5;
+	background: $body-bg-color;
+	border-top: 12px solid $brand-color;
+	color: $base-color;
+  -webkit-text-size-adjust: none;
+}
+
+body,
+td,
+input[type=text],
+textarea {
+
+}
+
+img {
+	max-width: 100%;
+	height: auto
+}
+
+h1, h2, h3, h4, h5 {
+	color: $header-color;
+	text-transform: uppercase;
+}
+h2 {
+	font-weight: normal;
+	font-size: 1.3rem;
+	margin: 1.3rem 0 .5rem 0
+}
+
+h3 {
+	font-size: 1.2rem;
+	margin: 1.3rem 0 .5rem 0
+}
+
+.sidebar h2:first-child,
+.main-content h2:first-child,
+.sidebar h3:first-child,
+.main-content h3:first-child{
+  margin-top: 0;
+}
+
+p {
+	margin: 0 0 1rem 0;
+}
+
+a {
+	color: $link-color;
+	text-decoration: underline;
+
+}
+a:hover {
+	color: darken($link-color, 10%);
+	//border-color: #aaa;
+	text-decoration: none;
+}
+
+blockquote {
+	margin-left: 0;
+	padding-left: 1.5rem;
+	padding-right: 2rem;
+	border-left: 4px solid #ddd;
+	font-style: italic;
+	color: #777;
+}
+
+pre, code {
+	background: #eee;
+	border: 1px solid #ddd;
+}
+
+pre {
+	font-size: px2rem(14);
+	line-height: 1.4em;
+	padding: 1em;
+	border-left: 4px solid $brand-color;
+}
+
+.align_left {
+	/* for images placed in rich text editor */
+	float: left;
+	margin: 0 1rem 0.5rem 0;
+	position: relative;
+	top: 0.5rem;
+	max-width: 50%;
+}
+
+.align_right {
+	/* for images placed in rich text editor */
+	float: right;
+	margin: 0 0 0.5rem 1rem;
+	max-width: 50%;
+}
+
+.align_center {
+	/* for images placed in rich text editor */
+	display: block;
+	margin: 1em auto;
+	position: relative;
+	top: 0.5rem;
+}
+
+
+/////////////////////////////////////////////////////
+/// layout common
+/////////////////////////////////////////////////////
+
+
+.container {
+
+}
+
+.breadcrumb.nav {
+	@include container;
+	padding:  1em;
+	display: none;
+	//background: rgba(255,255,255, 0.8);
+	@include breakpoint($medium) {
+		padding: 0 gutter(12);
+		display: block;
+	}
+}
+
+
+.top-bar {
+	@include clearfix;
+	display: none;
+	@include breakpoint($medium) {
+		display: block;
+	}
+}
+
+.body {
+	padding: 1em;
+	@include clearfix;
+	clear: both;
+	@include breakpoint($medium) {
+		@include container;
+		padding: 2em gutter(12) 1em gutter(12);
+	}
+}
+
+body.has-sidebar .main-content {
+	@include breakpoint($medium) {
+		@include span(9);
+
+
+	}
+}
+
+body.has-sidebar .sidebar {
+	clear: both;
+	@include breakpoint($medium) {
+		clear: none;
+		@include span(3 last);
+	}
+}

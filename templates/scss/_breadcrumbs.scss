@@ -1,0 +1,31 @@
+.breadcrumbs {
+	clear: both;
+	padding:.25em 0;
+  border-top: 1px solid $crumbs-border-color;
+	border-bottom: 1px solid $crumbs-border-color;
+	font-size: .75rem;
+	@include breakpoint($medium) {
+		font-size: 1rem;
+	}
+		li {
+		list-style: none;
+		display: inline-block;
+		.nav & {
+			margin: 0 .5rem 0 0;
+		}
+		color: $nav-color;
+		a {
+			color: $nav-color;
+		}
+	}
+}
+.breadcrumbs li:after {
+	content: "/";
+	color: $nav-color;
+	padding-left: 0.5rem;
+	padding-right: 0;
+}
+
+.breadcrumbs li.last:after {
+	content: "";
+}

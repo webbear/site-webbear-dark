@@ -1,0 +1,44 @@
+.header {
+	@include container;
+	padding:  1rem;
+	@include breakpoint($medium) {
+		padding: 0 gutter(12) ;
+	}
+  &.has-image {
+    .site-title {
+      position: absolute;
+      margin: -3rem 0;
+
+      top: 50%;
+    }
+
+    .header-image {
+      padding: .75rem 0;
+      position: relative;
+      img {
+        max-width: 100%;
+        min-width: 100%;
+      }
+    }
+  }
+}
+
+.site-title {
+	padding:2rem 0;
+
+	a, a:hover, a:visited, a:active {
+		text-decoration: none;
+    color: $site-title-color;
+	}
+	h1 {
+		font-weight: normal;
+		font-size: 1.7rem;
+    line-height: 1.7rem;
+		text-transform: none;
+    text-shadow: 1px 1px 4px  #000;
+		@include breakpoint($medium) {
+			font-size: 2rem;
+      line-height: 2rem;
+		}
+	}
+}

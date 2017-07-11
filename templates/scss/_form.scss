@@ -1,0 +1,57 @@
+/////////////////////////////////////////////
+//  Form
+/////////////////////////////////////////////
+#wrap_Inputfield- {
+	display: none;
+}
+.form {
+	input[type=text],
+	input[type=email],
+	textarea {
+		border: 1px solid $base-color;
+		padding: .5em;
+		max-width: 100%;
+		width: 30em;
+		font-size: 1em;
+		font-family: courier, monospace;
+		&:focus {
+			border-color: lighten($base-color, 20%);
+		}
+	}
+	.InputfieldStateRequired {
+		label:after {
+			content: " *";
+
+		}
+	}
+	.Inputfield {
+		margin: 0 0 .5em 0;
+	}
+	.InputfieldSubmit {
+		margin: 1em 0
+	}
+
+	button {
+		background: $base-color;
+		display: inline-block;
+		border: 1px solid $base-color;
+		padding: .75em 1.25em;
+		color: #fff;
+		cursor: pointer;
+		transition: background 200ms ease;
+		&:hover {
+			background: darken($base-color, 10%);
+		}
+	}
+	.ui-state-error  {
+		color: red;
+		p {
+			margin:0;
+		}
+
+	}
+	span.ui-state-error {
+		font-size: .825em;
+		font-style: italic;
+	}
+}

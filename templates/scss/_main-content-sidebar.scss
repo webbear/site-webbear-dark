@@ -1,0 +1,142 @@
+/////////////////////////////////////////////
+//  main content and sidebar
+/////////////////////////////////////////////
+
+
+
+h1.page-title {
+	font-size: 1.6rem;
+	margin-top: 0;
+	font-weight: normal;
+	margin-bottom: 1rem;
+}
+
+.main-content,
+.sidebar {
+	padding-bottom: 2rem;
+
+	ul {
+		padding: 0;
+		margin: 0 0 1rem 0;
+		list-style-position: inside;
+		&.nav {
+			margin-left: 0;
+		}
+	}
+}
+
+
+
+.nav {
+	margin-left: 0;
+	padding-left: 0;
+	list-style: none;
+}
+
+.nav .nav {
+	padding-left: 1.5rem;
+	list-style: none;
+}
+.nav li {
+	margin: 1em 0;
+}
+
+.nav-tree li {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.main-content .nav a {
+	color: $nav-color;
+	text-decoration: none;
+	display: inline-block;
+	vertical-align: top;
+	.summary {
+		font-size: .75rem;
+
+	}
+}
+.main-content .nav {
+	li {
+		&:before {
+			content: "» ";
+			color: $nav-color;
+			text-decoration: none;
+		}
+		&:hover:before {
+			color: $nav-color-current;
+		}
+		margin-bottom: 10px;
+	}
+
+}
+.nav a {
+	color: $nav-color;
+	text-decoration: none;
+
+}
+
+.nav-tree li a {
+	color: $nav-color;
+
+}
+
+.nav a:hover,
+.nav .current > a {
+	color: $nav-color-current;
+	&:before {
+		color: $nav-color-current;
+		text-decoration: none;
+	}
+}
+
+/////////////////////////////////////////////////////
+/// sub-page nav 
+/////////////////////////////////////////////////////
+
+.main-content {
+	@include breakpoint($medium) {
+		min-height: 250px;
+	}
+	ul.sub-page-nav {
+		list-style: none;
+		clear: both;
+		@include clearfix;
+    margin: 1.5rem 0;
+	}
+	.sub-page-nav li {
+		margin-top:0;
+		margin-bottom: gutter(4);
+		img {
+			max-width: 100%;
+			min-width: 100%;
+			width: 100%;
+			height: auto;
+		}
+		div.img {
+			width: 100%;
+		}
+		@include breakpoint($small) {
+			@include gallery( 2 of 4);
+		}
+
+		@include breakpoint($medium) {
+			@include gallery( 1 of 4);
+		}
+	}
+	.sub-page-nav {
+		a {
+			text-decoration: none;
+			display: block;
+		}
+		h2 {
+			font-size: 0.9rem;
+			margin: .25rem 0;
+		}
+		.summary {
+			font-size: .75rem;
+		}
+	}
+
+}
+

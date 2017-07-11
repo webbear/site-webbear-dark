@@ -1,0 +1,40 @@
+/////////////////////////////////////////////
+//  footer
+/////////////////////////////////////////////
+
+.footer {
+	clear: both;
+
+	padding: .75rem 1rem;
+	color: $base-color;
+
+	@include breakpoint($tablet) {
+
+		@include container;
+		padding: .75rem gutter(12);
+		margin-bottom: 1.25rem;
+
+	}
+}
+.utilities {
+	border-top: 1px solid $base-color;
+	padding:.75rem 0;
+}
+
+
+.additionals,
+.utilities {
+	margin: 0;
+	li {
+		font-size: .825rem;
+		display: inline-block;
+		margin: .1em 1.75em .1em 0;
+		a {
+			font-weight: normal;
+			text-decoration: none;
+			&:hover {
+				color: $nav-color-current;
+			}
+		}
+	}
+}

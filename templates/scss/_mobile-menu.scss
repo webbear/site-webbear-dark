@@ -1,0 +1,72 @@
+/////////////////////////////////////////////////////
+/// mobile menu
+/////////////////////////////////////////////////////
+
+.mobile-menu {
+	
+	@include breakpoint($medium) {
+		display: none;
+	}
+	
+	ul, li {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	background-color: $mobile-bg-color;
+	
+	.mobile-header {
+		background-color: $mobile-bg-color;
+		color: $mobile-link-color;
+		margin: -12px 0 0 0;
+		.reveal-mobile-menu {
+			display: inline-block;
+			padding: 6px;
+			font-size: 32px;
+			
+			&:before {
+				 content:'\2630'; 
+			}
+			&.on:before {
+				content: '\2715';
+			}
+		}
+	}
+
+	.mm-top-nav {
+		padding: 10px;
+	}
+	a {
+		text-decoration: none;
+		font-size: 1.1rem;
+		padding: 6px 12px;
+		display: block;
+		color: $mobile-link-color;
+	}
+	.mm-top-nav > li > a {
+		text-transform: uppercase;
+	}
+	li li {
+		>a {
+			padding-left: 32px;
+		}
+		li > a {
+			padding-left: 64px;
+		}
+	}
+	.mm-current>a,
+	.mm-active>a {
+		color: $mobile-link-current-color;
+		font-weight: bold;
+	}
+	.mm-container {
+		opacity: 1;	
+		transition: opacity 800ms ease;
+		border-top: 1px solid $mobile-link-color;
+	}
+	.hidden {
+		height: 0;
+		overflow:hidden;
+		opacity: 0;
+	}
+}

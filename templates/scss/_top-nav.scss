@@ -1,0 +1,85 @@
+.top-nav li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.top-nav ul > li {
+	float: left;
+	position: relative;
+	margin: 0 gutter(12) 0 0;
+
+
+}
+
+.topnav > li > a {
+	padding: 0.25rem 0;
+	border-top: 12px solid transparent;
+	text-decoration: none;
+	display: block;
+	//background: transparent;
+	color: $nav-color;
+	transition: border-color 300ms ease;
+}
+
+.topnav > li:hover > a {
+	//background: lighten($base-color, 20%);
+
+	border-top-color: $nav-color;
+}
+.topnav li.active > a,
+.topnav li.current > a {
+	//background: lighten($base-color, 20%);
+	color: $nav-color-current;
+	border-top-color:  $nav-color;
+}
+
+.top-nav ul li ul {
+	position: absolute;
+	top: 2.35rem;
+	left: -99999px;
+	border: 1px solid;
+	border-color: transparent;
+	background-color: $body-bg-color;
+	transition: border 300ms ease;
+	width: 12rem;
+	padding: .25rem;
+  z-index: 2000;
+	li {
+		width: 100%;
+		font-size: .9rem;
+		a {
+			display: block;
+			text-decoration: none;
+			padding: .25rem;
+		}
+	}
+}
+
+
+
+.top-nav ul li:hover ul {
+	left: 0;
+	border-color: $nav-color;
+}
+
+form.search {
+	float: right;
+	margin: 0;
+	width: span(3 of 12);
+}
+
+form.search input {
+	margin: 0;
+	padding: 0.25rem 0.5rem;
+	//border: 1px solid #000;
+	width: 100%;
+	//background: #aaa;
+	color: #000;
+	display: inline-block;
+	margin: .1rem 0 0 0;
+}
+
+form.search button {
+	display: none;
+}
