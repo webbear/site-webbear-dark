@@ -1,4 +1,3 @@
-/* webbear-sass-2 variables
 /////////////////////////////////////////////////////
 /// overrwrite them with your custom vars
 /////////////////////////////////////////////////////
@@ -187,7 +186,7 @@ $select-settings: (
   background-origin: content-box,
   background-repeat: no-repeat,
   outline: 1px solid $primary-color
-
+  
 ) !default;
 
 $font-icons: (
@@ -215,50 +214,5 @@ $fa-icons: (
   image: "\f1c5",
   zip: "\f1c6",
   audio: "\f1c7",
-  movie: "\f1c8"
+  movie: "\f1c8"  
 ) !default;
-
-*/
-
-$grid-gutter: 30px;
-
-// $portrait: 376px;
-// $tablet: 768px;
-// $desktop: 1040px;
-
-
-// $small: $portrait;
-// $medium: $tablet;
-// $large: $desktop;
-// $x-large: 1200px;
-
-$grey: #aaa;
-$light-grey: #ccc;
-$black: #000;
-$white: #fff;
-
-
-$primary-color: #666;
-$secondary-color: #158E50;
-
-
-$brand-color: $secondary-color;
-
-$base-color: $primary-color;
-$body-bg-color: #fff;
-$nav-color: $secondary-color;
-$nav-color-current: darken($secondary-color, 5%);
-$site-title-color: #ccc;
-$crumbs-border-color: $secondary-color;
-$link-color: $secondary-color;
-
-$body-border-top-color: $brand-color;
-
-$mobile-bg-color: $brand-color;
-$mobile-link-color: #fff;
-$mobile-link-current-color: #fff;
-$header-color: darken($secondary-color, 10%);
-
-$gallery-img-padding: 0;
-$gallery-img-bg: $white;
-$gallery-box-shadow: 1px 1px 9px rgba($black, 0.5);

@@ -1,19 +1,31 @@
 .main-content {
 	ul.gallery {
 		list-style: none;
-    @include clearfix;
-    margin: 1rem 0;
+    	@include flex-gallery-parent();
+
 	}
 
  .gallery	li {
-		margin-bottom: gutter(12);
-		padding: 5px;
-		background: lighten($body-bg-color, 8%);
-		@include breakpoint($portrait) {
-			@include gallery( 6 of 12);
+		// margin-bottom: gutter(.5);
+		// padding: 5px;
+		// background: lighten($body-bg-color, 8%);
+		@include flex-gallery-item();
+		@include flex-item-width(12);
+
+		//box-shadow: $gallery-box-shadow;
+
+		@include media(small) {
+
+			@include flex-item-width(6);
+
 		}
-		@include breakpoint($desktop) {
-			@include gallery( 3 of 12);
+		@include media(medium) {
+
+			@include flex-item-width(4);
+
+		}
+		@include media(large) {
+			@include flex-item-width(3);
 		}
 		img, a {
 			display: block;
@@ -22,5 +34,9 @@
 	.gallery-item>a>img {
 		min-width: 100%;
 		height: auto;
+		padding: $gallery-img-padding;
+		background: $gallery-img-bg;
+		box-shadow: $gallery-box-shadow;
+
 	}
 }

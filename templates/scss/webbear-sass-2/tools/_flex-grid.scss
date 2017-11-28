@@ -1,0 +1,47 @@
+@mixin container( $max-width: $container-max-width,
+                  $padding: 0 $grid-gutter,
+                  $margin: 0 auto
+                  ) {
+  max-width: $max-width;
+  margin: $margin;
+  padding: $padding;
+}
+
+@mixin container-fluid ($padding: 0 $grid-gutter) {
+  padding: $padding;
+  clear: both;
+}
+
+// prepare for flexbox
+@mixin flex-parent($margin: 0 (- $grid-gutter / 2), $flex-flow: row wrap) {
+  display: flex;
+  flex-flow: $flex-flow;
+  margin:$margin;
+
+}
+
+
+@mixin flex-item($flex: 0 1 auto) {
+  padding-right: $grid-gutter / 2;
+  padding-left: $grid-gutter / 2;
+  flex: $flex;
+}
+
+@mixin flex-gallery-parent($margin: 0 (- $grid-gutter / 2)) {
+  display: flex;
+  flex-flow: row wrap;
+  margin: $margin;
+}
+
+@mixin flex-gallery-item() {
+  padding: $grid-gutter / 2;
+  flex: 0 0 auto;
+}
+
+@mixin flex-item-width($value, $columns: $grid-columns) {
+  @if ($value == $columns) {
+    width: 100%;
+  } @elseif($value <= $columns) {
+    width: (100% / $grid-columns) * $value;
+  }
+}

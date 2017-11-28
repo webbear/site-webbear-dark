@@ -91,22 +91,25 @@ h1.page-title {
 }
 
 /////////////////////////////////////////////////////
-/// sub-page nav 
+/// sub-page nav
 /////////////////////////////////////////////////////
 
 .main-content {
-	@include breakpoint($medium) {
+	@include media(medium) {
 		min-height: 250px;
 	}
 	ul.sub-page-nav {
 		list-style: none;
 		clear: both;
 		@include clearfix;
+		@include media(small) {
+		@include flex-gallery-parent();
+	}
     margin: 1.5rem 0;
 	}
 	.sub-page-nav li {
 		margin-top:0;
-		margin-bottom: gutter(4);
+		margin-bottom: gutter(1);
 		img {
 			max-width: 100%;
 			min-width: 100%;
@@ -116,12 +119,13 @@ h1.page-title {
 		div.img {
 			width: 100%;
 		}
-		@include breakpoint($small) {
-			@include gallery( 2 of 4);
+		@include media(small) {
+		@include flex-gallery-item();
+			@include flex-item-width(6);
 		}
 
-		@include breakpoint($medium) {
-			@include gallery( 1 of 4);
+		@include media(medium) {
+			@include flex-item-width(3);
 		}
 	}
 	.sub-page-nav {

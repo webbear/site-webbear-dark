@@ -1,0 +1,82 @@
+@function unicode($str){
+	@return unquote("\"") + $str + unquote("\"");
+}
+
+@function unicode2($str){
+ @return unquote("\"")+unquote(str-insert($str, "\\", 1))+unquote("\"");
+}
+
+@function rem($sizeValue) {
+  @return($sizeValue/ 16) + rem;
+}
+
+
+// kind of backward compatibility
+@function px2rem($sizeValue) {
+  @return rem($sizeValue);
+}
+
+
+@function slice($list, $start: 1, $end: length($list)) {
+  @if length($list) < 1 or $start > $end {
+    @return ();
+  }
+
+  $result: ();
+
+  @for $i from $start through $end {
+    $result: append($result, nth($list, $i));
+  }
+
+  @return $result;
+}
+
+
+// kind of backward compatibility
+@function gutter($val: 1) {
+  @if (type-of($val) == number) {
+    @if (unitless($val)) {
+      @return $grid-gutter * $val;
+    } @else {
+      @return $grid-gutter + $val;
+    }
+  } @elseif (type-of($val) == string) {
+    @return calc(#{$grid-gutter} #{unquote($val)});
+  }
+}
+
+// @function flex-column-width($value: 1, $columns: $grid-columns) {
+//   @if ($value == $columns or $value > $columns) {
+//     @return 100%;
+//   } @else {
+//     @return (100% / $columns * $value);
+//   }
+// }
+
+// kind of backward compatibility
+@function span($value: 1, $columns: $grid-columns) {
+  @return flex-column-width($value,$columns);
+}
+
+// retreive color sass maps
+@function color($key: "greem") {
+  @return map-get($colors, $key);
+}
+
+@function brand-color($key: "primary") {
+  @return map-get($brand-colors, $key);
+}
+
+@function grayscale($key: "100") {
+  @return map-get($grays, $key);
+}
+
+// retrieve breakpoint sass map
+@function breakpoint($key: "x-small") {
+  @return map-get($breakpoints, $key);
+}
+
+// retrieve input sass map
+@function input($key: "background") {
+  @return map-get($text-input-settings, $key);
+}

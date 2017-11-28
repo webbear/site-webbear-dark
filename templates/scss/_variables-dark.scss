@@ -1,3 +1,228 @@
+/* webbear-sass-2 variables
+/////////////////////////////////////////////////////
+/// overrwrite them with your custom vars
+/////////////////////////////////////////////////////
+
+
+// layout /grid
+$grid-gutter: 24px !default;
+$grid-columns: 12 !default;
+$container-max-width: 1140px !default;
+
+
+$breakpoints: (
+  x-small: 0,
+  small: 576px,
+  medium: 768px,
+  large: 992px,
+  x-large: 1200px
+);
+
+/////////////////////////////////////////////////////
+/// colors
+/////////////////////////////////////////////////////
+$white:  #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #868e96 !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:  #000 !default;
+
+// retrieve via grayscale() function
+$grays: (
+  100: $gray-100,
+  200: $gray-200,
+  300: $gray-300,
+  400: $gray-400,
+  500: $gray-500,
+  600: $gray-600,
+  700: $gray-700,
+  800: $gray-800,
+  900: $gray-900
+) !default;
+
+$blue:    #007bff !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #dc3545 !default;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #28a745 !default;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
+
+// retrieve via color()
+$colors: (
+  blue: $blue,
+  indigo: $indigo,
+  purple: $purple,
+  pink: $pink,
+  red: $red,
+  orange: $orange,
+  yellow: $yellow,
+  green: $green,
+  teal: $teal,
+  cyan: $cyan,
+  white: $white,
+  gray: $gray-600,
+  gray-dark: $gray-800
+) !default;
+
+// retrieve via brand-color()
+$brand-colors: (
+  primary: $green,
+  secondary: $gray-600,
+  success: $blue,
+  info: $cyan,
+  warning: $yellow,
+  danger: $red,
+  light: $gray-100,
+  dark: $gray-800
+) !default;
+
+$primary-color: $green !default;
+$secondary-color: $gray-600 !default;
+
+$brand-primary: $primary-color !default;
+$brand-secondary: $secondary-color !default;
+
+$link-color: $brand-primary !default;
+$link-text-decoration: none !default;
+$link-hover-color: $link-color !default;
+$link-hover-text-decoration: underline !default;
+$link-visited-color: darken($brand-primary, 10%) !default;
+
+
+// fonts
+$font-family-base: "Helvetica", arial, sans-serif !default;
+$font-size-base: 100% !default;
+$font-weight-base: 400 !default;
+$line-height-base: 1.5 !default;
+$body-color: $gray-900 !default;
+$body-bg: $white !default;
+
+//font sizes
+$h1-font-size: 2rem !default;
+$h2-font-size: 1.8rem !default;
+$h3-font-size: 1.65rem !default;
+$h4-font-size: 1.4rem !default;
+$h5-font-size: 1.25rem !default;
+$h6-font-size: 1.1rem !default;
+
+$headings-font-family: inherit !default;
+$headings-font-weight: 500 !default;
+$headings-line-height: 1.1 !default;
+
+// font colors
+$headings-color: inherit !default;
+
+//margins
+$headings-margin-bottom: .75rem ;
+
+
+
+
+$dt-font-weight: 700;
+
+
+
+$label-margin-bottom: .25rem;
+
+$button-settings: (
+  background: $primary-color,
+  border: 1px solid $primary-color,
+  color: #fff,
+  border-radius: 0,
+  font-size: 1rem,
+  font-weight: 400,
+  font-family: inherit,
+  padding: .5rem .75rem,
+  hover-background: darken($primary-color, 10%),
+  appeareance: none
+) !default;
+
+$text-input-settings: (
+  background: transparent,
+  border: 1px solid $gray-400,
+  border-radius: 0,
+  font-size: 1rem,
+  font-weight: 400,
+  font-family: $font-family-base,
+  line-height: 1.2,
+  padding: .25rem .5rem,
+  margin: 0 0 .75rem 0,
+  display: block,
+  focus-border-color: $primary-color,
+  apperance: none,
+  max-width: 100%,
+  width: 100%,
+  outline: 1px solid $primary-color
+) !default;
+
+
+$select-settings: (
+  display: block,
+  width: 100%,
+  max-width: 100%,
+  padding: .75rem,
+  margin: 0 0 .75rem 0,
+  border: 1px solid $gray-400,
+  font-size: 1rem,
+  font-family: inherit,
+  line-height: normal,
+  color: $black,
+  border-radius: 0,
+  appearance: none,
+  background-color: $white,
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28138, 138, 138%29'></polygon></svg>"),
+  background-size: 9px 6px,
+  background-position: right .5rem center,
+  background-origin: content-box,
+  background-repeat: no-repeat,
+  outline: 1px solid $primary-color
+
+) !default;
+
+$font-icons: (
+  burger: "\2630",
+  menu: "\2630",
+  close: "\2715",
+  plus: "\002B",
+  mod-plus: "\02D6",
+  minus: "\002D",
+  mod-minus: "\02D7",
+  caret: "\02C7",
+  less: "\003C",
+  more: "\003E",
+  apo-left: "\00AB",
+  apo-right: "\00BB",
+  copyright: "\00A9"
+) !default;
+
+$fa-icons: (
+  file: "\f15b",
+  pdf: "\f1c1",
+  word: "\f1c2",
+  excel: "\f1c3",
+  powerpoint: "\f1c4",
+  image: "\f1c5",
+  zip: "\f1c6",
+  audio: "\f1c7",
+  movie: "\f1c8"
+) !default;
+
+*/
+
+$grid-gutter: 30px;
+
+
 $primary-color: #acacac;
 $secondary-color: #797979;
 
@@ -9,9 +234,20 @@ $nav-color: $secondary-color;
 $nav-color-current: #fcfcfc;
 $site-title-color: #ccc;
 $crumbs-border-color: $secondary-color;
-$link-color: $secondary-color;
+
+$body-border-top-color: $brand-color;
+
+$link-color: $primary-color;
+$link-text-decoration: underline;
+$link-hover-color: $link-color;
+$link-hover-text-decoration: none;
+$link-visited-color: lighten($link-color, 10%);
 
 $mobile-bg-color: $brand-color;
 $mobile-link-color: #fff;
 $mobile-link-current-color: #fff;
 $header-color: $base-color;
+
+$gallery-img-padding: 8px;
+$gallery-img-bg: lighten($body-bg-color, 10%);
+$gallery-box-shadow: 0 0 0 rgba($white, 0.3);

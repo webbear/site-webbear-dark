@@ -1,0 +1,74 @@
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $body-color;
+  background-color: $body-bg;
+  text-size-adjust: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  
+  margin-bottom: $headings-margin-bottom;
+  color: $headings-color;
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+  line-height: $headings-line-height;
+
+}
+
+h1 {
+  font-size: $h1-font-size;
+}
+
+h2 {
+  font-size: $h2-font-size;
+}
+
+h3 {
+  font-size: $h3-font-size;
+}
+
+h4 {
+  font-size: $h4-font-size;
+}
+
+h5 {
+  font-size: $h5-font-size;
+}
+
+h6 {
+  font-size: $h6-font-size;
+}
+
+
+a {
+  color: $link-color;
+  text-decoration: $link-text-decoration;
+}
+
+a:hover {
+  color: $link-hover-color;
+  text-decoration: $link-hover-text-decoration;
+}
+
+a:visited {
+  color: $link-visited-color;
+ 
+}
+
+p,
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+img {
+	max-width: 100%;
+	height: auto
+}

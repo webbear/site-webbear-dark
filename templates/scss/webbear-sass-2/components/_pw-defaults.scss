@@ -1,0 +1,82 @@
+/* images placed in richt text editor */
+
+.align_left,
+.align_right,
+.align_center {
+	display: block;
+	float: none;
+	margin: 1rem auto;
+	max-width: 100%;
+}
+
+.align_left {
+  @include media(medium) {
+  	float: left;
+  	margin: 0 1rem 0.5rem 0;
+    max-width: 50%;
+  }	
+}
+
+.align_right {
+  @include media(medium) {
+    float: right;
+  	margin: 0 0 0.5rem 1rem;
+  	max-width: 50%;
+  }  
+}
+
+.align_center {
+  @include media(medium) {
+  	display: block;
+  	margin: 1em auto;
+  }
+}
+
+
+/* pw FormBuilder */
+// honeypot field
+#wrap_Inputfield- {
+	display: none;
+}
+.FormBuilder, 
+.InputfieldForm {
+  font-family: inherit;
+}
+
+.InputfieldStateRequired {
+  label:after {
+    content: " *";
+
+  }
+}
+
+.Inputfield {
+  margin: 0 0 .5em 0;
+}
+
+.InputfieldSubmit {
+  margin: 1em 0
+}
+
+.InputfieldStateError,
+.ui-state-error  {
+  color: brand-color(danger);
+  p {
+    margin:0;
+  }
+}
+
+span.ui-state-error {
+  font-size: 80%;
+  font-style: italic;
+}
+
+.InputfieldStateError,
+.error {
+	color: brand-color(danger);
+	input[type=text],
+	input[type=email],
+	textarea {
+		border-color: brand-color(danger);
+	}
+}

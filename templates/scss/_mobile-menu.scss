@@ -3,18 +3,18 @@
 /////////////////////////////////////////////////////
 
 .mobile-menu {
-	
-	@include breakpoint($medium) {
+
+	@include media(medium) {
 		display: none;
 	}
-	
+
 	ul, li {
 		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
 	background-color: $mobile-bg-color;
-	
+
 	.mobile-header {
 		background-color: $mobile-bg-color;
 		color: $mobile-link-color;
@@ -23,9 +23,9 @@
 			display: inline-block;
 			padding: 6px;
 			font-size: 32px;
-			
+
 			&:before {
-				 content:'\2630'; 
+				 content:'\2630';
 			}
 			&.on:before {
 				content: '\2715';
@@ -60,7 +60,7 @@
 		font-weight: bold;
 	}
 	.mm-container {
-		opacity: 1;	
+		opacity: 1;
 		transition: opacity 800ms ease;
 		border-top: 1px solid $mobile-link-color;
 	}

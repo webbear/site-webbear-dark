@@ -10,7 +10,7 @@
 	<?php endif; ?>
 
 	<link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="<?=$wb->makeAssetLink(urls('templates').'css/main.css') ?>" media="all" />
+	<link rel="stylesheet" type="text/css" href="<?=$wb->makeAssetLink(urls('templates').'css/main-dark.css') ?>" media="all" />
     <link rel="stylesheet" type="text/css" href="<?=$wb->makeAssetLink(urls('templates').'js/lightcase/src/css/lightcase.css') ?>" media="all" />
 	<script src="<?=$wb->makeAssetLink(urls('templates').'js/vendors/modernizr.custom.js') ?>"></script>
     <script src="<?=$wb->makeAssetLink(urls('templates').'js/libs/jquery.min.js') ?>"></script>

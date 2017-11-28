@@ -1,6 +1,4 @@
-* {
-	@include box-sizing;
-}
+
 html {
   font-size: 100%;
 }
@@ -11,7 +9,7 @@ body {
 	font-size: 100%;
 	line-height:1.5;
 	background: $body-bg-color;
-	border-top: 12px solid $brand-color;
+	border-top: 12px solid $body-border-top-color;
 	color: $base-color;
   -webkit-text-size-adjust: none;
 }
@@ -125,8 +123,8 @@ pre {
 	padding:  1em;
 	display: none;
 	//background: rgba(255,255,255, 0.8);
-	@include breakpoint($medium) {
-		padding: 0 gutter(12);
+	@include media(medium) {
+		padding: 0 $grid-gutter/2;
 		display: block;
 	}
 }
@@ -135,7 +133,7 @@ pre {
 .top-bar {
 	@include clearfix;
 	display: none;
-	@include breakpoint($medium) {
+	@include media(medium) {
 		display: block;
 	}
 }
@@ -144,24 +142,54 @@ pre {
 	padding: 1em;
 	@include clearfix;
 	clear: both;
-	@include breakpoint($medium) {
+	@include media(medium) {
 		@include container;
-		padding: 2em gutter(12) 1em gutter(12);
+		padding: 2em gutter(.5) 1em gutter(.5);
 	}
 }
 
+
+.has-sidebar .body{
+	@include media(medium) {
+		@include container;
+		@include flex-parent(0 auto);
+
+		padding: 2em 0 1em 0;
+	}
+}
 body.has-sidebar .main-content {
-	@include breakpoint($medium) {
-		@include span(9);
+	@include media(medium) {
+		@include flex-item();
+		@include flex-item-width(7);
 
+	}
+	@include media(large) {
+
+		@include flex-item-width(8);
 
 	}
 }
 
+body.has-sidebar {
+
+	.page-title {
+		@include media(medium) {
+		@include flex-item();
+			@include flex-item-width(12);
+	}
+		}
+}
 body.has-sidebar .sidebar {
 	clear: both;
-	@include breakpoint($medium) {
-		clear: none;
-		@include span(3 last);
+	@include media(medium) {
+		@include flex-item();
+	@include flex-item-width(5);
+
 	}
+	@include media(large) {
+
+	@include flex-item-width(4);
+
+	}
+
 }

@@ -1,0 +1,123 @@
+@mixin clearfix() {
+  zoom: 1;
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+
+@mixin visuallyhidden() { 
+  border: 0; 
+  clip: rect(0 0 0 0); 
+  height: 1px; 
+  margin: -1px; 
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+@mixin fa-base($font-size: 14px) {
+  display: inline-block;
+  font: normal normal normal $font-size/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin icon($icon) {
+  @if (map-has-key($font-icons, $icon)) {
+    content: map-get($font-icons, $icon);
+  }
+}
+
+
+@mixin print-link($color:#999,$size:10pt){
+	content: "  ["attr(href)"] ";
+	color: $color;
+	font-size: $size;
+	text-decoration: none;
+}
+
+@mixin w-button() {
+  
+  background-color: map-get($button-settings, background);
+  border: map-get($button-settings, border);
+  border-radius: map-get($button-settings, border-radius);
+  color: map-get($button-settings, color);
+  cursor: pointer;
+  display: inline-block;
+  font-family: map-get($button-settings, font-family);
+  font-size: map-get($button-settings, font-size);
+  -webkit-font-smoothing: antialiased;
+  font-weight: map-get($button-settings, font-weight);
+  line-height: 1;
+  padding: map-get($button-settings, padding);
+  text-align: center;
+  text-decoration: none;
+  appearance: map-get($button-settings, appearance);
+  transition: background-color 200ms ease;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  
+  &:hover,
+  &:focus {
+    background-color: map-get($button-settings, hover-background);
+    color: #fff;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      background-color: $primary-color;
+    }
+  }
+}
+
+@mixin w-text-input() {
+  font-family: input('font-family');
+  font-size: input('font-size');
+  font-weight: input('font-weight');
+  line-height: input('line-hight');
+  padding: input('padding');
+  margin: input('margin');
+  background: input("background");
+  border: input("border");
+  border-radius: input("border-radius");
+  display: input("display");
+  width: input('width');
+  max-width: input('max-width');
+  appearance: input('appearance');
+  
+  &:focus {
+    border-color: input('focus-border-color');
+  }
+}
+
+@mixin w-select() {
+	display: map-get($select-settings, display);
+	width: map-get($select-settings, width);
+	max-width: map-get($select-settings, max-width);
+  padding: map-get($select-settings, padding);
+  margin: map-get($select-settings, margin);
+	border: map-get($select-settings, border);
+  font-size: map-get($select-settings, font-size);
+  font-family: map-get($select-settings, font-family);
+  line-height: map-get($select-settings, line-height);
+  color: map-get($select-settings, color);
+  background-color: map-get($select-settings, background-color);
+  border-radius: map-get($select-settings, border-radius);
+  appearance: map-get($select-settings, appearance);
+  background-image: map-get($select-settings, background-image);
+  background-size: map-get($select-settings, background-size);
+  background-position: map-get($select-settings, background-position);
+  background-origin: map-get($select-settings, background-origin);
+  background-repeat: map-get($select-settings, background-repeat); 
+}

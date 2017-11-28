@@ -1,20 +1,23 @@
 .header {
 	@include container;
-	padding:  1rem;
-	@include breakpoint($medium) {
-		padding: 0 gutter(12) ;
+	padding: 0 0  1rem 0;
+	@include media(medium) {
+		padding: 0  gutter(.5);
 	}
   &.has-image {
     .site-title {
       position: absolute;
-      margin: -3rem 0;
+      margin: -3rem gutter(.5);
 
       top: 50%;
     }
 
     .header-image {
-      padding: .75rem 0;
+      padding:0 0 gutter(.5) 0;
       position: relative;
+      @include media(medium) {
+        padding-top: gutter(.3);
+      }
       img {
         max-width: 100%;
         min-width: 100%;
@@ -36,7 +39,7 @@
     line-height: 1.7rem;
 		text-transform: none;
     text-shadow: 1px 1px 4px  #000;
-		@include breakpoint($medium) {
+		@include media(medium) {
 			font-size: 2rem;
       line-height: 2rem;
 		}

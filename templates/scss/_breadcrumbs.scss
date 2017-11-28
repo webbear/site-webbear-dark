@@ -4,7 +4,7 @@
   border-top: 1px solid $crumbs-border-color;
 	border-bottom: 1px solid $crumbs-border-color;
 	font-size: .75rem;
-	@include breakpoint($medium) {
+	@include media(medium) {
 		font-size: 1rem;
 	}
 		li {
