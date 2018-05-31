@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="<?=$wb->cssClasses() ?> no-js">
+<html class="<?=$wb->cssClasses() ?>">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -10,24 +10,14 @@
 	<?php endif; ?>
 
 	<link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="<?=$wb->makeAssetLink(urls('templates').'css/main-dark.css') ?>" media="all" />
+	<link rel="stylesheet" type="text/css" href="<?=$wb->makeAssetLink(urls('templates').'css/main.css') ?>" media="all" />
     <link rel="stylesheet" type="text/css" href="<?=$wb->makeAssetLink(urls('templates').'js/lightcase/src/css/lightcase.css') ?>" media="all" />
-	<script src="<?=$wb->makeAssetLink(urls('templates').'js/vendors/modernizr.custom.js') ?>"></script>
-    <script src="<?=$wb->makeAssetLink(urls('templates').'js/libs/jquery.min.js') ?>"></script>
-    <script src="<?=$wb->makeAssetLink(urls('templates').'js/libs/jquery-migrate-3.0.0.js') ?>"></script>
-    <script src="<?=$wb->makeAssetLink(urls('templates').'js/lightcase/vendor/jQuery/jquery.events.touch.js') ?>"></script>
-    <script src="<?=$wb->makeAssetLink(urls('templates').'js/lightcase/src/js/lightcase.js') ?>"></script>
-
 
 	<?=$headScript?>
 	<link rel="icon" type="image/x-icon" href="<?=$wb->makeAssetLink(urls('templates') .'images/favicon.ico')?>" />
 </head>
 <body id="top" class="<?php if($sidebar) {echo "has-sidebar";} else {echo "full-width";}?>">
-
-
 <div class="container">
-
-
 	<header class="header<?php if(count($settings->images)) echo ' has-image'; ?>">
 		<div class="top-bar">
 			<nav class="top-nav">
@@ -54,16 +44,13 @@
 	<div class='body'>
 		<h1 class="page-title"><?=$title; ?></h1>
 		<div class='main-content'>
-
 			<?=$content; ?>
-
 		</div>
 		<?php if($sidebar): ?>
 		<div class='sidebar'>
 			<?php echo $sidebar; ?>
 		</div>
 		<?php endif; ?>
-
 	</div>
 
 	<footer class='footer'>
@@ -79,7 +66,10 @@
 </div>
 
 <?=$wb->isEditable()?>
-
+<script src="<?=$wb->makeAssetLink(urls('templates').'js/libs/jquery.min.js') ?>"></script>
+<script src="<?=$wb->makeAssetLink(urls('templates').'js/libs/jquery-migrate-3.0.0.js') ?>"></script>
+<script src="<?=$wb->makeAssetLink(urls('templates').'js/lightcase/vendor/jQuery/jquery.events.touch.js') ?>"></script>
+<script src="<?=$wb->makeAssetLink(urls('templates').'js/lightcase/src/js/lightcase.js') ?>"></script>
 <script src="<?=$wb->makeAssetLink(urls('templates').'js/main.min.js')?>"></script>
 <?=$footScript?>
 </body>

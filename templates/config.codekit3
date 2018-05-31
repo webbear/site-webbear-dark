@@ -7,7 +7,7 @@
 		"uuidString": "AFE7EC1A-0B72-4569-8EFB-D1ECFD6DF6CF"
 		}
 	],
-"creatorBuild": "26148",
+"creatorBuild": "26680",
 "files": {
 	"\/_func.php": {
 		"cB": 0,
@@ -133,6 +133,7 @@
 	"\/images\/background.jpeg": {
 		"ft": 16384,
 		"iS": 122581,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/images\/background.jpg",
 		"oF": 0,
@@ -143,6 +144,7 @@
 	"\/images\/bollinger-coaching-logo.jpeg": {
 		"ft": 16384,
 		"iS": 29822,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/images\/bollinger-coaching-logo.jpg",
 		"oF": 0,
@@ -160,6 +162,7 @@
 	"\/images\/schmetterling-web2r.jpeg": {
 		"ft": 16384,
 		"iS": 33951,
+		"jF": 0,
 		"oA": 0,
 		"oAP": "\/images\/schmetterling-web2r.jpg",
 		"oF": 0,
@@ -502,7 +505,7 @@
 	"\/js\/main.js": {
 		"ft": 64,
 		"ma": 0,
-		"mi": 0,
+		"mi": 1,
 		"oA": 0,
 		"oAP": "\/js\/main.min.js",
 		"oF": 0,
@@ -776,40 +779,20 @@
 		"oF": 0,
 		"oS": 3
 		},
-	"\/scss\/main-dark.scss": {
+	"\/scss\/main.scss": {
 		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/css\/main-dark.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/scss\/main-light.scss": {
-		"aP": 1,
 		"bl": 0,
 		"dP": 10,
 		"dS": 0,
 		"ft": 4,
 		"ma": 1,
 		"oA": 0,
-		"oAP": "\/css\/main-light.css",
+		"oAP": "\/css\/main.css",
 		"oF": 0,
-		"oS": 0,
+		"oS": 3,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/.gitignore": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/scss\/webbear-sass-2\/.gitignore",
-		"oF": 0
-		},
-	"\/scss\/webbear-sass-2\/_custom-variables.scss": {
+	"\/scss\/webbear-sass-2\/_all.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -817,7 +800,7 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/css\/_custom-variables.css",
+		"oAP": "\/scss\/css\/_all.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
@@ -887,87 +870,6 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/css\/test.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/scss\/webbear-sass-2\/css\/test-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"\/scss\/webbear-sass-2\/css\/webbear2.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/scss\/webbear-sass-2\/css\/webbear2-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"\/scss\/webbear-sass-2\/readme.md": {
-		"cB": 0,
-		"cS": 0,
-		"eF": 0,
-		"eL": 1,
-		"ema": 1,
-		"eSQ": 1,
-		"ft": 4096,
-		"oA": 0,
-		"oAP": "\/scss\/webbear-sass-2\/readme.html",
-		"oF": 0,
-		"oFM": 0,
-		"oS": 0,
-		"pHT": 0,
-		"pME": 1,
-		"rFN": 0,
-		"uCM": 0
-		},
-	"\/scss\/webbear-sass-2\/test\/_custom-variables.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/webbear-sass-2\/css\/_custom-variables.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/scss\/webbear-sass-2\/test\/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/scss\/webbear-sass-2\/test\/index.html",
-		"oF": 0
-		},
-	"\/scss\/webbear-sass-2\/test\/test.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/scss\/webbear-sass-2\/test\/test-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"\/scss\/webbear-sass-2\/test\/test.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/scss\/webbear-sass-2\/css\/test.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
 	"\/scss\/webbear-sass-2\/tools\/_flex-grid.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -1033,19 +935,6 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/webbear2.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/scss\/css\/webbear2.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
 	"\/search.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -1076,7 +965,8 @@
 	"creationDate": 511683313,
 	"displayValue": "site-profile",
 	"displayValueWasSetByUser": 1,
-	"iconImageName": "meme-ariel"
+	"iconImageName": "meme-ariel",
+	"iconImageWasSetByUser": 0
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
@@ -1084,6 +974,7 @@
 	"animateCSSInjections": 1,
 	"autoBuildNewItems": 1,
 	"autoprefixerBrowserString": "> 1%, last 2 versions, Firefox ESR, Opera 12.1",
+	"autoprefixerEnableIEGrid": 0,
 	"babelAuxiliaryCommentAfter": "",
 	"babelAuxiliaryCommentBefore": "",
 	"babelConfigFileHandlingType": 0,
@@ -2434,7 +2325,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http:\/\/pw-webbear.dev",
+	"externalServerAddress": "http:\/\/processwire-webbear.local",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "$,jQuery",
@@ -2842,6 +2733,7 @@
 		"autoOutputPathReplace1": "",
 		"autoOutputPathReplace2": "",
 		"autoOutputPathStyle": 0,
+		"outputFormat": 0,
 		"quality": 100
 		},
 	"languageDefaultsJS": {

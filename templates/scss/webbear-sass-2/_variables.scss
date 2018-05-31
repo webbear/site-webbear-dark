@@ -4,9 +4,9 @@
 
 
 // layout /grid
-$grid-gutter: 24px !default;
+$grid-gutter: 32px !default;
 $grid-columns: 12 !default;
-$container-max-width: 1140px !default;
+$container-max-width: 1152px !default;
 
 
 $breakpoints: (
@@ -15,7 +15,7 @@ $breakpoints: (
   medium: 768px,
   large: 992px,
   x-large: 1200px
-);
+) !default;
 
 /////////////////////////////////////////////////////
 /// colors
@@ -134,31 +134,43 @@ $dt-font-weight: 700;
 
 $label-margin-bottom: .25rem;
 
+// forms
+$button-bg-color: $primary-color !default;
+$button-color: $white !default;
+$button-border: 1px solid $primary-color !default;
+$button-bg-color-hover: darken($button-bg-color, 10%) !default;
+$button-color-hover: $button-color !default;
+$button-border-color-hover: $button-bg-color-hover !default;
+
+$input-bg-color: transparent !default;
+$input-border: 1px solid $gray-400 !default;
+$input-color: inherit !default;
+$input-focus-border-color: $primary-color !default;
+$input-margin: 0 0 .75rem 0 !default;
+
+
 $button-settings: (
-  background: $primary-color,
-  border: 1px solid $primary-color,
-  color: #fff,
   border-radius: 0,
   font-size: 1rem,
   font-weight: 400,
   font-family: inherit,
   padding: .5rem .75rem,
-  hover-background: darken($primary-color, 10%),
   appeareance: none
 ) !default;
 
 $text-input-settings: (
-  background: transparent,
-  border: 1px solid $gray-400,
+  background: $input-bg-color,
+  border: $input-border,
   border-radius: 0,
   font-size: 1rem,
   font-weight: 400,
+  color: $input-color,
   font-family: $font-family-base,
   line-height: 1.2,
   padding: .25rem .5rem,
-  margin: 0 0 .75rem 0,
+  margin: $input-margin,
   display: block,
-  focus-border-color: $primary-color,
+  focus-border-color: $input-focus-border-color,
   apperance: none,
   max-width: 100%,
   width: 100%,
@@ -186,7 +198,7 @@ $select-settings: (
   background-origin: content-box,
   background-repeat: no-repeat,
   outline: 1px solid $primary-color
-  
+
 ) !default;
 
 $font-icons: (
@@ -214,5 +226,8 @@ $fa-icons: (
   image: "\f1c5",
   zip: "\f1c6",
   audio: "\f1c7",
-  movie: "\f1c8"  
+  movie: "\f1c8"
 ) !default;
+
+$processwire-defaults: false !default;
+$prefixed-class-set: false !default;

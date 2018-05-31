@@ -68,7 +68,7 @@
   &:hover,
   &:focus {
     background-color: map-get($button-settings, hover-background);
-    color: #fff;
+    color: map-get($button-settings, color-hover);
   }
 
   &:disabled {

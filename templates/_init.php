@@ -6,24 +6,31 @@ $settings = pages('/settings/');
 $navExcludedPages = ($settings->browser_title) ? $settings->browser_title : "site-map";
 $navExcludedTemplates = ($settings->custom_text_input) ? $settings->custom_text_input : "settings|news|events";
 
-$browserTitle = page('browser_title|headline|title') . ' - ' . $settings->headline;
-$title = page('headline|title'); // headline if available, otherwise title
-$content = page()->render->body;
-$sidebar = ($page->sidebar) ? $page->sidebar : $settings->sidebar;
-
 $headScript ='';
 $footScript ='';
 
-//
-// if (strpos($content, "data-lightbox")) {
-//     $headScript .= "<link rel='stylesheet' href='{$config->urls->templates}bower_components/lightbox2/dist/css/lightbox.css' media='screen' />";
-//     $footScript .= "<script src='{$config->urls->templates}bower_components/lightbox2/dist/js/lightbox.min.js'></script>";
-// }
-//
-// if (strpos($content, "class='swipebox'")) {
-//     $headScript .= "<link rel='stylesheet' href='{$config->urls->templates}bower_components/swipebox/src/css/swipebox.min.css' media='screen' />";
-//
-//     $footScript .= "<script src='{$config->urls->templates}bower_components/swipebox/src/js/jquery.swipebox.js'></script>\n"."<script>\n;( function( $ ) {\n $( document ).swipebox({selector: '.swipebox'});\n } )( jQuery );\n</script>";
-// }
+$browserTitle = page('browser_title|headline|title') . ' - ' . $settings->headline;
+$title = page('headline|title'); // headline if available, otherwise title
+$content = page()->render->body;
+$headerImage = ($settings->images->count) ? $settings->images->first() : '';
 
 
+$sidebar = '';
+
+
+if (page("images")) {
+  if (page('images')->count && page('images')->findTag('sidebar')->count) {
+    $sidebar .= "<div class='sidebar-images'>";
+    foreach(page('images')->findTag('sidebar') as $image) {
+      $sidebar .= "<div class='image'>" . $wb->image($image->size(420,0)) ."</div>";
+      }
+    $sidebar .=  "</div>";
+  }
+  if (page('images')->count && page('images')->findTag('header')->count) {
+    $headerImage = page('images')->findTag('header')->first();
+  }
+}
+
+if (page()->sidebar) {
+  $sidebar .= $page->sidebar;
+}
