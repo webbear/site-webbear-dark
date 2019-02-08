@@ -2,28 +2,23 @@
 /// mobile menu
 /////////////////////////////////////////////////////
 
-.mobile-menu {
-
-	@include media(medium) {
+.mobile-header {
+		background-color: transparent;
+		position: absolute;
+		top:0;
+		left:0;
+		width: 100%;
+		color: $white;
+		@include media(medium) {
 		display: none;
 	}
 
-	ul, li {
-		list-style: none;
-		margin: 0;
-		padding: 0;
-	}
-	background-color: $mobile-bg-color;
-
-	.mobile-header {
-		background-color: $mobile-bg-color;
-		color: $mobile-link-color;
-		margin: -12px 0 0 0;
 		.reveal-mobile-menu {
 			display: inline-block;
 			padding: 6px;
 			font-size: 32px;
-
+			color: $white;
+			line-height: 32px;
 			&:before {
 				 content:'\2630';
 			}
@@ -33,19 +28,61 @@
 		}
 	}
 
-	.mm-top-nav {
-		padding: 10px;
+
+.mobile-menu {
+	display: none;
+	background-color: $mobile-bg-color;
+
+	&.show {
+		display: block;
 	}
+	padding-top: 50px;
+	position: absolute;
+	top: 0;
+	left:0;
+	width:100%;
+
+	@include media(medium) {
+		display: none;
+		&.show {
+			display: none;
+		}
+	}
+	.mobile-nav {
+		height: 0;
+		overflow:hidden;
+		transition: opacity 300ms ease;
+		opacity: 0;
+	}
+	&.show .mobile-nav {
+		height: auto;
+		opacity: 1;
+	}
+
+	ul, li {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
 	a {
 		text-decoration: none;
 		font-size: 1.1rem;
-		padding: 6px 12px;
+		line-height: 50px;
+		padding:0 10px;
 		display: block;
 		color: $mobile-link-color;
 	}
-	.mm-top-nav > li > a {
+	.mobile-topnav {
+		> li > a {
 		text-transform: uppercase;
+		}
+		> li {
+			border-top: 1px solid $mobile-link-color;
+		}
 	}
+
+
 	li li {
 		>a {
 			padding-left: 32px;
@@ -54,19 +91,57 @@
 			padding-left: 64px;
 		}
 	}
-	.mm-current>a,
-	.mm-active>a {
+
+
+	.mm-current > a,
+	.mm-active > a {
 		color: $mobile-link-current-color;
 		font-weight: bold;
 	}
-	.mm-container {
+
+	.subnav {
 		opacity: 1;
 		transition: opacity 800ms ease;
-		border-top: 1px solid $mobile-link-color;
 	}
+
 	.hidden {
 		height: 0;
 		overflow:hidden;
 		opacity: 0;
+	}
+}
+
+
+
+.reveal-sub-menu {
+	position: relative;
+	z-index: 200;
+	display: inline-block;
+	line-height: 50px;
+	width: 50px;
+	color: $mobile-link-color;
+	text-align: center;
+	&:before {
+		font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  content: $icon-plus;
+	}
+	&.show:before {
+		content: $icon-minus;
+	}
+}
+
+.mm-parent {
+	> a {
+		width: calc(100% - 50px);
+		display: inline-block;
 	}
 }

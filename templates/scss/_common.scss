@@ -9,9 +9,13 @@ body {
 	font-size: 100%;
 	line-height:1.5;
 	background: $body-bg-color;
-	border-top: 12px solid $body-border-top-color;
+
 	color: $base-color;
   -webkit-text-size-adjust: none;
+
+  @include media(medium) {
+  	border-top: 12px solid $body-border-top-color;
+  }
 }
 
 body,
@@ -192,4 +196,8 @@ body.has-sidebar .sidebar {
 
 	}
 
+}
+
+.skip-links {
+	@include visually-hidden;
 }

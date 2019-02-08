@@ -1,0 +1,306 @@
+@import "icons-variables";
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('#{$icomoon-font-path}/icomoon.eot?ff70ye');
+  src:  url('#{$icomoon-font-path}/icomoon.eot?ff70ye#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/icomoon.ttf?ff70ye') format('truetype'),
+    url('#{$icomoon-font-path}/icomoon.woff?ff70ye') format('woff'),
+    url('#{$icomoon-font-path}/icomoon.svg?ff70ye#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+[class^="icon-"],
+[class*=" icon-"] {
+  &:before {
+    margin-right: 6px;
+    text-decoration: none;
+    a & {
+      text-decoration: none;
+    }
+  }
+
+}
+
+.icon-home2 {
+  &:before {
+    content: $icon-home2;
+  }
+}
+.icon-image {
+  &:before {
+    content: $icon-image;
+  }
+}
+.icon-music {
+  &:before {
+    content: $icon-music;
+  }
+}
+.icon-play {
+  &:before {
+    content: $icon-play;
+  }
+}
+.icon-film {
+  &:before {
+    content: $icon-film;
+  }
+}
+.icon-video-camera {
+  &:before {
+    content: $icon-video-camera;
+  }
+}
+.icon-dice {
+  &:before {
+    content: $icon-dice;
+  }
+}
+.icon-file-picture {
+  &:before {
+    content: $icon-file-picture;
+  }
+}
+.icon-quotes-left {
+  &:before {
+    content: $icon-quotes-left;
+  }
+}
+.icon-quotes-right {
+  &:before {
+    content: $icon-quotes-right;
+  }
+}
+.icon-spinner3 {
+  &:before {
+    content: $icon-spinner3;
+  }
+}
+.icon-switch {
+  &:before {
+    content: $icon-switch;
+  }
+}
+.icon-menu2 {
+  &:before {
+    content: $icon-menu2;
+  }
+}
+.icon-menu22 {
+  &:before {
+    content: $icon-menu22;
+  }
+}
+.icon-menu3 {
+  &:before {
+    content: $icon-menu3;
+  }
+}
+.icon-menu4 {
+  &:before {
+    content: $icon-menu4;
+  }
+}
+.icon-plus {
+  &:before {
+    content: $icon-plus;
+  }
+}
+.icon-minus {
+  &:before {
+    content: $icon-minus;
+  }
+}
+.icon-cross {
+  &:before {
+    content: $icon-cross;
+  }
+}
+.icon-checkmark {
+  &:before {
+    content: $icon-checkmark;
+  }
+}
+.icon-circle-up {
+  &:before {
+    content: $icon-circle-up;
+  }
+}
+.icon-circle-right {
+  &:before {
+    content: $icon-circle-right;
+  }
+}
+.icon-circle-down {
+  &:before {
+    content: $icon-circle-down;
+  }
+}
+.icon-circle-left {
+  &:before {
+    content: $icon-circle-left;
+  }
+}
+.icon-new-tab {
+  &:before {
+    content: $icon-new-tab;
+  }
+}
+.icon-mail2 {
+  &:before {
+    content: $icon-mail2;
+  }
+}
+.icon-google-plus {
+  &:before {
+    content: $icon-google-plus;
+  }
+}
+.icon-twitter2 {
+  &:before {
+    content: $icon-twitter2;
+  }
+}
+.icon-youtube {
+  &:before {
+    content: $icon-youtube;
+  }
+}
+.icon-vimeo {
+  &:before {
+    content: $icon-vimeo;
+  }
+}
+.icon-linkedin {
+  &:before {
+    content: $icon-linkedin;
+  }
+}
+.icon-file-pdf {
+  &:before {
+    content: $icon-file-pdf;
+  }
+}
+.icon-file-openoffice {
+  &:before {
+    content: $icon-file-openoffice;
+  }
+}
+.icon-file-word {
+  &:before {
+    content: $icon-file-word;
+  }
+}
+.icon-file-excel {
+  &:before {
+    content: $icon-file-excel;
+  }
+}
+.icon-libreoffice {
+  &:before {
+    content: $icon-libreoffice;
+  }
+}
+.icon-search {
+  &:before {
+    content: $icon-search;
+  }
+}
+.icon-facebook {
+  &:before {
+    content: $icon-facebook;
+  }
+}
+.icon-twitter {
+  &:before {
+    content: $icon-twitter;
+  }
+}
+.icon-mail {
+  &:before {
+    content: $icon-mail;
+  }
+}
+.icon-print {
+  &:before {
+    content: $icon-print;
+  }
+}
+.icon-info {
+  &:before {
+    content: $icon-info;
+  }
+}
+.icon-download-pdf {
+  &:before {
+    content: $icon-download-pdf;
+  }
+}
+.icon-download .path1 {
+  &:before {
+    content: $icon-download-path1;
+    color: rgb(0, 0, 0);
+  }
+}
+.icon-download .path2 {
+  &:before {
+    content: $icon-download-path2;
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-download .path3 {
+  &:before {
+    content: $icon-download-path3;
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-download .path4 {
+  &:before {
+    content: $icon-download-path4;
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-pfeil {
+  &:before {
+    content: $icon-pfeil;
+  }
+}
+.icon-pfeil-fett {
+  &:before {
+    content: $icon-pfeil-fett;
+  }
+}
+.icon-spinner {
+  &:before {
+    content: $icon-spinner;
+  }
+}
+.icon-menu {
+  &:before {
+    content: $icon-menu;
+  }
+}
+.icon-rss {
+  &:before {
+    content: $icon-rss;
+  }
+}

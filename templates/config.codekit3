@@ -1,5 +1,5 @@
 {
-"AAInfo": "This is a CodeKit 3 project config file. MODIFYING THE CONTENTS OF THIS FILE IS A POOR LIFE DECISION. Doing so will cause CodeKit to crash and\/or corrupt your project. I know it looks like JSON, but it is *not*. Many numbers in this file are 64-bit long long bitFlags, which JSON does not support. These numbers *cannot* be treated as discrete values and if you attempt to parse this file as standard JSON with any public JSON parser, these values will be corrupted. This file is not backwards-compatible with CodeKit 1 or 2. For more information, see https:\/\/codekitapp.com\/",
+"AAInfo": "This is a CodeKit 3 project config file. MODIFYING THE CONTENTS OF THIS FILE IS A POOR LIFE DECISION. Doing so will cause CodeKit to crash and/or corrupt your project. I know it looks like JSON, but it is *not*. Many numbers in this file are 64-bit long long bitFlags, which JSON does not support. These numbers *cannot* be treated as discrete values and if you attempt to parse this file as standard JSON with any public JSON parser, these values will be corrupted. This file is not backwards-compatible with CodeKit 1 or 2. For more information, see https://codekitapp.com/",
 "buildSteps": [
 	{
 		"name": "Process All Remaining Files and Folders",
@@ -7,600 +7,274 @@
 		"uuidString": "AFE7EC1A-0B72-4569-8EFB-D1ECFD6DF6CF"
 		}
 	],
-"creatorBuild": "26680",
+"creatorBuild": "28905",
 "files": {
-	"\/_func.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/_func.php",
-		"oF": 0
-		},
-	"\/_init.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/_init.php",
-		"oF": 0
-		},
-	"\/_main.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/_main.php",
-		"oF": 0
-		},
-	"\/admin.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/admin.php",
-		"oF": 0
-		},
-	"\/basic-page-form.php": {
+	"/.php_cs.cache": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/basic-page-form.php",
+		"oAP": "/.php_cs.cache",
 		"oF": 0
 		},
-	"\/basic-page.php": {
+	"/_func.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 0,
-		"oAP": "\/basic-page.php",
+		"oAP": "/_func.php",
 		"oF": 0
 		},
-	"\/css\/main-dark.css": {
+	"/_init.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/_init.php",
+		"oF": 0
+		},
+	"/_main.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/_main.php",
+		"oF": 0
+		},
+	"/admin.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/admin.php",
+		"oF": 0
+		},
+	"/basic-page-form.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "/basic-page-form.php",
+		"oF": 0
+		},
+	"/basic-page.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/basic-page.php",
+		"oF": 0
+		},
+	"/css/main-dark.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/css\/main-dark-min.css",
+		"oAP": "/css/main-dark-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"\/css\/main-light.css": {
+	"/css/main-light.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/css\/main-light-min.css",
+		"oAP": "/css/main-light-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"\/css\/main-light.css.map": {
+	"/css/main-light.css.map": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/css\/main-light.css.map",
+		"oAP": "/css/main-light.css.map",
 		"oF": 0
 		},
-	"\/css\/main.css": {
+	"/css/main.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/main-min.css",
+		"oAP": "/css/main-min.css",
 		"oF": 0,
 		"oS": 0
 		},
-	"\/css\/main.css.map": {
+	"/css/main.css.map": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/css\/main.css.map",
+		"oAP": "/css/main.css.map",
 		"oF": 0
 		},
-	"\/errors\/500.html": {
+	"/errors/500.html": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 0,
-		"oAP": "\/errors\/500.html",
+		"oAP": "/errors/500.html",
 		"oF": 0
 		},
-	"\/errors\/README.txt": {
+	"/errors/README.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/errors\/README.txt",
+		"oAP": "/errors/README.txt",
 		"oF": 0
 		},
-	"\/fields\/body.php": {
+	"/fields/body.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/fields\/body.php",
+		"oAP": "/fields/body.php",
 		"oF": 0
 		},
-	"\/form-builder.php": {
+	"/fields/form_name.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/form-builder.php",
+		"oAP": "/fields/form_name.php",
 		"oF": 0
 		},
-	"\/home.php": {
+	"/fonts/icomoon.eot": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "/fonts/icomoon.eot",
+		"oF": 0
+		},
+	"/fonts/icomoon.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/fonts/icomoon.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/fonts/icomoon.ttf": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "/fonts/icomoon.ttf",
+		"oF": 0
+		},
+	"/fonts/icomoon.woff": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "/fonts/icomoon.woff",
+		"oF": 0
+		},
+	"/form-builder.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "/form-builder.php",
+		"oF": 0
+		},
+	"/home.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 0,
-		"oAP": "\/home.php",
+		"oAP": "/home.php",
 		"oF": 0
 		},
-	"\/images\/background.jpeg": {
+	"/images/background.jpeg": {
 		"ft": 16384,
 		"iS": 122581,
 		"jF": 0,
 		"oA": 0,
-		"oAP": "\/images\/background.jpg",
+		"oAP": "/images/background.jpg",
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 0,
 		"q": 100
 		},
-	"\/images\/bollinger-coaching-logo.jpeg": {
+	"/images/bollinger-coaching-logo.jpeg": {
 		"ft": 16384,
 		"iS": 29822,
 		"jF": 0,
 		"oA": 0,
-		"oAP": "\/images\/bollinger-coaching-logo.jpg",
+		"oAP": "/images/bollinger-coaching-logo.jpg",
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 0,
 		"q": 100
 		},
-	"\/images\/favicon.ico": {
+	"/images/favicon.ico": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/images\/favicon.ico",
+		"oAP": "/images/favicon.ico",
 		"oF": 0
 		},
-	"\/images\/schmetterling-web2r.jpeg": {
+	"/images/schmetterling-web2r.jpeg": {
 		"ft": 16384,
 		"iS": 33951,
 		"jF": 0,
 		"oA": 0,
-		"oAP": "\/images\/schmetterling-web2r.jpg",
+		"oAP": "/images/schmetterling-web2r.jpg",
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 0,
 		"q": 100
 		},
-	"\/images\/schmetterling-web2r.png": {
+	"/images/schmetterling-web2r.png": {
 		"ft": 32768,
 		"iS": 117119,
 		"oA": 0,
-		"oAP": "\/images\/schmetterling-web2r.png",
+		"oAP": "/images/schmetterling-web2r.png",
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 0,
 		"oT": 1,
 		"q": 100
 		},
-	"\/js\/libs\/jquery-migrate-3.0.0.js": {
+	"/js/main.js": {
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
 		"oA": 0,
-		"oAP": "\/js\/libs\/jquery-migrate-3.0.0.min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
-	"\/js\/libs\/jquery.min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/libs\/jquery.min.min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
-	"\/js\/lightcase\/bower.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/bower-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"\/js\/lightcase\/changelog.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/js\/lightcase\/changelog.txt",
-		"oF": 0
-		},
-	"\/js\/lightcase\/license.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/js\/lightcase\/license.txt",
-		"oF": 0
-		},
-	"\/js\/lightcase\/package.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/package-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"\/js\/lightcase\/README.md": {
-		"cB": 0,
-		"cS": 0,
-		"eF": 0,
-		"eL": 1,
-		"ema": 1,
-		"eSQ": 1,
-		"ft": 4096,
-		"oA": 0,
-		"oAP": "\/js\/lightcase\/README.html",
-		"oF": 0,
-		"oFM": 0,
-		"oS": 0,
-		"pHT": 0,
-		"pME": 1,
-		"rFN": 0,
-		"uCM": 0
-		},
-	"\/js\/lightcase\/src\/css\/lightcase.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/js\/lightcase\/src\/css\/lightcase-min.css",
-		"oF": 0,
-		"oS": 0
-		},
-	"\/js\/lightcase\/src\/fonts\/lightcase.eot": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/js\/lightcase\/src\/fonts\/lightcase.eot",
-		"oF": 0
-		},
-	"\/js\/lightcase\/src\/fonts\/lightcase.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "\/js\/lightcase\/src\/fonts\/lightcase.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"\/js\/lightcase\/src\/fonts\/lightcase.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/js\/lightcase\/src\/fonts\/lightcase.ttf",
-		"oF": 0
-		},
-	"\/js\/lightcase\/src\/fonts\/lightcase.woff": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/js\/lightcase\/src\/fonts\/lightcase.woff",
-		"oF": 0
-		},
-	"\/js\/lightcase\/src\/js\/lightcase.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/lightcase\/src\/js\/lightcase.min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
-	"\/js\/lightcase\/src\/js\/lightcase.min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/lightcase\/src\/js\/lightcase.min.min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
-	"\/js\/lightcase\/src\/scss\/components\/_settings.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/src\/scss\/css\/_settings.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/src\/scss\/components\/fonts\/_font-lightcase.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/src\/scss\/components\/css\/_font-lightcase.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/src\/scss\/components\/mixins\/_presets.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/src\/scss\/components\/css\/_presets.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/src\/scss\/components\/mixins\/_utilities.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/src\/scss\/components\/css\/_utilities.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/src\/scss\/components\/modules\/_animations.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/src\/scss\/components\/css\/_animations.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/src\/scss\/components\/modules\/_case.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/src\/scss\/components\/css\/_case.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/src\/scss\/components\/modules\/_content.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/src\/scss\/components\/css\/_content.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/src\/scss\/components\/modules\/_error.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/src\/scss\/components\/css\/_error.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/src\/scss\/components\/modules\/_global.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/src\/scss\/components\/css\/_global.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/src\/scss\/components\/modules\/_info.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/src\/scss\/components\/css\/_info.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/src\/scss\/components\/modules\/_loading.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/src\/scss\/components\/css\/_loading.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/src\/scss\/components\/modules\/_navigation.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/src\/scss\/components\/css\/_navigation.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/src\/scss\/components\/modules\/_overlay.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/js\/lightcase\/src\/scss\/components\/css\/_overlay.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/src\/scss\/lightcase.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/js\/lightcase\/src\/css\/lightcase.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/js\/lightcase\/vendor\/jQuery\/jquery.events.touch.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/lightcase\/vendor\/jQuery\/jquery.events.touch.min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
-	"\/js\/main.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/main.min.js",
+		"oAP": "/js/main.min.js",
 		"oF": 0,
 		"sC": 3,
 		"tS": 0
 		},
-	"\/js\/main.min.js": {
+	"/js/main.min.js": {
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
 		"oA": 1,
-		"oAP": "\/js\/main.min.min.js",
+		"oAP": "/js/main.min.min.js",
 		"oF": 0,
 		"sC": 1,
 		"tS": 0
 		},
-	"\/js\/vendors\/jquery.mobilemenu.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/vendors\/jquery.mobilemenu.min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
-	"\/js\/vendors\/jquery.mobilemenu.min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/js\/vendors\/jquery.mobilemenu.min.min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
-	"\/js\/vendors\/mobileMenu.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 1,
-		"oAP": "\/js\/vendors\/mobileMenu.min.js",
-		"oF": 0,
-		"sC": 3,
-		"tS": 0
-		},
-	"\/js\/vendors\/mobileMenu.min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/vendors\/mobileMenu.min.min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
-	"\/js\/vendors\/modernizr.custom.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/vendors\/modernizr.custom.min.js",
-		"oF": 0,
-		"sC": 1,
-		"tS": 0
-		},
-	"\/login.php": {
+	"/login.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/login.php",
+		"oAP": "/login.php",
 		"oF": 0
 		},
-	"\/logout.php": {
+	"/logout.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/logout.php",
+		"oAP": "/logout.php",
 		"oF": 0
 		},
-	"\/README.txt": {
+	"/README.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/README.txt",
+		"oAP": "/README.txt",
 		"oF": 0
 		},
-	"\/redirect.php": {
+	"/redirect.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/redirect.php",
+		"oAP": "/redirect.php",
 		"oF": 0
 		},
-	"\/scss\/_breadcrumbs.scss": {
+	"/scss/_breadcrumbs.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -608,12 +282,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/_breadcrumbs.css",
+		"oAP": "/css/_breadcrumbs.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/_common.scss": {
+	"/scss/_common.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -621,12 +295,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/_common.css",
+		"oAP": "/css/_common.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/_footer.scss": {
+	"/scss/_footer.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -634,12 +308,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/_footer.css",
+		"oAP": "/css/_footer.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/_form.scss": {
+	"/scss/_form.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -647,12 +321,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/_form.css",
+		"oAP": "/css/_form.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/_gallery.scss": {
+	"/scss/_gallery.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -660,12 +334,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/_gallery.css",
+		"oAP": "/css/_gallery.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/_header.scss": {
+	"/scss/_header.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -673,12 +347,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/_header.css",
+		"oAP": "/css/_header.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/_main-content-sidebar.scss": {
+	"/scss/_icons-variables.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -686,12 +360,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/_main-content-sidebar.css",
+		"oAP": "/css/_icons-variables.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/_mobile-menu.scss": {
+	"/scss/_icons.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -699,12 +373,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/_mobile-menu.css",
+		"oAP": "/css/_icons.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/_responsive.scss": {
+	"/scss/_main-content-sidebar.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -712,12 +386,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/_responsive.css",
+		"oAP": "/css/_main-content-sidebar.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/_top-nav.scss": {
+	"/scss/_media.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -725,12 +399,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/_top-nav.css",
+		"oAP": "/css/_media.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/_utilities.scss": {
+	"/scss/_mobile-menu.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -738,12 +412,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/_utilities.css",
+		"oAP": "/css/_mobile-menu.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/_variables-dark.scss": {
+	"/scss/_responsive.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -751,12 +425,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/_variables-dark.css",
+		"oAP": "/css/_responsive.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/_variables.scss": {
+	"/scss/_top-nav.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -764,22 +438,51 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/css\/_variables.css",
+		"oAP": "/css/_top-nav.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/css\/webbear2.css": {
-		"aP": 1,
+	"/scss/_utilities.scss": {
+		"aP": 0,
 		"bl": 0,
-		"ft": 16,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
 		"ma": 0,
-		"oA": 0,
-		"oAP": "\/scss\/css\/webbear2-min.css",
+		"oA": 1,
+		"oAP": "/css/_utilities.css",
 		"oF": 0,
-		"oS": 3
+		"oS": 0,
+		"uL": 1
 		},
-	"\/scss\/main.scss": {
+	"/scss/_variables-dark.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/css/_variables-dark.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/scss/_variables.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/css/_variables.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/scss/main.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -787,12 +490,12 @@
 		"ft": 4,
 		"ma": 1,
 		"oA": 0,
-		"oAP": "\/css\/main.css",
+		"oAP": "/css/main.css",
 		"oF": 0,
 		"oS": 3,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/_all.scss": {
+	"/scss/webbear-sass-2/_all.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -800,12 +503,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/css\/_all.css",
+		"oAP": "/scss/css/_all.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/_variables.scss": {
+	"/scss/webbear-sass-2/_variables.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -813,12 +516,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/css\/_variables.css",
+		"oAP": "/scss/css/_variables.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/components\/_commons.scss": {
+	"/scss/webbear-sass-2/components/_commons.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -826,12 +529,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/webbear-sass-2\/css\/_commons.css",
+		"oAP": "/scss/webbear-sass-2/css/_commons.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/components\/_forms.scss": {
+	"/scss/webbear-sass-2/components/_forms.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -839,12 +542,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/webbear-sass-2\/css\/_forms.css",
+		"oAP": "/scss/webbear-sass-2/css/_forms.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/components\/_pw-defaults.scss": {
+	"/scss/webbear-sass-2/components/_pw-defaults.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -852,12 +555,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/webbear-sass-2\/css\/_pw-defaults.css",
+		"oAP": "/scss/webbear-sass-2/css/_pw-defaults.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/components\/_reboot.scss": {
+	"/scss/webbear-sass-2/components/_reboot.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -865,12 +568,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/webbear-sass-2\/css\/_reboot.css",
+		"oAP": "/scss/webbear-sass-2/css/_reboot.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/tools\/_flex-grid.scss": {
+	"/scss/webbear-sass-2/tools/_flex-grid.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -878,12 +581,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/webbear-sass-2\/css\/_flex-grid.css",
+		"oAP": "/scss/webbear-sass-2/css/_flex-grid.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/tools\/_functions.scss": {
+	"/scss/webbear-sass-2/tools/_functions.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -891,12 +594,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/webbear-sass-2\/css\/_functions.css",
+		"oAP": "/scss/webbear-sass-2/css/_functions.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/tools\/_gradients.scss": {
+	"/scss/webbear-sass-2/tools/_gradients.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -904,12 +607,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/webbear-sass-2\/css\/_gradients.css",
+		"oAP": "/scss/webbear-sass-2/css/_gradients.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/tools\/_media-queries.scss": {
+	"/scss/webbear-sass-2/tools/_media-queries.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -917,12 +620,12 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/webbear-sass-2\/css\/_media-queries.css",
+		"oAP": "/scss/webbear-sass-2/css/_media-queries.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/webbear-sass-2\/tools\/_utilities.scss": {
+	"/scss/webbear-sass-2/tools/_utilities.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -930,31 +633,450 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/webbear-sass-2\/css\/_utilities.css",
+		"oAP": "/scss/webbear-sass-2/css/_utilities.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/search.php": {
+	"/search.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 0,
-		"oAP": "\/search.php",
+		"oAP": "/search.php",
 		"oF": 0
 		},
-	"\/sitemap-xml.php": {
+	"/sitemap-xml.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 0,
-		"oAP": "\/sitemap-xml.php",
+		"oAP": "/sitemap-xml.php",
 		"oF": 0
 		},
-	"\/sitemap.php": {
+	"/sitemap.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 0,
-		"oAP": "\/sitemap.php",
+		"oAP": "/sitemap.php",
 		"oF": 0
+		},
+	"/vendor/jquery/jquery-migrate-3.0.0.min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "/vendor/jquery/jquery-migrate-3.0.0.min.min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"/vendor/jquery/jquery.min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "/vendor/jquery/jquery.min.min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"/vendor/lightcase/.gitignore": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "/vendor/lightcase/.gitignore",
+		"oF": 0
+		},
+	"/vendor/lightcase/src/css/lightcase-no-breakpoint.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/vendor/lightcase/src/css/lightcase-no-breakpoint-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/vendor/lightcase/src/css/lightcase.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/vendor/lightcase/src/css/lightcase-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/vendor/lightcase/src/fonts/lightcase.eot": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "/vendor/lightcase/src/fonts/lightcase.eot",
+		"oF": 0
+		},
+	"/vendor/lightcase/src/fonts/lightcase.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/vendor/lightcase/src/fonts/lightcase.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/vendor/lightcase/src/fonts/lightcase.ttf": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "/vendor/lightcase/src/fonts/lightcase.ttf",
+		"oF": 0
+		},
+	"/vendor/lightcase/src/fonts/lightcase.woff": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "/vendor/lightcase/src/fonts/lightcase.woff",
+		"oF": 0
+		},
+	"/vendor/lightcase/src/js/lightcase.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "/vendor/lightcase/src/js/lightcase.min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"/vendor/lightcase/src/scss/components/_settings.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/scss/css/_settings.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/src/scss/components/fonts/_font-lightcase.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/scss/components/css/_font-lightcase.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/src/scss/components/mixins/_presets.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/scss/components/css/_presets.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/src/scss/components/mixins/_utilities.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/scss/components/css/_utilities.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/src/scss/components/modules/_animations.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/scss/components/css/_animations.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/src/scss/components/modules/_case.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/scss/components/css/_case.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/src/scss/components/modules/_content.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/scss/components/css/_content.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/src/scss/components/modules/_error.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/scss/components/css/_error.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/src/scss/components/modules/_global.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/scss/components/css/_global.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/src/scss/components/modules/_info.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/scss/components/css/_info.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/src/scss/components/modules/_loading.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/scss/components/css/_loading.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/src/scss/components/modules/_navigation.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/scss/components/css/_navigation.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/src/scss/components/modules/_overlay.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/scss/components/css/_overlay.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/src/scss/lightcase.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/lightcase/src/css/lightcase.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/lightcase/vendor/jQuery/jquery.events.touch.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "/vendor/lightcase/vendor/jQuery/jquery.events.touch.min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"/vendor/slick/ajax-loader.gif": {
+		"ft": 4194304,
+		"iS": 4178,
+		"oA": 0,
+		"oAP": "/vendor/slick/ajax-loader.gif",
+		"oF": 0,
+		"opt": 0
+		},
+	"/vendor/slick/fonts/slick.eot": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "/vendor/slick/fonts/slick.eot",
+		"oF": 0
+		},
+	"/vendor/slick/fonts/slick.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/vendor/slick/fonts/slick.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/vendor/slick/fonts/slick.ttf": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "/vendor/slick/fonts/slick.ttf",
+		"oF": 0
+		},
+	"/vendor/slick/fonts/slick.woff": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "/vendor/slick/fonts/slick.woff",
+		"oF": 0
+		},
+	"/vendor/slick/slick-theme.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/vendor/slick/slick-theme-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/vendor/slick/slick-theme.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 0,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/vendor/css/slick-theme.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/vendor/slick/slick-theme.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/css/slick-theme.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/vendor/slick/slick.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/vendor/slick/slick-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/vendor/slick/slick.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "/vendor/slick/slick.min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"/vendor/slick/slick.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 0,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/vendor/css/slick.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/vendor/slick/slick.min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "/vendor/slick/slick.min.min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
+	"/vendor/slick/slick.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vendor/css/slick.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
 		}
 	},
 "hooks": [
@@ -973,141 +1095,94 @@
 	"alwaysUseExternalServer": 1,
 	"animateCSSInjections": 1,
 	"autoBuildNewItems": 1,
-	"autoprefixerBrowserString": "> 1%, last 2 versions, Firefox ESR, Opera 12.1",
 	"autoprefixerEnableIEGrid": 0,
+	"babel7PresetType": 1,
+	"babelAllowRCFiles": 0,
 	"babelAuxiliaryCommentAfter": "",
 	"babelAuxiliaryCommentBefore": "",
-	"babelConfigFileHandlingType": 0,
+	"babelConfigType": 0,
 	"babelCustomPluginsList": "",
 	"babelCustomPresetsList": "",
 	"babelInsertModuleIDs": 0,
 	"babelModuleID": "",
 	"babelNoComments": 0,
 	"babelPlugins": {
+		"arrow-functions": {
+			"active": 0
+			},
 		"async-generator-functions": {
 			"active": 0
 			},
 		"async-to-generator": {
 			"active": 0
 			},
-		"async-to-module-method": {
+		"block-scoped-functions": {
+			"active": 0
+			},
+		"block-scoping": {
 			"active": 0
 			},
 		"class-properties": {
 			"active": 0
 			},
+		"classes": {
+			"active": 0
+			},
+		"computed-properties": {
+			"active": 0
+			},
 		"decorators": {
 			"active": 0
 			},
-		"decorators-legacy": {
+		"destructuring": {
 			"active": 0
 			},
 		"do-expressions": {
 			"active": 0
 			},
-		"es2015-arrow-functions": {
+		"dotall-regex": {
 			"active": 0
 			},
-		"es2015-block-scoped-functions": {
-			"active": 0
-			},
-		"es2015-block-scoping": {
-			"active": 0
-			},
-		"es2015-classes": {
-			"active": 0
-			},
-		"es2015-computed-properties": {
-			"active": 0
-			},
-		"es2015-constants": {
-			"active": 0
-			},
-		"es2015-destructuring": {
-			"active": 0
-			},
-		"es2015-duplicate-keys": {
-			"active": 0
-			},
-		"es2015-for-of": {
-			"active": 0
-			},
-		"es2015-function-name": {
-			"active": 0
-			},
-		"es2015-literals": {
-			"active": 0
-			},
-		"es2015-modules-amd": {
-			"active": 0
-			},
-		"es2015-modules-commonjs": {
-			"active": 0
-			},
-		"es2015-modules-systemjs": {
-			"active": 0
-			},
-		"es2015-modules-umd": {
-			"active": 0
-			},
-		"es2015-object-super": {
-			"active": 0
-			},
-		"es2015-parameters": {
-			"active": 0
-			},
-		"es2015-shorthand-properties": {
-			"active": 0
-			},
-		"es2015-spread": {
-			"active": 0
-			},
-		"es2015-sticky-regex": {
-			"active": 0
-			},
-		"es2015-template-literals": {
-			"active": 0
-			},
-		"es2015-typeof-symbol": {
-			"active": 0
-			},
-		"es2015-unicode-regex": {
-			"active": 0
-			},
-		"es3-member-expression-literals": {
-			"active": 0
-			},
-		"es3-property-literals": {
-			"active": 0
-			},
-		"es5-property-mutators": {
-			"active": 0
-			},
-		"eval": {
+		"duplicate-keys": {
 			"active": 0
 			},
 		"exponentiation-operator": {
 			"active": 0
 			},
-		"export-extensions": {
+		"export-default-from": {
+			"active": 0
+			},
+		"export-namespace-from": {
 			"active": 0
 			},
 		"external-helpers": {
 			"active": 0
 			},
-		"flow-comments": {
+		"flow-strip-types": {
 			"active": 0
 			},
-		"flow-strip-types": {
+		"for-of": {
 			"active": 0
 			},
 		"function-bind": {
 			"active": 0
 			},
-		"inline-environment-variables": {
+		"function-name": {
+			"active": 0
+			},
+		"function-sent": {
+			"active": 0
+			},
+		"instanceof": {
 			"active": 0
 			},
 		"jscript": {
+			"active": 0
+			},
+		"literals": {
+			"active": 0
+			},
+		"logical-assignment-operators": {
 			"active": 0
 			},
 		"member-expression-literals": {
@@ -1119,7 +1194,28 @@
 		"minify-booleans": {
 			"active": 0
 			},
+		"modules-amd": {
+			"active": 0
+			},
+		"modules-commonjs": {
+			"active": 0
+			},
+		"modules-systemjs": {
+			"active": 0
+			},
+		"modules-umd": {
+			"active": 0
+			},
+		"new-target": {
+			"active": 0
+			},
 		"node-env-inline": {
+			"active": 0
+			},
+		"nullish-coalescing-operator": {
+			"active": 0
+			},
+		"numeric-separator": {
 			"active": 0
 			},
 		"object-assign": {
@@ -1131,7 +1227,25 @@
 		"object-set-prototype-of-to-assign": {
 			"active": 0
 			},
+		"object-super": {
+			"active": 0
+			},
+		"optional-catch-binding": {
+			"active": 0
+			},
+		"optional-chaining": {
+			"active": 0
+			},
+		"parameters": {
+			"active": 0
+			},
+		"pipeline-operator": {
+			"active": 0
+			},
 		"property-literals": {
+			"active": 0
+			},
+		"property-mutators": {
 			"active": 0
 			},
 		"proto-to-assign": {
@@ -1167,53 +1281,46 @@
 		"remove-debugger": {
 			"active": 0
 			},
+		"reserved-words": {
+			"active": 0
+			},
 		"runtime": {
+			"active": 0
+			},
+		"shorthand-properties": {
 			"active": 0
 			},
 		"simplify-comparison-operators": {
 			"active": 0
 			},
+		"spread": {
+			"active": 0
+			},
+		"sticky-regex": {
+			"active": 0
+			},
 		"strict-mode": {
 			"active": 0
 			},
-		"syntax-async-generators": {
+		"template-literals": {
 			"active": 0
 			},
-		"syntax-class-properties": {
+		"throw-expressions": {
 			"active": 0
 			},
-		"syntax-decorators": {
-			"active": 0
-			},
-		"syntax-do-expressions": {
-			"active": 0
-			},
-		"syntax-export-extensions": {
-			"active": 0
-			},
-		"syntax-flow": {
-			"active": 0
-			},
-		"syntax-function-bind": {
-			"active": 0
-			},
-		"syntax-function-sent": {
-			"active": 0
-			},
-		"syntax-jsx": {
-			"active": 0
-			},
-		"syntax-object-rest-spread": {
-			"active": 0
-			},
-		"undeclared-variables-check": {
+		"typeof-symbol": {
 			"active": 0
 			},
 		"undefined-to-void": {
 			"active": 0
+			},
+		"unicode-property-regex": {
+			"active": 0
+			},
+		"unicode-regex": {
+			"active": 0
 			}
 		},
-	"babelPresetType": 193,
 	"babelRetainLines": 0,
 	"bowerAbbreviatedPath": "bower_components",
 	"bowerAutoCreateInfoFile": 1,
@@ -1222,6 +1329,7 @@
 	"bowerSaveDevDependencies": 0,
 	"bowerUseExactVersion": 0,
 	"browserRefreshDelay": 0,
+	"browserslistString": ">0.2%, last 2 versions, Firefox ESR, not dead",
 	"buildFolderActive": 0,
 	"buildFolderName": "build",
 	"cleanBuild": 1,
@@ -1632,7 +1740,7 @@
 			"optionString": ""
 			},
 		"no-catch-shadow": {
-			"active": 0,
+			"active": false,
 			"optionString": ""
 			},
 		"no-class-assign": {
@@ -1833,7 +1941,7 @@
 			},
 		"no-mixed-operators": {
 			"active": 0,
-			"optionString": "{'groups': [['+', '-', '*', '\/', '%', '**'], ['&', '|', '^', '~', '<<', '>>', '>>>'], ['==', '!=', '===', '!==', '>', '>=', '<', '<='], ['&&', '||'], ['in', 'instanceof']], 'allowSamePrecedence': true}"
+			"optionString": "{'groups': [['+', '-', '*', '/', '%', '**'], ['&', '|', '^', '~', '<<', '>>', '>>>'], ['==', '!=', '===', '!==', '>', '>=', '<', '<='], ['&&', '||'], ['in', 'instanceof']], 'allowSamePrecedence': true}"
 			},
 		"no-mixed-requires": {
 			"active": 0,
@@ -2269,7 +2377,7 @@
 			},
 		"spaced-comment": {
 			"active": 0,
-			"optionString": "'always', {'line': {'markers': ['\/'], 'exceptions': ['-', '+']}, 'block': {'markers': ['!'], 'exceptions': ['*'], 'balanced': false}}"
+			"optionString": "'always', {'line': {'markers': ['/'], 'exceptions': ['-', '+']}, 'block': {'markers': ['!'], 'exceptions': ['*'], 'balanced': false}}"
 			},
 		"strict": {
 			"active": 0,
@@ -2325,7 +2433,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http:\/\/processwire-webbear.local",
+	"externalServerAddress": "http://pw-webbear.local",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "$,jQuery",
@@ -2720,7 +2828,6 @@
 		"escapeHTMLCharacters": 0,
 		"noEscapeInAttributes": 0,
 		"outputFormat": 2,
-		"outputStyle": 0,
 		"shouldRunCacheBuster": 0,
 		"useCDATA": 0,
 		"useDoubleQuotes": 0,
@@ -2739,7 +2846,7 @@
 	"languageDefaultsJS": {
 		"autoOutputAction": 0,
 		"autoOutputPathFilenamePattern": "*.min.js",
-		"autoOutputPathRelativePath": "\/min",
+		"autoOutputPathRelativePath": "/min",
 		"autoOutputPathReplace1": "",
 		"autoOutputPathReplace2": "",
 		"autoOutputPathStyle": 0,
@@ -2771,19 +2878,19 @@
 		"allowInsecureImports": 0,
 		"autoOutputAction": 0,
 		"autoOutputPathFilenamePattern": "*.css",
-		"autoOutputPathRelativePath": "..\/css",
+		"autoOutputPathRelativePath": "../css",
 		"autoOutputPathReplace1": "less",
 		"autoOutputPathReplace2": "css",
 		"autoOutputPathStyle": 2,
 		"createSourceMap": 0,
-		"disableJavascript": 0,
+		"enableJavascript": 0,
 		"ieCompatibility": 1,
+		"mathStyle": 0,
 		"outputStyle": 0,
-		"relativeURLS": 0,
+		"rewriteURLStyle": 0,
 		"shouldRunAutoprefixer": 0,
 		"shouldRunBless": 0,
 		"strictImports": 0,
-		"strictMath": 0,
 		"strictUnits": 0
 		},
 	"languageDefaultsMARKDOWN": {
@@ -2839,7 +2946,7 @@
 	"languageDefaultsSASS": {
 		"autoOutputAction": 0,
 		"autoOutputPathFilenamePattern": "*.css",
-		"autoOutputPathRelativePath": "..\/css",
+		"autoOutputPathRelativePath": "../css",
 		"autoOutputPathReplace1": "sass",
 		"autoOutputPathReplace2": "css",
 		"autoOutputPathStyle": 2,
@@ -2868,7 +2975,7 @@
 	"languageDefaultsSTYLUS": {
 		"autoOutputAction": 0,
 		"autoOutputPathFilenamePattern": "*.css",
-		"autoOutputPathRelativePath": "..\/css",
+		"autoOutputPathRelativePath": "../css",
 		"autoOutputPathReplace1": "stylus",
 		"autoOutputPathReplace2": "css",
 		"autoOutputPathStyle": 2,
@@ -2892,36 +2999,70 @@
 	"languageDefaultsTS": {
 		"autoOutputAction": 0,
 		"autoOutputPathFilenamePattern": "*.js",
-		"autoOutputPathRelativePath": "\/js",
+		"autoOutputPathRelativePath": "/js",
 		"autoOutputPathReplace1": "",
 		"autoOutputPathReplace2": "",
 		"autoOutputPathStyle": 2,
 		"createDeclarationFile": 0,
 		"createSourceMap": 0,
-		"jsxMode": 0,
 		"minifyOutput": 0,
 		"moduleResolutionType": 0,
 		"moduleType": 0,
-		"noImplicitAny": 0,
-		"preserveConstEnums": 0,
 		"removeComments": 0,
-		"suppressImplicitAnyIndexErrors": 0,
 		"targetECMAVersion": 0
 		},
 	"languageDefaultsUserDefined": [
 		],
 	"overrideExternalServerCSS": 0,
 	"previewPathAddition": "",
-	"skippedFoldersString": "log, _logs, logs, _cache, cache, \/storage\/framework\/sessions, node_modules",
+	"skippedFoldersString": "log, _logs, logs, _cache, cache, /storage/framework/sessions, node_modules",
 	"sourceFolderName": "source",
 	"susyVersion": 3,
+	"tsAllowSyntheticDefaultImports": 0,
+	"tsAllowUnreachableCode": 0,
+	"tsAllowUnusedLabels": 0,
+	"tsAlwaysStrict": 0,
+	"tsDownlevelIteration": 0,
+	"tsEmitBOM": 0,
+	"tsEmitDecoratorMetadata": 0,
+	"tsESModuleInterop": 0,
+	"tsForceConsistentCasingInFileNames": 0,
+	"tsImportHelpers": 0,
+	"tsIsolatedModules": 0,
+	"tsJSXFactory": "React.createElement",
+	"tsKeyofStringsOnly": 0,
+	"tsNoEmitHelpers": 0,
+	"tsNoFallthroughCasesInSwitch": 0,
+	"tsNoImplicitAny": 0,
+	"tsNoImplicitReturns": 0,
+	"tsNoImplicitThis": 0,
+	"tsNoImplicitUseStrict": 0,
+	"tsNoLib": 0,
+	"tsNoResolve": 0,
+	"tsNoStrictGenericChecks": 0,
+	"tsNoUnusedLocals": 0,
+	"tsNoUnusedParameters": 0,
+	"tsPreserveConstEnums": 0,
+	"tsPreserveSymlinks": 0,
+	"tsResolveJsonModule": 0,
+	"tsSkipLibCheck": 0,
+	"tsStrictFunctionTypes": 0,
+	"tsStrictNullChecks": 0,
+	"tsStrictPropertyInitialization": 0,
+	"tsStripInternal": 0,
+	"tsSuppressExcessPropertyErrors": 0,
+	"tsSuppressImplicitAnyIndexErrors": 0,
 	"uglifyDefinesString": "",
 	"uglifyFlags2": {
-		"ascii-only": {
+		"arguments": {
+			"active": 1,
+			"flagValue": -1
+			},
+		"ascii_only": {
 			"active": 0,
 			"flagValue": -1
 			},
-		"bare-returns": {
+		"bare_returns": {
 			"active": 0,
 			"flagValue": -1
 			},
@@ -2929,11 +3070,11 @@
 			"active": 1,
 			"flagValue": -1
 			},
-		"bracketize": {
+		"braces": {
 			"active": 0,
 			"flagValue": -1
 			},
-		"cascade": {
+		"collapse_vars": {
 			"active": 1,
 			"flagValue": -1
 			},
@@ -2957,6 +3098,10 @@
 			"active": 0,
 			"flagValue": -1
 			},
+		"directives": {
+			"active": 1,
+			"flagValue": -1
+			},
 		"drop_console": {
 			"active": 0,
 			"flagValue": -1
@@ -2973,7 +3118,15 @@
 			"active": 1,
 			"flagValue": -1
 			},
+		"expression": {
+			"active": 0,
+			"flagValue": -1
+			},
 		"hoist_funs": {
+			"active": 1,
+			"flagValue": -1
+			},
+		"hoist_props": {
 			"active": 1,
 			"flagValue": -1
 			},
@@ -2981,20 +3134,32 @@
 			"active": 0,
 			"flagValue": -1
 			},
-		"if_return": {
+		"html5_comments": {
 			"active": 1,
 			"flagValue": -1
 			},
-		"indent-level": {
+		"ie8": {
 			"active": 0,
-			"flagValue": 4
+			"flagValue": -1
+			},
+		"if_return": {
+			"active": 1,
+			"flagValue": -1
 			},
 		"indent-start": {
 			"active": 0,
 			"flagValue": 0
 			},
-		"inline-script": {
+		"indent_level": {
 			"active": 0,
+			"flagValue": 4
+			},
+		"inline": {
+			"active": 1,
+			"flagValue": 3
+			},
+		"inline_script": {
+			"active": 1,
 			"flagValue": -1
 			},
 		"join_vars": {
@@ -3009,6 +3174,14 @@
 			"active": 0,
 			"flagValue": -1
 			},
+		"keep_infinity": {
+			"active": 0,
+			"flagValue": -1
+			},
+		"keep_quoted_props": {
+			"active": 0,
+			"flagValue": -1
+			},
 		"loops": {
 			"active": 1,
 			"flagValue": -1
@@ -3017,12 +3190,20 @@
 			"active": 1,
 			"flagValue": -1
 			},
-		"max-line-len": {
+		"max_line_len": {
 			"active": 1,
 			"flagValue": 32000
 			},
 		"negate_iife": {
 			"active": 1,
+			"flagValue": -1
+			},
+		"passes": {
+			"active": 1,
+			"flagValue": 1
+			},
+		"preserve_line": {
+			"active": 0,
 			"flagValue": -1
 			},
 		"properties": {
@@ -3033,12 +3214,20 @@
 			"active": 0,
 			"flagValue": -1
 			},
-		"quote-keys": {
+		"quote_keys": {
 			"active": 0,
 			"flagValue": -1
 			},
-		"screw-ie8": {
-			"active": 0,
+		"quote_style": {
+			"active": 1,
+			"flagValue": 0
+			},
+		"reduce_funcs": {
+			"active": 1,
+			"flagValue": -1
+			},
+		"reduce_vars": {
+			"active": 1,
 			"flagValue": -1
 			},
 		"semicolons": {
@@ -3049,23 +3238,51 @@
 			"active": 1,
 			"flagValue": -1
 			},
-		"sort": {
-			"active": 0,
-			"flagValue": -1
-			},
-		"space-colon": {
+		"shebang": {
 			"active": 1,
 			"flagValue": -1
 			},
-		"support-ie8": {
-			"active": 0,
+		"side_effects": {
+			"active": 1,
+			"flagValue": -1
+			},
+		"switches": {
+			"active": 1,
 			"flagValue": -1
 			},
 		"toplevel": {
 			"active": 0,
 			"flagValue": -1
 			},
+		"typeofs": {
+			"active": 1,
+			"flagValue": -1
+			},
 		"unsafe": {
+			"active": 0,
+			"flagValue": -1
+			},
+		"unsafe_comps": {
+			"active": 0,
+			"flagValue": -1
+			},
+		"unsafe_Function": {
+			"active": 0,
+			"flagValue": -1
+			},
+		"unsafe_math": {
+			"active": 0,
+			"flagValue": -1
+			},
+		"unsafe_proto": {
+			"active": 0,
+			"flagValue": -1
+			},
+		"unsafe_regexp": {
+			"active": 0,
+			"flagValue": -1
+			},
+		"unsafe_undefined": {
 			"active": 0,
 			"flagValue": -1
 			},
@@ -3077,9 +3294,17 @@
 			"active": 0,
 			"flagValue": -1
 			},
+		"webkit": {
+			"active": 0,
+			"flagValue": -1
+			},
 		"width": {
 			"active": 1,
 			"flagValue": 80
+			},
+		"wrap_iife": {
+			"active": 0,
+			"flagValue": -1
 			}
 		},
 	"uglifyReservedNamesString": "$",

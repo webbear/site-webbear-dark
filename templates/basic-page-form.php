@@ -1,13 +1,6 @@
-<?php
+<?php namespace ProcessWire;
 
-if ($page->form_name) {
-	$form = $forms->render($page->form_name);
-
-	$headScript .= $form->styles;
-	$headScript .= $form->scripts;
-	
-	$content .= "<div class='form'>" . $form . "</div>";
-}
+$content .= page()->render->form_name;
 
 //if($page->hasChildren) $content .= renderNav($page->children, 0, 'summary');
 

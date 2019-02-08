@@ -6,23 +6,37 @@
 	clear: both;
 
 	padding: .75rem 1rem;
-	color: $base-color;
-
+	color: $nav-color;
+	a {
+		color: $nav-color;
+	}
 	@include media(medium) {
 
 		@include container;
 		padding: .75rem gutter(.5);
 		margin-bottom: 1.25rem;
-
 	}
 }
-.utilities {
+.footer-content {
 	border-top: 1px solid $base-color;
 	padding:.75rem 0;
 }
 
 
-.additionals,
+.additionals {
+	font-size: .825rem;
+	@include media(medium) {
+		text-align: right;
+	}
+
+	span {
+		display: inline-block;
+		margin-left: $grid-gutter/2;
+		&.copyright {
+			margin-left: 0;
+		}
+	}
+}
 .utilities {
 	margin: 0;
 	padding:0;
@@ -36,6 +50,21 @@
 			&:hover {
 				color: $nav-color-current;
 			}
+		}
+	}
+}
+
+.widget {
+	margin-bottom: $grid-gutter/2;
+}
+
+@include media(medium) {
+	.widgets {
+		@include columns();
+
+		.widget {
+			@include column(6);
+			margin-bottom: 0;
 		}
 	}
 }

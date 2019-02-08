@@ -2,16 +2,22 @@
 //  utilities
 /////////////////////////////////////////////
 
+.logout-link,
 .edit {
 	position: fixed;
-	top: 5px;
+	top: 45%;
 	right:0;
 	a {
 		text-decoration: none;
-		font-size: px2rem(12);
+		font-size: px2rem(10);
 		display: block;
 		background: darken(red, 20%);
 		color: white;
 		padding: .5rem .75rem;
 	}
+}
+
+.logout-link {
+	top: auto;
+	bottom: 20px;
 }
