@@ -1,9 +1,8 @@
 <?php namespace ProcessWire;
 
 /*
-    all used functions
-*/
-
+all used functions
+ */
 
 class Utilities
 {
@@ -41,7 +40,7 @@ class Utilities
                 if ($class == 'nav') {
                     $class = 'nav nav-tree';
                 }
-                $out .= $this->renderNav($item->children, $maxDepth-1, $fieldNames, $class, $excludeTemplates);
+                $out .= $this->renderNav($item->children, $maxDepth - 1, $fieldNames, $class, $excludeTemplates);
             }
 
             $out .= "</li>";
@@ -57,30 +56,32 @@ class Utilities
     public function renderNavigation(PageArray $items, $options = array(), $level = 0)
     {
         $defaults = array(
-        'tree' => 2, // number of levels it should recurse into the tree
-        'dividers' => false,
-        'current_class' => 'current',
-        'has_sublevel_class' => 'parent',
-        'first_child_class' => 'first-child',
-        'last_child_class' => 'last-child',
-        'active_class' => 'active ',
-        'sublevel_class' => 'subnav',
-        'level_class' => 'level-',
-        'repeat' => false, // whether to repeat items with children as first item in their children nav
-        'excluded_pages' => 'site-map',
-        'excluded_templates' => 'news|events'
+            'tree'               => 2, // number of levels it should recurse into the tree
+            'dividers'           => false,
+            'current_class'      => 'current',
+            'has_sublevel_class' => 'parent',
+            'first_child_class'  => 'first-child',
+            'last_child_class'   => 'last-child',
+            'active_class'       => 'active ',
+            'sublevel_class'     => 'subnav',
+            'level_class'        => 'level-',
+            'repeat'             => false, // whether to repeat items with children as first item in their children nav
+            'excluded_pages'     => 'site-map',
+            'excluded_templates' => 'news|events',
         );
 
-        $options = array_merge($defaults, $options);
-        $divider = $options['dividers'] ? "<li class='divider'></li>" : "";
-        $page = wire('page');
-        $out = '';
-        $c = 0;
-        $lc = $level + 1;
+        $options      = array_merge($defaults, $options);
+        $divider      = $options['dividers'] ? "<li class='divider'></li>" : "";
+        $page         = wire('page');
+        $out          = '';
+        $c            = 0;
+        $lc           = $level + 1;
+        $tempExcluded = array_map('trim', explode("|", $options['excluded_templates']));
+        $pageExcluded = array_map('trim', explode("|", $options['excluded_pages']));
         foreach ($items as $item) {
             ++$c;
             $numChildren = $item->numChildren(true);
-            if ($level+1 > $options['tree'] || $item->id == 1) {
+            if ($level + 1 > $options['tree'] || $item->id == 1) {
                 $numChildren = 0;
             }
 
@@ -90,26 +91,28 @@ class Utilities
             if (in_array($item->template, array_map('trim', explode("|", $options['excluded_templates'])))) {
                 continue;
             }
+            $children = $item->children()->not("template=" . implode('|', $tempExcluded) . ", name=" . implode('|', $pageExcluded));
+
             $total = count($items) - count(explode("|", $options['excluded_pages'])) - count(explode('|', $options['excluded_templates']));
             $class = '';
-            if ($numChildren) {
-                $class .= $options['has_sublevel_class']." ";
+            if ($numChildren && count($children)) {
+                $class .= $options['has_sublevel_class'] . " ";
             }
             if ($page->id == $item->id) {
-                $class .= $options['current_class']." ";
+                $class .= $options['current_class'] . " ";
             }
             if (($item->id > 1 && $page->parents->has($item)) || $page->id == $item->id) {
-                $class .= $options['active_class']. " ";
+                $class .= $options['active_class'] . " ";
             }
-            $class .= " nav-item-".$c;
+            $class .= " nav-item-" . $c;
             if ($c == 1) {
-                $class .= " ".$options['first_child_class'];
+                $class .= " " . $options['first_child_class'];
             }
-            if ($level == 0 && $c ==  $total) {
-                $class .= " ".$options['last_child_class'];
+            if ($level == 0 && $c == $total) {
+                $class .= " " . $options['last_child_class'];
             }
-            if ($level > 0 && $c ==  count($items)) {
-                $class .= " ".$options['last_child_class'];
+            if ($level > 0 && $c == count($items)) {
+                $class .= " " . $options['last_child_class'];
             }
             if ($class) {
                 $class = " class='" . trim($class) . "'";
@@ -122,7 +125,7 @@ class Utilities
                 if ($options['repeat']) {
                     $out .= "$divider<li><a href='$item->url'>$item->title</a></li>";
                 }
-                $out .= $this->renderNavigation($item->children, $options, $level+1);
+                $out .= $this->renderNavigation($item->children, $options, $level + 1);
                 $out .= "</ul>";
             }
 
@@ -137,53 +140,52 @@ class Utilities
     public function renderUtilityNav($options = array())
     {
         $defaults = array(
-            'print' => true,
-            'pages' => 'site-map',
-            'top_id' => '#top'
+            'print'  => true,
+            'pages'  => 'site-map',
+            'top_id' => '#top',
         );
         $options = array_merge($defaults, $options);
-        $list = array();
-        $list = explode("|", $options['pages']);
-        $out ='';
-        $c = 0;
+        $list    = array();
+        $list    = explode("|", $options['pages']);
+        $out     = '';
+        $c       = 0;
         foreach ($list as $l) {
             $c++;
-            $el = wire('pages')->get('/'.$l.'/');
+            $el    = wire('pages')->get('/' . $l . '/');
             $first = ($c == 1) ? ' first-child' : '';
-            $last = ($options['print'] == false && $c == count($list)) ? ' last-child' : '';
-            if ($l=='top') {
-                $url = $options['top_id'];
+            $last  = ($options['print'] == false && $c == count($list)) ? ' last-child' : '';
+            if ($l == 'top') {
+                $url   = $options['top_id'];
                 $title = __('Top');
-                $name = "top";
+                $name  = "top";
             } elseif ($l == 1) {
-                $home = wire('pages')->get(1);
-                $url = $home->url;
+                $home  = wire('pages')->get(1);
+                $url   = $home->url;
                 $title = $home->title;
-                $name = 'home';
+                $name  = 'home';
             } else {
-                $url =$el->url;
+                $url   = $el->url;
                 $title = $el->title;
-                $name = $el->name;
+                $name  = $el->name;
             }
             $out .= "<li class='item-{$name}{$first}{$last}'><a href='{$url}'>{$title}</a></li>";
         }
         if ($options['print']) {
-            $out .= "<li class='item-print'><a href='#' onclick='window.print()'>".__('Print')."</a></li>";
+            $out .= "<li class='item-print'><a href='#' onclick='window.print()'>" . __('Print') . "</a></li>";
         }
         return $out;
     }
-
 
     public function renderBreadcrumb($page, $options = array())
     {
         $defaults = array(
             'show_current' => true,
-            'show_home' => true
+            'show_home'    => true,
         );
         $options = array_merge($defaults, $options);
         $parents = $page->parents();
-        $out = "<ul class='breadcrumbs'>";
-        $c = 0;
+        $out     = "<ul class='breadcrumbs'>";
+        $c       = 0;
         foreach ($parents as $item) {
             ++$c;
             if ($item->id == 1 && $options['show_home'] == false) {
@@ -199,7 +201,7 @@ class Utilities
     }
     public function renderHeadLanguages()
     {
-        $out = '';
+        $out       = '';
         $languages = wire("languages");
         if (count($languages)) {
             foreach ($languages as $language) {
@@ -221,27 +223,27 @@ class Utilities
     public function renderLanguageNav($options = array())
     {
         $defaults = array(
-    'container_class' => "languages language-nav", // number of levels it should recurse into the tree
-    'role' => "navigation",
-    'current_class' => 'current'
+            'container_class' => "languages language-nav", // number of levels it should recurse into the tree
+            'role'            => "navigation",
+            'current_class'   => 'current',
 
-    );
-        $options = array_merge($defaults, $options);
-        $out ='';
+        );
+        $options   = array_merge($defaults, $options);
+        $out       = '';
         $languages = wire("languages");
 
         if (count($languages)) {
-            $out .= "<ul class='". $options["container_class"] ."' role='". $options["role"] ."'>";
+            $out .= "<ul class='" . $options["container_class"] . "' role='" . $options["role"] . "'>";
             foreach ($languages as $language) {
                 if (!page()->viewable($language)) {
                     continue;
                 } // is page viewable in this language?
                 if ($language->id == user()->language->id) {
-                    $out .= "<li class='". $options["current_class"] ."'>";
+                    $out .= "<li class='" . $options["current_class"] . "'>";
                 } else {
                     $out .= "<li>";
                 }
-                $url = page()->localUrl($language);
+                $url      = page()->localUrl($language);
                 $hreflang = pages("/")->getLanguageValue($language, 'name');
                 $out .= "<a hreflang='$hreflang' href='$url'>$language->title</a></li>";
             }
@@ -250,36 +252,33 @@ class Utilities
         return $out;
     }
 
-
     public function cssClasses()
     {
-        $out='';
-        $page = wire('page');
-        $user = wire('user');
+        $out      = '';
+        $page     = wire('page');
+        $user     = wire('user');
         $language = $user->language->name;
-        $roles = '';
+        $roles    = '';
         foreach ($user->roles as $role) {
-            $roles .= ' role-'.$role->name;
+            $roles .= ' role-' . $role->name;
         }
 
-
         $classes = array();
-
 
         //get the segments
         if ($page->id == 1) {
             if ($page->path != "/") {
-                $segment1 = str_replace('/', '', $page->path);
+                $segment1  = str_replace('/', '', $page->path);
                 $classes[] = "homepage-$segment1";
             } else {
                 $classes[] = "homepage";
             }
         } else {
             $segments = array();
-            $segments= explode(" ", trim(str_replace("/", " ", $page->path)));
-            for ($i=0; $i < count($segments); $i++) {
-                $segment = $segments[$i];
-                $classes[] = (is_numeric(substr($segment, 0, 1))) ? 'n'.$segment : $segment;
+            $segments = explode(" ", trim(str_replace("/", " ", $page->path)));
+            for ($i = 0; $i < count($segments); $i++) {
+                $segment   = $segments[$i];
+                $classes[] = (is_numeric(substr($segment, 0, 1))) ? 'n' . $segment : $segment;
             }
         }
         $classes[] = "page-$page->id";
@@ -288,7 +287,7 @@ class Utilities
         $classes[] = ($page->id == $page->rootParent->id) ? "section-startpage root-level-page" : '';
         $classes[] = "template-" . $page->template->name;
         $classes[] = "language-" . $language;
-        $classes[] =  $roles;
+        $classes[] = $roles;
 
         $out = implode(' ', $classes);
         return $out;
@@ -301,11 +300,11 @@ class Utilities
             return;
         }
         $out = '';
-        if (file_exists($_SERVER["DOCUMENT_ROOT"].$filename)) {
-            $fileTime = date('Y-m-d-H:i:s', filemtime($_SERVER["DOCUMENT_ROOT"].$filename));
-            $out = $filename . '?updated=' . $fileTime;
+        if (file_exists($_SERVER["DOCUMENT_ROOT"] . $filename)) {
+            $fileTime = date('Y-m-d-H:i:s', filemtime($_SERVER["DOCUMENT_ROOT"] . $filename));
+            $out      = $filename . '?updated=' . $fileTime;
         } else {
-            $out = $filename ;
+            $out = $filename;
         }
         return $out;
     }
@@ -316,7 +315,7 @@ class Utilities
 
     public function renderLogoutLink($user)
     {
-        $out='';
+        $out    = '';
         $config = wire('config');
 
         if ($user->isLoggedin()) {
@@ -325,21 +324,21 @@ class Utilities
         return $out;
     }
     // renders an 'edit' link
-    public function isEditable($class= 'edit')
+    public function isEditable($class = 'edit')
     {
-        $out = '';
+        $out      = '';
         $pageEdit = page()->editURL;
         if (page()->editable()) {
-            $out = "<div class='{$class}'><a href='{$pageEdit}'>".__('Edit') ."</a></div>";
+            $out = "<div class='{$class}'><a href='{$pageEdit}'>" . __('Edit') . "</a></div>";
         }
         return $out;
     }
 
     // navigation
-    public function subNavWidget($class='sub-nav widget', $level = 3, $wrap = 'div')
+    public function subNavWidget($class = 'sub-nav widget', $level = 3, $wrap = 'div')
     {
         if (page("rootParent")->hasChildren > 1) {
-            return "<{$wrap} class='{$class}'>". $this->renderNav(page('rootParent'), $level) ."</{$wrap}>";
+            return "<{$wrap} class='{$class}'>" . $this->renderNav(page('rootParent'), $level) . "</{$wrap}>";
         }
     }
 
@@ -357,15 +356,15 @@ class Utilities
     public function randomImage($images, $options = array())
     {
         $defaults = array(
-            'upscaling' => true,
-            'width' => 480,
-            'height' => 0,
-            'wrap' => true,
-            'wrap_tag' => 'div',
-            'wrap_class' => 'random-image'
+            'upscaling'  => true,
+            'width'      => 480,
+            'height'     => 0,
+            'wrap'       => true,
+            'wrap_tag'   => 'div',
+            'wrap_class' => 'random-image',
         );
         $options = array_merge($defaults, $options);
-        $o = '';
+        $o       = '';
         if (count($images)) {
             $image = $this->image($images->getRandom()->size($options['width'], $options['height'], array('upscaling' => $options['upscaling'])));
             if ($options['wrap']) {
@@ -380,22 +379,22 @@ class Utilities
     public function firstImage($images, $options = array())
     {
         $defaults = array(
-        'resize' => true,
-        'width' => 480,
-        'height' => 0,
-        'wrap' => true,
-        'wrap_tag' => 'div',
-        'wrap_class' => 'image'
-    );
+            'resize'     => true,
+            'width'      => 480,
+            'height'     => 0,
+            'wrap'       => true,
+            'wrap_tag'   => 'div',
+            'wrap_class' => 'image',
+        );
 
         $options = array_merge($defaults, $options);
 
         $out = '';
         if (count($images)) {
-            $image = $images->first();
-            $thumb = ($options['resize']) ? $image->size($options['width'], $options['height']) : $image;
+            $image       = $images->first();
+            $thumb       = ($options['resize']) ? $image->size($options['width'], $options['height']) : $image;
             $description = ($image->description) ? $image->description : '';
-            $img = "<img src='{$thumb->url}' alt='{$description}' width='{$thumb->width}' height='{$thumb->height}' />";
+            $img         = "<img src='{$thumb->url}' alt='{$description}' width='{$thumb->width}' height='{$thumb->height}' />";
             if ($options['wrap']) {
                 $out .= "<{$options['wrap_tag']} class='{$options['wrap_class']}'>{$img}</{$options['wrap_tag']}>";
             } else {
@@ -410,18 +409,18 @@ class Utilities
         return "<p>{$p}</p>";
     }
 
-    public function headline($headline, $tag= "h3")
+    public function headline($headline, $tag = "h3")
     {
         return "<{$tag}>" . $headline . "</{$tag}>";
     }
 
-    public function description($text, $class="description", $tag = "div")
+    public function description($text, $class = "description", $tag = "div")
     {
-        return "<{$tag} class='{$class}'>" .$text . "</{$tag}>";
+        return "<{$tag} class='{$class}'>" . $text . "</{$tag}>";
     }
-    public function wrap($object, $class="item", $tag = "div")
+    public function wrap($object, $class = "item", $tag = "div")
     {
-        return "<{$tag} class='{$class}'>" .$object . "</{$tag}>";
+        return "<{$tag} class='{$class}'>" . $object . "</{$tag}>";
     }
 
     public function link($link = null, $object, $linkText = '', $fa = "<span class='link'><i class='fa fa-angle-double-right' aria-hidden='true'></i></span>")
@@ -429,10 +428,9 @@ class Utilities
         if ($link != null) {
             return $object;
         } else {
-            return "<a href='{$link}'>" . $object  . $linkText.  $fa . "</a>";
+            return "<a href='{$link}'>" . $object . $linkText . $fa . "</a>";
         }
     }
-
 
     public function tagStripper($str)
     {
@@ -440,7 +438,7 @@ class Utilities
             return;
         }
         $temp = preg_replace('#<[^>]+>#', ' ', $str);
-        $out = trim(preg_replace('/\s+/', ' ', $temp));
+        $out  = trim(preg_replace('/\s+/', ' ', $temp));
         return $out;
     }
 
@@ -454,7 +452,7 @@ class Utilities
         }
         $out = substr($str, 0, $limit);
         $pos = strrpos($out, " ");
-        if ($pos>0) {
+        if ($pos > 0) {
             $out = substr($out, 0, $pos);
         }
         $out .= $endstr;
@@ -464,8 +462,8 @@ class Utilities
     public function dateFormatter($timestamp, $formats = array())
     {
         $defaults = array(
-             "de" => '%e. %B %G',
-             "fr" => '%e %B %G'
+            "de" => '%e. %B %G',
+            "fr" => '%e %B %G',
         );
         $formats = array_merge($defaults, $formats);
         if (user()->language == languages("fr")) {
@@ -476,16 +474,16 @@ class Utilities
             $format = $formats["de"];
         }
         return strftime($format, $timestamp);
-        ;
+
     }
-    public function widgets(Page $p, $wName="widgets")
+    public function widgets(Page $p, $wName = "widgets")
     {
         $out = '';
         if (count($p->$wName)) {
             $c = 1;
-            $out .="<div class='widgets'>";
+            $out .= "<div class='widgets'>";
             foreach ($p->$wName as $w) {
-                $h = ($w->headline) ? "<h3 class='widget-title'>{$w->headline}</h3>" : "";
+                $h  = ($w->headline) ? "<h3 class='widget-title'>{$w->headline}</h3>" : "";
                 $cc = ($w->custom_text_input) ? " " . sanitizer()->fieldName($w->custom_text_input) : "";
                 $out .= "<div class='widget widget-{$c}{$cc}'>";
                 $out .= "<div class='widget-content'>" . $h . $w->small_text . "</div>";
@@ -497,6 +495,5 @@ class Utilities
         return $out;
     }
 }
-
 
 $wb = new Utilities();
